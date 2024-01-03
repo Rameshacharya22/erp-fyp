@@ -10,36 +10,60 @@ class EmployeeController extends Controller
     // {
     //     $this->middleware('auth');
     // }
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         return view('admin.employee.index');
     }
+
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         return view('admin.employee.create');
     }
-    
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
      */
-    public function store(Request $request)
+    public function store()
     {
         //
     }
 
     /**
-     * Show the specified resource.
-     * @param int $id
-     * @return Renderable
+     * Display the specified resource.
      */
-    public function show($id)
+    public function show()
     {
-        // $info = $this->crudInfo();
-        // $info['item'] = Admission::findOrFail($id);
-        // return view($this->showResource(), $info);
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit()
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy()
+    {
+        //
     }
 
 }
