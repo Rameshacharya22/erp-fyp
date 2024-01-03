@@ -21,9 +21,8 @@
                 <tr>
                     <th>Employee ID</th>
                     <th>Name</th>
-                    <th>Email</th>
-                    <!-- <th>User Role</th> -->
-                    <th>Status</th>
+                    <th>Total Working Days</th>
+                    <th>Total Absent Days</th>
                     <th>Action</th>
                      
                 </tr>

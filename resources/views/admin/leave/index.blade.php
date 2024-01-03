@@ -21,9 +21,10 @@
                 <tr>
                     <th>Employee ID</th>
                     <th>Name</th>
-                    <th>Email</th>
-                    <!-- <th>User Role</th> -->
-                    <th>Status</th>
+                    <th>Leave Date</th>
+                    <th>Duration</th>
+                    <th>Leave Status</th>
+                    <th>Leave Type</th>
                     <th>Action</th>
                      
                 </tr>
