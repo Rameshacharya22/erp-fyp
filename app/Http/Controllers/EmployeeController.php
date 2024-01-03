@@ -18,4 +18,28 @@ class EmployeeController extends Controller
     {
         return view('admin.employee.create');
     }
+    
+
+    /**
+     * Store a newly created resource in storage.
+     * @param Request $request
+     * @return Renderable
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Show the specified resource.
+     * @param int $id
+     * @return Renderable
+     */
+    public function show($id)
+    {
+        // $info = $this->crudInfo();
+        // $info['item'] = Admission::findOrFail($id);
+        // return view($this->showResource(), $info);
+    }
+
 }
