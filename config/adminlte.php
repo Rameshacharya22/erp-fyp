@@ -320,12 +320,12 @@ return [
         [
             'text'        => 'Leave',
             'route'         => 'leave.index',
-            'icon'        => 'fas fa-user-tie',    
+            'icon'        => 'fas fa-user',    
         ],
         [
             'text'        => 'Attendance',
             'route'         => 'attendance.index',
-            'icon'        => 'fas fa-user-tie',   
+            'icon'        => 'fas fa-user',   
         ],
         ['header' => 'account_settings'],
         [
