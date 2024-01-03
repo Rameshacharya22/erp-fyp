@@ -23,5 +23,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('employee', App\Http\Controllers\EmployeeController::class);
+Route::resource('leave', App\Http\Controllers\LeaveController::class);
+Route::resource('attendance', App\Http\Controllers\AttendanceController::class);
 
 

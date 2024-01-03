@@ -315,8 +315,17 @@ return [
         [
             'text'        => 'Employee',
             'route'         => 'employee.index',
-            'icon'        => 'fas fa-user-tie',
-            
+            'icon'        => 'fas fa-user-tie',   
+        ],
+        [
+            'text'        => 'Leave',
+            'route'         => 'leave.index',
+            'icon'        => 'fas fa-user-tie',    
+        ],
+        [
+            'text'        => 'Attendance',
+            'route'         => 'attendance.index',
+            'icon'        => 'fas fa-user-tie',   
         ],
         ['header' => 'account_settings'],
         [
