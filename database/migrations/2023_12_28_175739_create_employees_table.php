@@ -13,18 +13,20 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->date('date_of_birth');
             $table->enum('gender', ['Male', 'Female', 'Other'])->default('Male');
+            $table->string('contact_number');
+            $table->string('mobile')->nullable();
             $table->string('designation')->nullable();
             $table->string('department')->nullable();
-            $table->string('phone_number')->nullable();
-            $table->string('dob')->nullable();
-            $table->string('date')->nullable();
-            $table->string('mobile')->nullable();
-            $table->rememberToken();
-            $table->enum('status', ['Active', 'Inactive'])->default('Active');            
+            $table->string('email')->unique();
+            $table->text('address');
+            $table->date('hire_date');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
+            // $table->unsignedBigInteger('position_id');
+            // $table->foreign('position_id')->references('id')->on('positions');                  
             $table->timestamps();
         });
     }

@@ -15,21 +15,24 @@
 @stop
 
 @section('content')
-<div class="container">
-        <table class="table" id="employee-table">
-            <thead>
-                <tr>
-                    <th>Employee ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <!-- <th>User Role</th> -->
-                    <th>Status</th>
-                    <th>Action</th>
-                     
-                </tr>
-            </thead>
-        </table>
-    </div>
+    <table class="table table-bordered" id="employees-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Hire Date</th>
+                <th>Position</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+    </table>
+</div>
 
    
 @stop
@@ -40,26 +43,24 @@
 
 @section('js')
 <script>
-        $(function () {
-            var table = $('#data-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('employee.index') }}",
-                columns: [
-                    {data: 'id', name: 'DT_RowIndex'},
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    { 
-                        data: 'is_active', 
-                        name: 'is_active',
-                        render: function(data, type, full, meta) {
-                            // Assuming 1 represents active and 0 represents inactive
-                            return data == 1 ? 'Active' : 'Inactive';
-                        }},
-                    {data: 'status', name: 'status'},
-                    {data: 'action', name: 'action'},
-                ],
-            });
+    $(document).ready(function() {
+        $('#employees-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('employee.index') }}",
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'first_name', name: 'first_name' },
+                { data: 'last_name', name: 'last_name' },
+                { data: 'date_of_birth', name: 'date_of_birth' },
+                { data: 'gender', name: 'gender' },
+                { data: 'contact_number', name: 'contact_number' },
+                { data: 'email', name: 'email' },
+                { data: 'address', name: 'address' },
+                { data: 'hire_date', name: 'hire_date' },
+                // { data: 'position.title', name: 'position.title' }, // Assumes you have a relationship in the Employee model
+            ]
         });
-    </script>
+    });
+</script>
     @stop

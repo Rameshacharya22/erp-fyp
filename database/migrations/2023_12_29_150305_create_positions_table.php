@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('positions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('employee_id');
-            $table->foreign('employee_id')->references('id')->on('employees');
-            $table->date('date');
-            $table->time('clock_in_time');
-            $table->time('clock_out_time')->nullable();
+            $table->string('title');
+            $table->unsignedBigInteger('department_id');
+            // $table->foreign('department_id')->references('id')->on('departments');
+            $table->decimal('salary');
+            $table->text('responsibilities');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('positions');
     }
 };
