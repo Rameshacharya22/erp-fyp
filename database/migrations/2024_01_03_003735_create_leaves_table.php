@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('leaves', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id');
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->enum('duration',['half day','full day'])->defaul('half day');
             $table->string('reason');
             $table->enum('type',['unpaid','paid','annual'])->default('Unpaid');
-            $table->enum('status',['approved','rejected','pending'])->default('Unpaid');
+            $table->enum('status',['approved','rejected','pending'])->default('approved');
             $table->timestamps();
         });
     }
