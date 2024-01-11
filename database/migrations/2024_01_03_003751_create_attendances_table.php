@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('attendances', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id');
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->date('date');
+            $table->enum('type',['check_in','check_out'])->default('check_in');
+            $table->string('source');
             $table->time('clock_in_time');
             $table->time('clock_out_time')->nullable();
             $table->timestamps();

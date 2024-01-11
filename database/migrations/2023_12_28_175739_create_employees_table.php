@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->id();
+            $table->bigInteger('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->date('date_of_birth');
+            $table->date('dob');
             $table->enum('gender', ['Male', 'Female', 'Other'])->default('Male');
-            $table->string('contact_number');
+            $table->string('number');
             $table->string('mobile')->nullable();
             $table->string('designation')->nullable();
             $table->string('department')->nullable();
@@ -25,8 +25,8 @@ return new class extends Migration
             $table->text('address');
             $table->date('hire_date');
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
-            // $table->unsignedBigInteger('position_id');
-            // $table->foreign('position_id')->references('id')->on('positions');                  
+            $table->unsignedBigInteger('position_id');
+            $table->foreign('position_id')->references('id')->on('positions');                  
             $table->timestamps();
         });
     }

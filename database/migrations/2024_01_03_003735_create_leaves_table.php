@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees');
-            $table->string('leave_type');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('status')->default('Pending'); // You can customize the default status
+            $table->enum('duration',['half day','full day'])->defaul('half day');
+            $table->string('reason');
+            $table->enum('type',['unpaid','paid','annual'])->default('Unpaid');
+            $table->enum('status',['approved','rejected','pending'])->default('Unpaid');
             $table->timestamps();
         });
     }
