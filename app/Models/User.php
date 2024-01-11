@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use PHPUnit\Framework\TestStatus\Notice;
+
 // use App\Models\HasMany;
 
 class User extends Authenticatable
@@ -56,9 +58,30 @@ class User extends Authenticatable
         return $this->hasMany(Attendance::class);
 
     }
+    public function notices(): HasMany
+    {
+        return $this->hasMany(Notice::class);
+
+    }
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+
+    }
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+
+    }
 
     public function position(): HasOne
     {
         return $this->hasOne(Position::class);
     }
+    public function appreciations(): HasMany
+    {
+        return $this->hasMany(Appreciation::class);
+
+    }
+   
 }
