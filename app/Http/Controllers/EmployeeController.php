@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 // use App\Http\Controllers\DataTables;
+use Yajra\DataTables\DataTables;
+
 use App\Models\Employee;
+use App\Models\Position;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -18,9 +21,16 @@ class EmployeeController extends Controller
     public function index(Request $request) 
     {
         if ($request->ajax()) {
+            // $data = Employee::orderBy('created_at', 'desc');
             $data = Employee::orderBy('id', 'DESC')->limit(10)->get();
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('action', function ($employee) {
+                    return '<a href="'.route('employee.show', $employee->id).'" class="btn btn-outline-info">View</a>
+                            <a href="'.route('employee.edit', $employee->id).'" class="btn btn-outline-primary">Edit</a>';
+                            
+                })
+            
                 ->rawColumns(['action','title','image'])
                 ->make(true);
         }
@@ -32,7 +42,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('admin.employee.create');
+        $info['positions'] = Position::with('department')->get();
+        return view('admin.employee.create', $info);
     }
 
     /**
@@ -44,45 +55,48 @@ class EmployeeController extends Controller
         $request->validate([
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'date_of_birth' => 'required|date',
+            'dob' => 'required|date',
             'gender' => 'required|string',
-            'contact_number' => 'required|string',
+            'number' => 'required|digits_between:9,10',
             'email' => 'required|email|unique:employees',
             'address' => 'required|string',
             'hire_date' => 'required|date',
-            // 'position_id' => 'required|exists:positions,id',
+            'position_id' => 'required|exists:positions,id',
         ]);
 
         $data = $request->all();
         $employee = new Employee($data);
         $employee->save();
-
-        // Redirect to a success page or do other actions
         return redirect()->route('employee.index')->with('success', 'Employee added successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show()
-    {
-        //
-    }
+    public function show($id)
+{
+    $employee = Employee::findOrFail($id);
+    return view('admin.employee.show', compact('employee'));
+}
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
-    {
-        //
-    }
+    public function edit($id)
+{
+    $info['positions'] = Position::with('department')->get();
+    $employee = Employee::findOrFail($id);
+    return view('admin.employee.edit', $info,compact('employee'));
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+        $employee->update($request->all());
+        return redirect()->route('employee.index')->with('success', 'Record updated successfully');
     }
 
     /**

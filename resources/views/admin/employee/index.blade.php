@@ -15,7 +15,8 @@
 @stop
 
 @section('content')
-    <table class="table table-bordered" id="employees-table">
+<div class="table-responsive">
+       <table class="table  data-table display">  
         <thead>
             <tr>
                 <th>ID</th>
@@ -30,7 +31,10 @@
                 <th>Position</th>
                 <th>Action</th>
             </tr>
-        </thead>
+            </thead>
+        <tbody>
+
+        </tbody>
     </table>
 </div>
 
@@ -43,8 +47,8 @@
 
 @section('js')
 <script>
-    $(document).ready(function() {
-        $('#employees-table').DataTable({
+    $(function () {
+            var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('employee.index') }}",
@@ -52,13 +56,16 @@
                 { data: 'id', name: 'id' },
                 { data: 'first_name', name: 'first_name' },
                 { data: 'last_name', name: 'last_name' },
-                { data: 'date_of_birth', name: 'date_of_birth' },
+                { data: 'dob', name: 'dob' },
                 { data: 'gender', name: 'gender' },
-                { data: 'contact_number', name: 'contact_number' },
+                { data: 'number', name: 'number' },
                 { data: 'email', name: 'email' },
                 { data: 'address', name: 'address' },
                 { data: 'hire_date', name: 'hire_date' },
-                // { data: 'position.title', name: 'position.title' }, // Assumes you have a relationship in the Employee model
+                { data: 'position_id', name: 'position.title' },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
+ 
+
             ]
         });
     });
