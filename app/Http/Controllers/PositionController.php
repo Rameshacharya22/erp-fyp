@@ -14,22 +14,10 @@ class PositionController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            // $data = Employee::orderBy('created_at', 'desc');
-            $data = Position::orderBy('id', 'DESC')->limit(15)->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($position) {
-                    return '<a href="' . route('position.show', $position->id) . '" class="btn btn-outline-info">View</a>
-                            <a href="' . route('position.edit', $position->id) . '" class="btn btn-outline-primary">Edit</a>
-                            <a href="' . route('position.destroy', $position->id) . '" class="btn btn-outline-primary">Delete</a>
-                            ';
-                })
+       
 
-                ->rawColumns(['action', 'title', 'image'])
-                ->make(true);
-        }
-        return view('admin.position.index');
+        $positions = Position::all();
+        return view('admin.position.index', compact('positions'));
     }
 
     /**

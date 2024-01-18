@@ -20,21 +20,8 @@ class EmployeeController extends Controller
      */
     public function index(Request $request) 
     {
-        if ($request->ajax()) {
-            // $data = Employee::orderBy('created_at', 'desc');
-            $data = Employee::orderBy('id', 'DESC')->limit(10)->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($employee) {
-                    return '<a href="'.route('employee.show', $employee->id).'" class="btn btn-outline-info">View</a>
-                            <a href="'.route('employee.edit', $employee->id).'" class="btn btn-outline-primary">Edit</a>';
-                            
-                })
-            
-                ->rawColumns(['action','title','image'])
-                ->make(true);
-        }
-        return view('admin.employee.index');
+        $employees = Employee::all();
+        return view('admin.employee.index', compact('employees'));
     }
 
     /**

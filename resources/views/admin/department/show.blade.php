@@ -9,7 +9,7 @@
 @section('content')
 <div class="container">
     <div class="card-body">
-        <h4>Id: {{$department->id}}</h4>
+        <h4>Id: {{$department->id}} </h4>
         <h4>Title: {{$department->title}}</h4>
     </div>
     <a href="{{route('department.index')}}">

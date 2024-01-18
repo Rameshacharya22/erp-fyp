@@ -14,20 +14,8 @@ class DepartmentController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            // $data = Employee::orderBy('created_at', 'desc');
-            $data = Department::orderBy('id', 'DESC')->limit(10)->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($department) {
-                    return '<a href="' . route('department.show', $department->id) . '" class="btn btn-outline-info">View</a>
-                            <a href="' . route('department.edit', $department->id) . '" class="btn btn-outline-primary">Edit</a>';
-                })
-
-                ->rawColumns(['action', 'title', 'image'])
-                ->make(true);
-        }
-        return view('admin.department.index');
+        $departments = Department::all(); 
+        return view('admin.department.index', compact('departments'));
     }
 
     /**
