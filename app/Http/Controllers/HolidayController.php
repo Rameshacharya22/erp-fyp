@@ -12,7 +12,12 @@ class HolidayController extends Controller
      */
     public function index()
     {
-        //
+        $data = Holiday::paginate(10);
+        $users = Holiday::paginate(5);
+
+        $holidays = Holiday::all();
+        return view("admin.holiday.index", compact('holidays', 'data'));
+
     }
 
     /**
@@ -20,7 +25,7 @@ class HolidayController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.holiday.create');
     }
 
     /**
@@ -28,37 +33,51 @@ class HolidayController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'date' => 'required|string',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'day' => 'required'
+        ]);
+
+        $data = $request->all();
+        $holiday = new Holiday($data);
+        $holiday->save();
+        return redirect()->route('holiday.index')->with('success', 'department added successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Holiday $holiday)
+    public function show($id)
     {
-        //
+        $holiday = Holiday::findOrFail($id);
+        return view('admin.holiday.show', compact('holiday'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Holiday $holiday)
+    public function edit($id)
     {
-        //
+        $holiday = Holiday::findOrFail($id);
+        return view('admin.holiday.edit', compact('holiday'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Holiday $holiday)
+    public function update(Request $request, $id)
     {
-        //
+        $holiday = Holiday::findOrFail($id);
+        $holiday->update($request->all());
+        return redirect()->route('holiday.index')->with('success', 'Record updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Holiday $holiday)
+    public function destroy()
     {
         //
     }

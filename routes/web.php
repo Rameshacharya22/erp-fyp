@@ -27,5 +27,6 @@ Route::resource('leave', App\Http\Controllers\LeaveController::class);
 Route::resource('attendance', App\Http\Controllers\AttendanceController::class);
 Route::resource('department', App\Http\Controllers\DepartmentController::class);
 Route::resource('position', App\Http\Controllers\PositionController::class);
+Route::resource('holiday', App\Http\Controllers\HolidayController::class);
 
 
