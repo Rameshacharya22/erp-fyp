@@ -310,7 +310,19 @@ return [
             'text'        => 'Dashboard',
             'route'         => 'home',
             'icon'        => 'far fa-fw fa-file',
-            
+
+        ],
+        [
+            'text'        => 'Department',
+            'route'         => 'department.index',
+            'icon'        => 'fas fa-user-tie',
+
+        ],
+        [
+            'text'        => 'Position',
+            'route'         => 'position.index',
+            'icon'        => 'fas fa-user-tie',
+
         ],
         [
             'text'        => 'Employee',

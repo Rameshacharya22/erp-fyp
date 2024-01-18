@@ -25,5 +25,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::resource('employee', App\Http\Controllers\EmployeeController::class);
 Route::resource('leave', App\Http\Controllers\LeaveController::class);
 Route::resource('attendance', App\Http\Controllers\AttendanceController::class);
+Route::resource('department', App\Http\Controllers\DepartmentController::class);
+Route::resource('position', App\Http\Controllers\PositionController::class);
 
 
