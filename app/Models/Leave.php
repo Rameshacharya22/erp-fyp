@@ -11,6 +11,11 @@ class Leave extends Model
     use HasFactory;
     protected $guarded=[];
 
+    public static function getAll()
+    {
+        return self::paginate(5);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(user::class);

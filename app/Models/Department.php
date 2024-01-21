@@ -11,6 +11,11 @@ class Department extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public static function getAllDepartment()
+    {
+        return self::paginate(5);
+    }
+
     public function positions(): HasMany    
     {
         return $this->hasMany(Position::class);

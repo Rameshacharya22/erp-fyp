@@ -18,9 +18,12 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     //display the employee
     public function index(Request $request) 
     {
-        $employees = Employee::all();
+        $employees = Employee::paginate(5);
+
         return view('admin.employee.index', compact('employees'));
     }
 

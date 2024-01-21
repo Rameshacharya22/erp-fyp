@@ -11,6 +11,12 @@ class Position extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public static function getAllPositions()
+    {
+        return self::paginate(5);
+    }
+
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

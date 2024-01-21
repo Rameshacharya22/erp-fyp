@@ -9,4 +9,10 @@ class Employee extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public static function getAllEmployee()
+    {
+        return self::paginate(5);
+    }
 }
+

@@ -11,12 +11,9 @@ class HolidayController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $data = Holiday::paginate(10);
-        $users = Holiday::paginate(5);
-
-        $holidays = Holiday::all();
-        return view("admin.holiday.index", compact('holidays', 'data'));
+    {       
+        $holidays = Holiday::paginate(5);
+        return view("admin.holiday.index", compact('holidays'));
 
     }
 
