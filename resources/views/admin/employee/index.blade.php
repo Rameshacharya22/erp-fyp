@@ -58,6 +58,8 @@
 
             </tbody>
         </table>
+                {{$employees->links()}}
+
     </div>
 
 

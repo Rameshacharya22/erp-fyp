@@ -44,6 +44,7 @@
 
             </tbody>
         </table>
+        {{$positions->links()}}
     </div>
 
 

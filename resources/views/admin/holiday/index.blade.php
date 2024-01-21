@@ -43,8 +43,9 @@
                     </tr>
                 @endforeach
             </tbody>
-            {!! $data->withQueryString()->links('pagination::bootstrap-5') !!}
         </table>
+                {{$holidays->links()}}
+
     </div>
 
    
