@@ -75,9 +75,12 @@
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>
+
+
 
     {{-- Body Content --}}
     @yield('body')

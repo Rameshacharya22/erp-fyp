@@ -29,14 +29,14 @@
             <input type="email" name="email" class="form-control" id="form-floating"
                    value="{{ old('email') }}" placeholder="{{ 'Email / Username'  }}" autofocus>
 
-            <!-- <div class="input-group-append">
+        <!-- <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
                 </div>
             </div> -->
 
             @error('email')
-                <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
@@ -52,32 +52,32 @@
                     <span class="fas fa-eye-slash {{ config('adminlte.classes_auth_icon', '') }}"></span>
                 </div>
             </div>
-            
+
             @error('password')
-                <span class="invalid-feedback" role="alert">
+            <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
         </div>
 
-        {{-- Login field --}}
-        <!-- <div class="row">
+    {{-- Login field --}}
+    <!-- <div class="row">
             <div class="col-7">
                 <div class="icheck-primary" title="{{ __('adminlte::adminlte.remember_me_hint') }}">
                     <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                     <label for="remember">
                         {{ __('adminlte::adminlte.remember_me') }}
-                    </label>
-                </div>
-            </div> -->
+        </label>
+    </div>
+</div> -->
 
-            <div class="d-grid gap-2">
-                <button type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
-                    <span class="fas fa-sign-in-alt"></span>
-                    {{ __('adminlte::adminlte.sign_in') }}
-                </button>
-            </div>
+        <div class="d-grid gap-2">
+            <button type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
+                <span class="fas fa-sign-in-alt"></span>
+                {{ __('adminlte::adminlte.sign_in') }}
+            </button>
+        </div>
         </div>
 
     </form>

@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
+Auth::routes(['register' => false]);
+//user wont be able to register. Admin would be responsible for creating user
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('employee', App\Http\Controllers\EmployeeController::class);
