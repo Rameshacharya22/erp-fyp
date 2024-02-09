@@ -3,7 +3,7 @@
 @section('title', 'Edit Holiday')
 
 <!-- @section('content_header')
-        <h1>Add Employee</h1>
+                    <h1>Add Employee</h1>
 
 @stop -->
 
@@ -19,38 +19,43 @@
             @csrf
             @method('PUT')
 
-            <div class="form-group col-md-6">
-                <label for="date">Holiday Date*</label>
-                <input type="date" class="form-control" id="date" name="date" value="{{$holiday->date}}" required>
+            <div class="form-row">
+                <div class="form-group col-md-6 mt-3">
+                    <label for="date">Holiday Date</label>
+                    <input type="date" class="form-control" id="date" value="{{ $holiday->date }}  name="date" required min="{{\Carbon\Carbon::now()->format('Y-m-d')}}">
+                </div>
+                <div class="form-group col-md-6 mt-3">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" value="{{ $holiday->title }} id="title" name="title" required>
+                </div>
+
             </div>
 
+            <div class="form-row">
 
-            <div class="form-group col-md-6">
-                <label for="title">Title*</label>
-                <input type="text" class="form-control" id="title" value="{{$holiday->title}} "name="title" required>
-            </div>
+                <div class="form-group col-md-6">
+                    <label for="description">Description*</label>
+                    <input type="text" class="form-control" id="description" value="{{ $holiday->description }}"
+                        name="description" required>
+                </div>
 
-            <div class="form-group col-md-6">
-                <label for="description">Description*</label>
-                <input type="text" class="form-control" id="description" value="{{$holiday->description}}" name="description" required>
-            </div>
-
-            <div class="form-group col-md-6">
-                <label for="position_id">Holiday Day</label>
-                <select class="form-control" name="day" id="day" required>
-                    <option value=""><-Select Day-></option>
-                    <option value="Sunday">Suday</option>
-                    <option value="Monday">Monday</option>
-                    <option value="Tuesday">Tuesday</option>
-                    <option value="Wednesday">Wednesday</option>
-                    <option value="Thrusday">Thrusday</option>
-                    <option value="Friday">Friday</option>
-                </select>
+                <div class="form-group col-md-6">
+                    <label for="position_id">Holiday Day</label>
+                    <select class="form-control" name="day" id="day" required>
+                        <option value="">Select Day</option>
+                        <option value="Sunday">Sunday</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thrusday">Thrusday</option>
+                        <option value="Friday">Friday</option>
+                    </select>
+                </div>
             </div>
     </div>
 
     <button type="submit" class="btn btn-primary">Update</button>
-    <a href="{{ route('employee.index') }}"><button type="submit" class="btn btn-secondary">Back</button></a>
+    {{-- <a href="{{ route('employee.index') }}"><button type="submit" class="btn btn-secondary">Back</button></a> --}}
     </form>
     </div>
 

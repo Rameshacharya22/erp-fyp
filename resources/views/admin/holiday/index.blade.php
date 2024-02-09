@@ -4,14 +4,14 @@
 
 @section('content_header')
 <div class="row">
-    <div class="col"><h1>Holiday</h1></div>
+{{--    <div class="col"><h1>Holiday</h1></div>--}}
     <div class="col"></div>
     <div class="col"></div>
     <div class="col"></div>
     <div class="col"><a href="{{route('holiday.create')}}" class="tertiary-color"><button type="button" class="btn btn-primary">Add Holiday</button></a></div>
 </div>
-    
-    
+
+
 @stop
 
 @section('content')
@@ -25,7 +25,7 @@
                     <th>Description</th>
                     <th>Day</th>
                     <th>Action</th>
-                     
+
                 </tr>
             </thead>
             <tbody>
@@ -39,7 +39,12 @@
                         <td>
                         <a href="{{ route('holiday.show', $holiday->id) }}" class="btn"><i class="fas fa-eye"></i></a>
                         <a href="{{ route('holiday.edit', $holiday->id) }}" class="btn "><i class="far fa-edit"></i></a>
-                    </td>
+                            <form action="{{ route('holiday.destroy', $holiday->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn"><i class="fas fa-trash-alt" style="color: #e01010;"></i></button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -48,7 +53,7 @@
 
     </div>
 
-   
+
 @stop
 
 @section('css')
@@ -66,8 +71,8 @@
                     {data: 'id', name: 'DT_RowIndex'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
-                    { 
-                        data: 'is_active', 
+                    {
+                        data: 'is_active',
                         name: 'is_active',
                         render: function(data, type, full, meta) {
                             // Assuming 1 represents active and 0 represents inactive
