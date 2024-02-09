@@ -19,12 +19,19 @@
             @include('adminlte::partials.common.preloader')
         @endif
 
+
+        @section('content_top_nav_left')
+            <li class="pt-2 px-2"><h4>{{$title}}</h4></li>
+        @endsection
+
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())
             @include('adminlte::partials.navbar.navbar-layout-topnav')
         @else
             @include('adminlte::partials.navbar.navbar')
         @endif
+
+
 
         {{-- Left Main Sidebar --}}
         @if(!$layoutHelper->isLayoutTopnavEnabled())
@@ -47,6 +54,7 @@
         @if(config('adminlte.right_sidebar'))
             @include('adminlte::partials.sidebar.right-sidebar')
         @endif
+
 
     </div>
 @stop

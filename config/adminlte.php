@@ -63,9 +63,9 @@ return [
     |
     */
 
-    'logo' => '<b>LOGIN</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/Login.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo' => '<b class="text-transparent">ERP</b>',
+    'logo_img' => 'img/Logo.png',
+    'logo_img_class' => 'brand-image ',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Admin Logo',
@@ -150,7 +150,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
@@ -192,7 +192,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-primary ',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -327,17 +327,27 @@ return [
         [
             'text'        => 'Employee',
             'route'         => 'employee.index',
-            'icon'        => 'fas fa-user-tie',   
+            'icon'        => 'fas fa-user-tie',
         ],
         [
             'text'        => 'Leave',
             'route'         => 'leave.index',
-            'icon'        => 'fas fa-user',    
+            'icon'        => 'fas fa-user',
+        ],
+        [
+            'text'        => 'Holiday',
+            'route'         => 'holiday.index',
+            'icon'        => 'fas fa-user',
         ],
         [
             'text'        => 'Attendance',
             'route'         => 'attendance.index',
-            'icon'        => 'fas fa-user',   
+            'icon'        => 'fas fa-user',
+        ],
+        [
+            'text'        => 'Project',
+            'route'         => 'project.index',
+            'icon'        => 'fas fa-user',
         ],
         // ['header' => 'account_settings'],
         // [
@@ -350,7 +360,7 @@ return [
         //     'url'  => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
-      
+
     ],
 
     /*

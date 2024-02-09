@@ -7,7 +7,11 @@
 @endif
 
 {{-- Default Content Wrapper --}}
-<div class="content-wrapper {{ config('adminlte.classes_content_wrapper', '') }}">
+<div class="content-wrapper {{ config('adminlte.classes_content_wrapper', '') }}" style="
+/*background-color:#faf9f9*/background-color:#F2F2F2;
+    border-top-left-radius: 20px;
+
+">
 
     {{-- Content Header --}}
     @hasSection('content_header')
