@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->bigInteger('id');
             $table->unsignedBigInteger('employee_id');
-            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('employee_id')->references('id')->on('employees')->cascadeOnDelete();
             $table->date('date');
             $table->enum('type',['check_in','check_out'])->default('check_in');
             $table->string('source');

@@ -23,11 +23,12 @@ return new class extends Migration
             $table->string('designation')->nullable();
             $table->string('department')->nullable();
             $table->string('email')->unique();
+            $table->string('password');
             $table->text('address');
             $table->date('hire_date');
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->unsignedBigInteger('position_id');
-            $table->foreign('position_id')->references('id')->on('positions');                  
+            $table->foreign('position_id')->references('id')->on('positions');
             $table->timestamps();
         });
     }

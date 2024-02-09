@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Leave;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -10,12 +11,25 @@ use Yajra\DataTables\DataTables;
 class DepartmentController extends Controller
 {
     /**
+     * @var string
+     */
+    protected $title;
+
+    public function getInfo()
+    {
+        $info['title'] = "Department";
+        return $info;
+    }
+
+    /**
      * Display a listing of the resource.
      */
+
     public function index(Request $request)
     {
-        $departments = Department::paginate(5);
-        return view('admin.department.index', compact('departments'));
+        $info = $this->getInfo();
+        $info['departments'] = Department::paginate(5);
+        return view('admin.department.index',$info);
     }
 
     /**
@@ -23,7 +37,8 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.department.create');
+        $info = $this->getInfo();
+        return view('admin.department.create', $info);
     }
 
     /**
@@ -38,6 +53,7 @@ class DepartmentController extends Controller
         $data = $request->all();
         $department = new Department($data);
         $department->save();
+
         return redirect()->route('department.index')->with('success', 'department added successfully');
     }
 
@@ -46,8 +62,9 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        $department = Department::findOrFail($id);
-        return view('admin.department.show', compact('department'));
+        $info = $this->getInfo();
+        $info['department'] = Department::findOrFail($id);
+        return view('admin.department.show', $info);
     }
 
     /**
@@ -55,8 +72,9 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        $department = Department::findOrFail($id);
-        return view('admin.department.edit', compact('department'));
+        $info = $this->getInfo();
+        $info['department'] = Department::findOrFail($id);
+        return view('admin.department.edit', $info);
     }
 
     /**
@@ -72,8 +90,10 @@ class DepartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Department $department)
+    public function destroy($id)
     {
-        //
+        $department= Department::where('id',$id)->first();
+        $department->delete();
+        return back()->withSuccess('Department deleted');
     }
 }

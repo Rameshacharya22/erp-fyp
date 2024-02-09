@@ -3,7 +3,7 @@
 @section('title', 'Add Position')
 
 <!-- @section('content_header')
-                <h1>Add Position</h1>
+{{--                <h1>Add Position</h1>--}}
 
 @stop -->
 

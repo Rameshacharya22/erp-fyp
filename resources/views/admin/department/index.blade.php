@@ -2,51 +2,50 @@
 
 @section('title', 'Department')
 
-@section('content_header')
-    <div class="row">
-        <div class="col">
-            <h1>Department</h1>
-        </div>
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col"></div>
-        <div class="col"><a href="{{ route('department.create') }}" class="tertiary-color"><button type="button"
-                    class="btn btn-primary">Add Department</button></a></div>
-    </div>
-
-
-@stop
-
 @section('content')
-    <div class="table-responsive">
-        <table class="table  data-table display table-bordered ">
-            <thead>
+    <div class="row mx-4 py-3">
+        <a href="{{ route('department.create') }}" class="tertiary-color">
+            <button type="button"
+                    class="btn btn-primary rounded">Add Department +
+            </button>
+        </a>
+
+        <div class="table-responsive mt-5 bg-white">
+            <table class="table table-md data-table rounded">
+                <thead>
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
                     <th>Action</th>
                 </tr>
-            </thead>
+                </thead>
 
-            <tbody>
-
-
+                <tbody>
                 @foreach ($departments as $department)
                     <tr>
                         <td>{{ $department->id }}</td>
                         <td>{{ $department->title }}</td>
                         <td>
                             <a href="{{ route('department.show', $department->id) }}" class="btn"><i class="fas fa-eye"></i></a>
-                        <a href="{{ route('department.edit', $department->id) }}" class="btn "><i class="far fa-edit"></i></a>
+                            <a href="{{ route('department.edit', $department->id) }}" class="btn "><i
+                                    class="far fa-edit"></i></a>
+                            <form action="{{ route('department.destroy', $department->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn"><i class="fas fa-trash-alt" style="color: #e01010;"></i></button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
 
-            </tbody>
-        </table>
-                {{$departments->links()}}
+                </tbody>
+            </table>
+            {{$departments->links()}}
+
+        </div>
 
     </div>
+
 
 
 @stop
@@ -56,18 +55,4 @@
 @stop
 
 @section('js')
-    {{-- <script>
-    $(function () {
-            var table = $('.data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('department.index') }}",
-            columns: [
-                { data: 'id', name: 'id' },
-                { data: 'title', name: 'title' },
-                { data: 'action', name: 'action', orderable: false, searchable: false },
-            ]
-        });
-    });
-</script> --}}
 @stop

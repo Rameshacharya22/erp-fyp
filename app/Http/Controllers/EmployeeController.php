@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 // use App\Http\Controllers\DataTables;
+use App\Models\Leave;
 use Yajra\DataTables\DataTables;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 use App\Models\Employee;
 use App\Models\Position;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class EmployeeController extends Controller
 {
@@ -19,12 +23,22 @@ class EmployeeController extends Controller
      * Display a listing of the resource.
      */
 
-     //display the employee
-    public function index(Request $request) 
-    {
-        $employees = Employee::paginate(5);
+    protected $title;
 
-        return view('admin.employee.index', compact('employees'));
+    public function getInfo()
+{
+    $info['title'] = "Employee";
+    return $info;
+
+}
+
+     //display the employee
+    public function index(Request $request)
+    {
+        $info = $this->getInfo();
+        $info['employees'] = Employee::paginate(5);
+
+        return view('admin.employee.index',$info);
     }
 
     /**
@@ -32,6 +46,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
+        $info = $this->getInfo();
         $info['positions'] = Position::with('department')->get();
         return view('admin.employee.create', $info);
     }
@@ -42,21 +57,33 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         // Validate the form data
-        $request->validate([
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
+
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'dob' => 'required|date',
             'gender' => 'required|string',
             'number' => 'required|digits_between:9,10',
-            'email' => 'required|email|unique:employees',
-            'address' => 'required|string',
-            'hire_date' => 'required|date',
+            'email' => 'required|email|unique:employees,email',
+            'password' => 'required|string|max:255|confirmed',
+            'address' => 'required|string|max:255',
+            'hire_date' => 'required|date|after_or_equal:today',
             'position_id' => 'required|exists:positions,id',
         ]);
 
-        $data = $request->all();
-        $employee = new Employee($data);
+
+
+        $employee = new Employee();
+        $employee->fill($validatedData);
         $employee->save();
+
+
+        $user = new User();
+        $user->email = $validatedData['email'];
+        $user->name = $validatedData['first_name'];
+        $user->password = bcrypt($validatedData['password']);
+        $user->save();
+
         return redirect()->route('employee.index')->with('success', 'Employee added successfully');
     }
 
@@ -65,8 +92,9 @@ class EmployeeController extends Controller
      */
     public function show($id)
 {
-    $employee = Employee::findOrFail($id);
-    return view('admin.employee.show', compact('employee'));
+    $info = $this->getInfo();
+    $info ['employee'] = Employee::findOrFail($id);
+    return view('admin.employee.show', $info);
 }
 
     /**
@@ -74,9 +102,10 @@ class EmployeeController extends Controller
      */
     public function edit($id)
 {
+    $info = $this->getInfo();
     $info['positions'] = Position::with('department')->get();
-    $employee = Employee::findOrFail($id);
-    return view('admin.employee.edit', $info,compact('employee'));
+    $info['employee'] = Employee::findOrFail($id);
+    return view('admin.employee.edit', $info);
 }
 
     /**
@@ -92,9 +121,11 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy($id)
     {
-        //
+        $employee = Employee::find($id);
+        $employee->delete();
+        return back()->withSuccess('Employee deleted');
     }
 
 }

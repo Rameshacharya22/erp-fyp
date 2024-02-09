@@ -7,12 +7,21 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
+    protected $title;
+
+    public function getInfo()
+    {
+        $info['title'] = "Attendance";
+        return $info;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view("admin.attendance.index");
+        $info = $this->getInfo();
+
+        return view("admin.attendance.index", $info);
     }
 
     /**

@@ -14,12 +14,14 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'Admin',
+
+        \App\Models\User::factory()->create(
+            [
+                'name' => 'Admin',
             'email' => 'admin@test.test',
             'password' => bcrypt('12345678'),
-        ]);
-
+            'role'=>'Admin'
+            ]);
         $this->call(DepartmentSeeder::class);
     }
 }

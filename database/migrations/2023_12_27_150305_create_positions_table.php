@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->unsignedBigInteger('department_id');
-            $table->foreign('department_id')->references('id')->on('departments');
+            $table->foreign('department_id')->references('id')->on('departments')->cascadeOnDelete();
             // $table->decimal('salary');
             // $table->text('responsibilities');
             $table->timestamps();
