@@ -3,8 +3,6 @@
 @section('title', 'Edit Holiday')
 
 <!-- @section('content_header')
-                    <h1>Add Employee</h1>
-
 @stop -->
 
 @section('content')
@@ -26,7 +24,7 @@
                 </div>
                 <div class="form-group col-md-6 mt-3">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" value="{{ $holiday->title }} id="title" name="title" required>
+                    <input type="text" class="form-control" value="{{ $holiday->title }}" id="title" name="title" required>
                 </div>
 
             </div>
@@ -35,8 +33,9 @@
 
                 <div class="form-group col-md-6">
                     <label for="description">Description*</label>
-                    <input type="text" class="form-control" id="description" value="{{ $holiday->description }}"
-                        name="description" required>
+
+                    <textarea class="form-control" id="description" name="description"  cols="30" rows="1" required>{{ $holiday->description }}</textarea>
+
                 </div>
 
                 <div class="form-group col-md-6">
