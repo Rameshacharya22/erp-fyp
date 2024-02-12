@@ -56,37 +56,42 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the form data
-
+        // Validate the request data
         $validatedData = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'dob' => 'required|date',
             'gender' => 'required|string',
             'number' => 'required|digits_between:9,10',
-            'email' => 'required|email|unique:employees,email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|string|max:255|confirmed',
             'address' => 'required|string|max:255',
-            'hire_date' => 'required|date|after_or_equal:today',
+            'hire_date' => 'required|date',
             'position_id' => 'required|exists:positions,id',
         ]);
 
+        // Create user through employee form
+        $user = User::create([
+            'name' => $validatedData['first_name'], 
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+        ]);
 
-
-        $employee = new Employee();
-        $employee->fill($validatedData);
-        $employee->save();
-
-
-        $user = new User();
-        $user->email = $validatedData['email'];
-        $user->name = $validatedData['first_name'];
-        $user->password = bcrypt($validatedData['password']);
-        $user->save();
+        // Create employee
+        $employee = Employee::create([
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
+            'dob' => $validatedData['dob'],
+            'gender' => $validatedData['gender'],
+            'number' => $validatedData['number'],
+            'address' => $validatedData['address'],
+            'hire_date' => $validatedData['hire_date'],
+            'position_id' => $validatedData['position_id'],
+        ]);
 
         return redirect()->route('employee.index')->with('success', 'Employee added successfully');
     }
-
+    
     /**
      * Display the specified resource.
      */
