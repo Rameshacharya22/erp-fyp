@@ -75,7 +75,7 @@
             </div>
             <div class="form-group col-md-6">
             <label for="address">Address*</label>
-            <textarea class="form-control" value="{{old('')}}"  id="address" name="address" rows="1" required></textarea>
+            <textarea class="form-control" value="{{old('address')}}"  id="address" name="address" rows="1" required></textarea>
         </div>
         </div>
         <div class="form-row">

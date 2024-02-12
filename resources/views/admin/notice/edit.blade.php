@@ -3,7 +3,6 @@
 @section('title', 'Edit Notice')
 
 <!-- @section('content_header')
-        <h1>Add Notice</h1>
 
 @stop -->
 
@@ -37,8 +36,8 @@
                 <div class="form-group col-md">
                     <label for="description">Description</label>
 
-                    <textarea class="form-control" value="{{ $notice->description }}" name="description" id="description" cols="30"
-                              rows="4"></textarea>
+                    <textarea class="form-control"  name="description" id="description" cols="30"
+                              rows="4">{{ $notice->description }}</textarea>
                 </div>
             </div>
 

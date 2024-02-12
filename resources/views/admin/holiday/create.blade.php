@@ -22,12 +22,12 @@
 
         <div class="form-row">
             <div class="form-group col-md-6 mt-3">
-                <label for="date">Holiday Date</label>
-                <input type="date" class="form-control" id="date" name="date" required min="{{\Carbon\Carbon::now()->format('Y-m-d')}}">
-            </div>
-            <div class="form-group col-md-6 mt-3">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="form-group col-md-6 mt-3">
+                <label for="date">Holiday Date</label>
+                <input type="date" class="form-control" id="date" name="date" required min="{{\Carbon\Carbon::now()->format('Y-m-d')}}">
             </div>
 
         </div>
@@ -35,7 +35,9 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="description">Description</label>
-                <input type="text" class="form-control" id="description" name="description" required>
+{{--                <input type="text" class="form-control" id="description" name="description" required>--}}
+                <textarea class="form-control" id="description" name="description"  cols="30" rows="1" required></textarea>
+
             </div>
 
             <div class="form-group col-md-6">

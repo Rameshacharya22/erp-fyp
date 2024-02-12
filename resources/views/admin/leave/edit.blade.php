@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Add Employee')
+@section('title', 'Edit Leave')
 
 <!-- @section('content_header')
-{{--    <h1>Add Employee</h1>--}}
+
 
 @stop -->
 
@@ -21,13 +21,13 @@
             @csrf
             @method('PUT')
             <div class="form-row ">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-4 mt-4">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" value="{{$leave->name}}" name="name"
                            required placeholder="">
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="type">Leave Type*</label>
+                <div class="form-group col-md-4 mt-4">
+                    <label for="type">Leave Type</label>
                     <select class="form-control" id="type" name="type" required>
                         <option value="">{{$leave->type}}</option>
                         <option value="unpaid">Unpaid</option>
@@ -35,7 +35,7 @@
                         <option value="annual">Annual</option>
                     </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-4 mt-4">
                     <label for="duration">Select Duration</label>
                     <select class="form-control" id="duration" name="duration" required>
                         <option value="">{{$leave->duration}} </option>
@@ -54,11 +54,11 @@
 
             <div class="form-row">
                 <label for="reason"> Reason</label>
-                <textarea class="form-control" value="{{$leave->reason}}" name="reason" id="reason" cols="30" rows="5"
-                ></textarea>
+                <textarea class="form-control" name="reason" id="reason" cols="30" rows="5"
+                > {{$leave->reason}} </textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-            <a href="{{route('leave.index')}}"><button type="submit" class="btn btn-secondary">Back</button></a>
+            <button type="submit" class="btn btn-primary mt-4">Update</button>
+            <a href="{{route('leave.index')}}"><button type="submit" class="btn btn-secondary mt-4">Back</button></a>
         </form>
     </div>
 
