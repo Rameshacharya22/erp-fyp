@@ -44,7 +44,7 @@ class HolidayController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'date' => 'required|string|after_or_equal:today',
+            'date' => 'required|date|after_or_equal:today',
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'day' => 'required'

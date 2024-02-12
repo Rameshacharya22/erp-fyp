@@ -68,8 +68,9 @@ class PositionController extends Controller
     {
         $info = $this->getInfo();
 
-        $position = Position::findOrFail($id);
-        $info['department'] = $position->department;
+        $positions = Position::findOrFail($id);
+        $info['position'] = $positions ;
+        $info['department'] = $positions->department;
 
         return view('admin.position.show',$info);
     }

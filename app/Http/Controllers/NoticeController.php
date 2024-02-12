@@ -22,7 +22,7 @@ class NoticeController extends Controller
     public function index(Request $request)
     {
         // dd(auth()->user());
-        dd(Auth::user());
+//        dd(Auth::user());
 
         if (Gate::allows('userAccss', auth()->user())) {
             $info = $this->getInfo();
