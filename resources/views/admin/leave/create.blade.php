@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Add Employee')
+@section('title', 'Add Leave')
 
 <!-- @section('content_header')
 {{--                    <h1>Add Employee</h1>--}}
@@ -32,11 +32,11 @@
 
             <form action="{{ route('leave.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-
+{{old('')}}
                 <div class="form-row ">
                     <div class="form-group col-md-4">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" value="" name="name"
+                        <input type="text" class="form-control" id="name" value="{{old('name')}}" name="name"
                             required placeholder="">
                     </div>
                     <div class="form-group col-md-4">
@@ -61,13 +61,13 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="date">Date</label>
-                        <input type="date" class="form-control" id="date" value="" name="date" required min="{{\Carbon\Carbon::now()->format('Y-m-d')}}">
+                        <input type="date" class="form-control" id="date" value="{{old('date')}}" name="date" required min="{{\Carbon\Carbon::now()->format('Y-m-d')}}">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <label for="reason"> Reason</label>
-                    <textarea class="form-control" name="reason" id="reason" cols="30" rows="5"
+                    <textarea class="form-control" value="{{old('reason')}}" name="reason" id="reason" cols="30" rows="5"
                         placeholder="For eg :Feeling not well"></textarea>
                 </div>
                 <div class="action mt-2 float-right">

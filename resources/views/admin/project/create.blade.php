@@ -20,12 +20,12 @@
             <div class="form-row ">
                 <div class="form-group col-md-6 mt-3">
                     <label for="title">Project Title</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
+                    <input type="text" value="{{old('title')}}" class="form-control" id="title" name="title" required>
                 </div>
 
                 <div class="form-group col-md-6 mt-3">
                     <label for="description">Project Description</label>
-                    <input type="text" class="form-control" id="description" name="description" required>
+                    <input type="text" value="{{old('description')}}" class="form-control" id="description" name="description" required>
                 </div>
 
 
@@ -35,12 +35,12 @@
 
                 <div class="form-group col-md-6 mt-3">
                     <label for="started_at">Started Date</label>
-                    <input type="date" class="form-control" id="started_at" name="started_at" required>
+                    <input type="date" value="{{old('started_at')}}" class="form-control" id="started_at" name="started_at" required>
                 </div>
 
                 <div class="form-group col-md-6">
                     <label for="deadline_at">Deadline Date</label>
-                    <input type="date" class="form-control" id="deadline_at" name="deadline_at" required>
+                    <input type="date" value="{{old('deadline_at')}}" class="form-control" id="deadline_at" name="deadline_at" required>
                 </div>
             </div>
 
@@ -48,21 +48,21 @@
 
                 <div class="form-group col-md-6">
                     <label for="completion_time">Completion Time</label>
-                    <input type="time" class="form-control" id="completion_time" name="completion_time" required>
+                    <input type="time" value="{{old('completion_time')}}" class="form-control" id="completion_time" name="completion_time" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="completion_at">Completed Date</label>
-                    <input type="date" class="form-control" id="completion_at" name="completion_at" required>
+                    <input type="date" class="form-control" value="{{old('completion_at')}}" id="completion_at" name="completion_at" required>
                 </div>
             </div>
 
-            {{-- 
+            {{--
             title
-        description 
+        description
         started_at
         deadline_at
         completion_time
-        completed_at 
+        completed_at
         --}}
 
 
