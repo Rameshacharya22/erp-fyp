@@ -14,5 +14,10 @@ class Employee extends Model
     {
         return self::paginate(5);
     }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_members', 'employee_id', 'project_id');
+    }
 }
 
