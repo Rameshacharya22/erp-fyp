@@ -70,9 +70,13 @@ class EmployeeController extends Controller
             'position_id' => 'required|exists:positions,id',
         ]);
 
+        $name = $validatedData['first_name'] . ' ' . $validatedData['last_name'];
+
+
         // Create user through employee form
         $user = User::create([
-            'name' => $validatedData['first_name'], 
+//            'name' => $validatedData['first_name'],
+            'name' => $name,
             'email' => $validatedData['email'],
             'password' => bcrypt($validatedData['password']),
         ]);
@@ -83,6 +87,7 @@ class EmployeeController extends Controller
             'last_name' => $validatedData['last_name'],
             'dob' => $validatedData['dob'],
             'gender' => $validatedData['gender'],
+            'email' => $validatedData['email'],
             'number' => $validatedData['number'],
             'address' => $validatedData['address'],
             'hire_date' => $validatedData['hire_date'],
@@ -91,7 +96,7 @@ class EmployeeController extends Controller
 
         return redirect()->route('employee.index')->with('success', 'Employee added successfully');
     }
-    
+
     /**
      * Display the specified resource.
      */
