@@ -349,6 +349,12 @@ return [
             'route'         => 'project.index',
             'icon'        => 'fas fa-user',
         ],
+      
+        [
+            'text'        => 'Notice',
+            'route'         => 'notice.index',
+            'icon'        => 'fas fa-user',
+        ],
         // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',

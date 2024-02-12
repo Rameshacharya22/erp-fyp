@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectMember extends Model
 {
     use HasFactory;
+
+    protected  $guarded = ['id'];
+
+//    protected $primaryKey = 'id';
+//    public $incrementing = true;
 }
