@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Project')
+@section('title', 'View Project')
 
 @section('content_header')
-  
+
 @stop
 
 @section('content')
@@ -15,7 +15,7 @@
         <h4>Started_at: {{$project->started_at}}</h4>
         <h4> Deadline At: {{$project->deadline_at}}</h4>
         <h4> Completion time: {{$project->completion_time}}</h4>
-        <h4> Completed At: {{$project->completed_at}}</h4>
+        <h4> Completed At: {{$project->completion_at}}</h4>
     </div>
     <a href="{{route('project.index')}}">
         <div class="button">
@@ -24,7 +24,7 @@
 </div>
 
 
-   
+
 @stop
 
 @section('css')

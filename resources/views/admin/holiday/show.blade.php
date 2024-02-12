@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Holiday')
+@section('title', 'View Holiday')
 
 @section('content_header')
-  
+
 @stop
 
 @section('content')
@@ -22,7 +22,7 @@
 </div>
 
 
-   
+
 @stop
 
 @section('css')

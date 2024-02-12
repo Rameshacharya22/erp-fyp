@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Position')
+@section('title', 'View Position')
 
 @section('content_header')
-  
+
 @stop
 
 @section('content')
@@ -19,7 +19,7 @@
 </div>
 
 
-   
+
 @stop
 
 @section('css')
