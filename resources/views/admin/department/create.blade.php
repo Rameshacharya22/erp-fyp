@@ -14,31 +14,25 @@
         @endforeach
     @endif
 
-    <div class="container pt-2">
-        <div class="card">
-            <div class="card-header">
-                Add Department
-            </div>
-            <div class="card-body">
+
                 <div class="container ">
                     <form action="{{ route('department.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        <div class="form-group col-md-6">
+                        <div class="form-row">
+                        <div class="form-group col-md-6 mt-4">
                             <label for="title">Title</label>
                             <input type="text" class="form-control" id="title" name="title" required>
                         </div>
+                        </div>
 
 
 
-                        <div class="col-md-12 border-top">
 
-                            <button type="submit" class="btn btn-primary mt-2 float-right">Submit</button>
+                            <button type="submit" class="btn btn-primary mt-2 ">Submit</button>
                         </div>
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
+
 
 
 @endsection

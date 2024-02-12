@@ -3,7 +3,7 @@
 @section('title', 'Add Department')
 
 <!-- @section('content_header')
-    <h1>Add Department</h1>   
+{{--    <h1>Add Department</h1>   --}}
 
 @stop -->
 
@@ -20,10 +20,9 @@
     <form action="{{ route('department.update', $department->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        <div class="form-row">  
-            
-            <div class="form-group col-md-6">
-                <label for="title">Title*</label>
+        <div class="form-row">
+            <div class="form-group col-md-6 mt-4">
+                <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" value="{{$department->title}}" name="title" required>
             </div>
         </div>
