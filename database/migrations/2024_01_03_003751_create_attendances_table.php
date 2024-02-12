@@ -15,10 +15,10 @@ return new class extends Migration
             $table->bigInteger('id');
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees')->cascadeOnDelete();
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->enum('type',['check_in','check_out'])->default('check_in');
-            $table->string('source');
-            $table->time('clock_in_time');
+            $table->string('source')->nullable();
+            $table->time('clock_in_time')->nullable();
             $table->time('clock_out_time')->nullable();
             $table->timestamps();
         });

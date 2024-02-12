@@ -18,10 +18,10 @@ return new class extends Migration
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->unsignedBigInteger('project_id');
             $table->foreign('project_id')->references('id')->on('projects');
-            $table->longText('description');
-            $table->date('deadline');
-            $table->date('completed_at');
-            $table->date('started_at');
+            $table->longText('description')->nullable();
+            $table->date('deadline')->nullable();
+            $table->date('completed_at')->nullable();
+            $table->date('started_at')->nullable();
             $table->double('time_taken')->nullable();
             $table->timestamps();
         });

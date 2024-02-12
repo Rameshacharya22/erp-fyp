@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('holidays', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->string('title');
-            $table->longText('description');
-            $table->string('day');
+            $table->longText('description')->nullable();
+            $table->string('day')->nullable();
             $table->timestamps();
         });
     }

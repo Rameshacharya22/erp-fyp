@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('reason');
             $table->date('date');
             $table->enum('type',['unpaid','paid','annual'])->default('Unpaid');
-//            $table->enum('status',['approved','rejected','pending'])->default('approved');
-            $table->string('status')->default('null');
+            $table->enum('status',['approved','rejected','pending'])->default('pending');
+//            $table->string('status')->default('null');
             $table->timestamps();
         });
     }

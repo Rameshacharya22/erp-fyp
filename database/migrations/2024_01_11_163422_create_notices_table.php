@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('notices', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->longText('description');
-            $table->date('date');
+            $table->longText('description')->nullable();
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }
