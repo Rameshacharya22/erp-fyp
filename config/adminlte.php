@@ -349,12 +349,31 @@ return [
             'route'         => 'project.index',
             'icon'        => 'fas fa-user',
         ],
-      
+
         [
             'text'        => 'Notice',
             'route'         => 'notice.index',
             'icon'        => 'fas fa-user',
         ],
+      
+        [
+            'text'        => 'Appreciation',
+            'route'         => 'appreciation.index',
+            'icon'        => 'fas fa-user',
+        ],
+        [
+            'text'        => 'Task',
+            'route'         => 'task.index',
+            'icon'        => 'fas fa-user',
+        ],
+        [
+            'text'        => 'Salary',
+            'route'         => 'salary.index',
+            'icon'        => 'fas fa-user',
+            // 'is_admin'=>true
+        ],
+   
+
         // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',

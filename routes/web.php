@@ -36,6 +36,9 @@ Route::middleware(['auth', 'checkRole:Admin'])->group(function () {
     //    Route::resource('holiday', App\Http\Controllers\HolidayController::class);
     Route::resource('project', App\Http\Controllers\ProjectController::class);
     Route::resource('notice', App\Http\Controllers\NoticeController::class);
+    Route::resource('appreciation', App\Http\Controllers\AppreciationController::class);
+    Route::resource('salary', App\Http\Controllers\SalaryController::class);
+    Route::resource('task', App\Http\Controllers\TaskController::class);
 
 
 
@@ -52,8 +55,8 @@ Route::middleware(['auth', 'checkRole:Admin'])->group(function () {
     Route::post('/holiday/store', [App\Http\Controllers\HolidayController::class, 'store'])->name('holiday.store');
 });
 
+//notice
 Route::resource('/notice', NoticeController::class)->except(['create']);
-
 
 
 //leave
