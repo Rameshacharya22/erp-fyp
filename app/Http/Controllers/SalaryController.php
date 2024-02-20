@@ -3,16 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Salary;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class SalaryController extends Controller
 {
+    protected $title;
+
+    public function getInfo()
+    {
+        $info['title'] = "Salary";
+        return $info;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $info = $this->getInfo();
+        $info['employees'] = Employee::get();
+        $info['salaries'] = Salary::paginate(5);
+        return view("admin.salary.index", $info);
     }
 
     /**
@@ -20,7 +32,10 @@ class SalaryController extends Controller
      */
     public function create()
     {
-        //
+        $info = $this->getInfo();
+        $info['employees'] = Employee::get();
+
+        return view('admin.salary.create', $info);
     }
 
     /**
@@ -28,38 +43,59 @@ class SalaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'employee_id' => 'required',
+            'effective_date' => 'required|date|after_or_equal:today',
+            'amount' => 'required|string|max:8',
+        ]);
+        
+        $data = $request->all();
+        $salary = new Salary($data);
+        $salary->save();
+        return redirect()->route('salary.index')->with('success', 'salary added successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Salary $salary)
+    public function show($id)
     {
-        //
+        $info = $this->getInfo();
+        $info['employees'] = Employee::get();
+
+        $info['salary'] = Salary::findOrFail($id);
+        return view('admin.salary.show', $info);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Salary $salary)
+    public function edit($id)
     {
-        //
+        $info = $this->getInfo();
+        $info['employees'] = Employee::get();
+
+        $info['salary']  = Salary::findOrFail($id);
+        return view('admin.salary.edit', $info);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Salary $salary)
+    public function update(Request $request, $id)
     {
-        //
+        $salary = Salary::findOrFail($id);
+        $salary->update($request->all());
+        return redirect()->route('salary.index')->with('success', 'Record updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Salary $salary)
+    public function destroy($id)
     {
-        //
+        $salary = Salary::find($id);
+        $salary->delete();
+        return back()->withSuccess('Salary deleted');
     }
 }
