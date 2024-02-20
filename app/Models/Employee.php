@@ -19,5 +19,21 @@ class Employee extends Model
     {
         return $this->belongsToMany(Project::class, 'project_members', 'employee_id', 'project_id');
     }
+
+    public function appreciation()
+    {
+        return $this->belongsTo(Appreciation::class,);
+    }
+
+    public function salary()
+    {
+        return $this->belongsTo(Salary::class);
+    }
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class, 'employee_tasks');
+    }
+
 }
 
