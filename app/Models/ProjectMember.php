@@ -11,6 +11,11 @@ class ProjectMember extends Model
 
     protected  $guarded = ['id'];
 
-//    protected $primaryKey = 'id';
-//    public $incrementing = true;
+    //    protected $primaryKey = 'id';
+    //    public $incrementing = true;
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id');
+    }
 }
