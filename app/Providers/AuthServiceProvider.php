@@ -34,5 +34,40 @@ class AuthServiceProvider extends ServiceProvider
             }
             return false;
         });
+
+        Gate::define('appreciation-crud', function ($user) {
+            if ($user->role == 'Admin') {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define('task-crud', function ($user) {
+            if ($user->role == 'Admin') {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define('project-crud', function ($user) {
+            if ($user->role == 'Admin') {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define('holiday-crud', function ($user) {
+            if ($user->role == 'Admin') {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define('salary-crud', function ($user) {
+            if ($user->role == 'Admin') {
+                return true;
+            }
+            return false;
+        });
     }
 }
