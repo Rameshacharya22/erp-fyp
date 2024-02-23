@@ -1,17 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
+use App\Models\User;
 // use App\Http\Controllers\DataTables;
 use App\Models\Leave;
-use Yajra\DataTables\DataTables;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-
-
 use App\Models\Employee;
 use App\Models\Position;
-use App\Models\User;
+use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -93,6 +92,8 @@ class EmployeeController extends Controller
             'hire_date' => $validatedData['hire_date'],
             'position_id' => $validatedData['position_id'],
         ]);
+        $user->employee()->save($employee);
+
 
         return redirect()->route('employee.index')->with('success', 'Employee added successfully');
     }
