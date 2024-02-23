@@ -10,6 +10,11 @@ class Employee extends Model
     use HasFactory;
     protected $guarded = [];
 
+    protected $casts = [
+        'personaldetail' => 'array',
+        'emergencycontact' => 'array',
+    ];
+
     public static function getAllEmployee()
     {
         return self::paginate(5);
@@ -34,6 +39,13 @@ class Employee extends Model
     {
         return $this->belongsToMany(Task::class, 'employee_tasks');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
 }
-
