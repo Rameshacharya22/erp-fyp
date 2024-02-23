@@ -348,6 +348,7 @@ return [
             'text'        => 'Project',
             'route'         => 'project.index',
             'icon'        => 'fas fa-user',
+            'can'         => 'project-crud',
         ],
 
         [
@@ -355,25 +356,30 @@ return [
             'route'         => 'notice.index',
             'icon'        => 'fas fa-user',
         ],
-      
+
         [
             'text'        => 'Appreciation',
             'route'         => 'appreciation.index',
             'icon'        => 'fas fa-user',
+            'can'        => 'appreciation-crud',
         ],
         [
             'text'        => 'Task',
             'route'         => 'task.index',
             'icon'        => 'fas fa-user',
+            'can'        => 'task-crud',
         ],
         [
             'text'        => 'Salary',
             'route'         => 'salary.index',
             'icon'        => 'fas fa-user',
-            // 'is_admin'=>true
+            'can'           => 'salary-crud'
         ],
-   
-
+        [
+            'text'        => 'Setting',
+            'route'         => 'setting.index',
+            'icon'        => 'fas fa-user',
+        ],
         // ['header' => 'account_settings'],
         // [
         //     'text' => 'profile',
@@ -389,7 +395,7 @@ return [
     ],
 
     /*
-    |--------------------------------------------------------------------------
+    |----------------------------------,----------------------------------------
     | Menu Filters
     |--------------------------------------------------------------------------
     |
