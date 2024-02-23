@@ -20,11 +20,14 @@ class Position extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-
     }
 
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
+    }
+    public function employee()
+    {
+        return $this->hasMany(Employee::class, 'employee_id');
     }
 }
