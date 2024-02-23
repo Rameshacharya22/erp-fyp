@@ -41,8 +41,8 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory()->create(
             [
-                'name' => 'Aashish',
-                'email' => 'aashish@erp.test',
+                'name' => 'Ramesh',
+                'email' => 'ramesh@erp.test',
                 'password' => bcrypt('user'),
                 'role' => 'User'
             ]
@@ -50,8 +50,8 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Employee::create(
             [
-                'first_name' => 'Aashish',
-                'email' => 'aashish@erp.test',
+                'first_name' => 'Ramesh',
+                'email' => 'ramesh@erp.test',
             ]
         );
 
