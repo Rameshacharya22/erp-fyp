@@ -67,6 +67,8 @@ class TaskController extends Controller
             'completed_at' => $validatedData['completed_at'],
         ]);
         $task->employees()->sync($request->employee_ids);
+
+        return redirect()->route('task.index')->with('success', 'Record created successfully');
     }
 
     /**
@@ -134,8 +136,8 @@ class TaskController extends Controller
     public function destroy($id)
     {
         $task = Task::find($id);
-        $task->employeeTasks()->delete(); 
-        $task->delete(); 
+        $task->employeeTasks()->delete();
+        $task->delete();
         return back()->withSuccess('Task deleted');
     }
 }
