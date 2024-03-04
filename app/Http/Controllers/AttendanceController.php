@@ -43,6 +43,8 @@ class AttendanceController extends Controller
             $date = Carbon::now()->format('Y-m-d');
             $clockTime = Carbon::now();
 
+
+
             $attendance = Attendance::updateOrCreate(
                 [
                     'user_id' => $userId,
@@ -54,7 +56,16 @@ class AttendanceController extends Controller
                 ]
             );
 
-            if (!$request->clockIn) {
+            if ($request->clockIn){
+                $openingTime = Carbon::createFromFormat('H:i:s', config('erp.open_time'));
+                if ($clockTime->gt($openingTime)) {
+                    $late = true;
+                } else {
+                    $late = false;
+                }
+                $attendance->update(['is_late' => $late]);
+            }
+            elseif (!$request->clockIn) {
                 $startDate = Carbon::parse($attendance->clock_in_time);
                 $endDate = Carbon::parse($attendance->clock_out_time);
                 $hours = $endDate->diffInHours($startDate);
