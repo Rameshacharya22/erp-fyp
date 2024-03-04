@@ -3,21 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Leave;
 use App\Models\Position;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class PositionController extends Controller
 {
+
+    protected $title;
+
+    public function getInfo()
+    {
+        $info['title'] = "Position";
+        return $info;
+    }
+
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-       
-        
-        $positions = Position::paginate(5);
-        return view('admin.position.index', compact('positions'));
+
+        $info = $this->getInfo();
+        $info['positions'] = Position::paginate(5);
+        return view('admin.position.index', $info );
 
     }
 
@@ -26,6 +37,8 @@ class PositionController extends Controller
      */
     public function create()
     {
+        $info = $this->getInfo();
+
         // $info['positions'] = Position::with('department')->get();
         $info['departments'] = Department::get();
         return view('admin.position.create', $info);
@@ -53,10 +66,13 @@ class PositionController extends Controller
      */
     public function show($id)
     {
-        $position = Position::findOrFail($id);
-        $department = $position->department;
+        $info = $this->getInfo();
 
-        return view('admin.position.show', compact('position', 'department'));
+        $positions = Position::findOrFail($id);
+        $info['position'] = $positions ;
+        $info['department'] = $positions->department;
+
+        return view('admin.position.show',$info);
     }
 
     /**
@@ -64,9 +80,10 @@ class PositionController extends Controller
      */
     public function edit($id)
     {
+        $info = $this->getInfo();
         $info['departments'] = Department::all();
-        $position = Position::findOrFail($id);
-        return view('admin.position.edit', compact('info', 'position'));
+        $info['position'] = Position::findOrFail($id);
+        return view('admin.position.edit',$info);
     }
 
     /**
@@ -83,13 +100,9 @@ class PositionController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-    { {
-            // $position = Position::findOrFail($id);
-            $position = Position::where('id', $id)->first();
-
-            $position->delete();
-
-            return redirect()->route('position.index')->with('success', 'Position deleted successfully');
-        }
+    {
+        $position = Position::find($id);
+        $position->delete();
+        return back()->withSuccess('Positoin deleted');
     }
 }

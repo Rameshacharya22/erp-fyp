@@ -335,8 +335,49 @@ return [
             'icon'        => 'fas fa-user',
         ],
         [
+            'text'        => 'Holiday',
+            'route'         => 'holiday.index',
+            'icon'        => 'fas fa-user',
+        ],
+        [
             'text'        => 'Attendance',
             'route'         => 'attendance.index',
+            'icon'        => 'fas fa-user',
+        ],
+        [
+            'text'        => 'Project',
+            'route'         => 'project.index',
+            'icon'        => 'fas fa-user',
+            'can'         => 'project-crud',
+        ],
+
+        [
+            'text'        => 'Notice',
+            'route'         => 'notice.index',
+            'icon'        => 'fas fa-user',
+        ],
+
+        [
+            'text'        => 'Appreciation',
+            'route'         => 'appreciation.index',
+            'icon'        => 'fas fa-user',
+            'can'        => 'appreciation-crud',
+        ],
+        [
+            'text'        => 'Task',
+            'route'         => 'task.index',
+            'icon'        => 'fas fa-user',
+            'can'        => 'task-crud',
+        ],
+        [
+            'text'        => 'Salary',
+            'route'         => 'salary.index',
+            'icon'        => 'fas fa-user',
+            'can'           => 'salary-crud'
+        ],
+        [
+            'text'        => 'Setting',
+            'route'         => 'setting.index',
             'icon'        => 'fas fa-user',
         ],
         // ['header' => 'account_settings'],
@@ -354,7 +395,7 @@ return [
     ],
 
     /*
-    |--------------------------------------------------------------------------
+    |----------------------------------,----------------------------------------
     | Menu Filters
     |--------------------------------------------------------------------------
     |

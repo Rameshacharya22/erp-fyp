@@ -2,37 +2,62 @@
 
 @section('title', 'Leave')
 
-@section('content_header')
-<div class="row">
-    <div class="col"><h1>Leave</h1></div>
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"><a href="{{route('leave.create')}}" class="tertiary-color"><button type="button" class="btn btn-primary">Add Leave</button></a></div>
-</div>
-    
-    
-@stop
-
 @section('content')
-<div class="container">
-        <table class="table" id="employee-table">
-            <thead>
+    <div class="row mx-4 py-3">
+        <a href="{{ route('leave.create') }}" class="tertiary-color">
+            <button type="button"
+                    class="btn btn-primary rounded">Add Leave +
+            </button>
+        </a>
+
+        <div class="table-responsive mt-5 bg-white">
+            <table class="table table-md data-table rounded">
+                <thead>
                 <tr>
-                    <th>Employee ID</th>
+                    <th>ID</th>
                     <th>Name</th>
-                    <th>Leave Date</th>
+{{--                    <th>Employee Id</th>--}}
+                    <th> Leave Date</th>
                     <th>Duration</th>
-                    <th>Leave Status</th>
                     <th>Leave Type</th>
+                    <th>Leave Reason</th>
+                    <th>Leave Status</th>
                     <th>Action</th>
-                     
                 </tr>
-            </thead>
-        </table>
+                </thead>
+
+                <tbody>
+                @foreach ($leaves as $leave)
+                    <tr>
+                        <td>{{ $leave->id }}</td>
+                        <td>{{$leave->name}}</td>
+                        <th>{{$leave->date}}</th>
+                        <th>{{$leave->duration}}</th>
+                        <th>{{$leave->type}}</th>
+                        <th>{{$leave->reason}}</th>
+                        <th>{{$leave->status}}</th>
+                        <td>
+                            <a href="{{ route('leave.show', $leave->id) }}" class="btn"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('leave.edit', $leave->id) }}" class="btn "><i
+                                    class="far fa-edit"></i></a>
+                            <form action="{{ route('leave.destroy', $leave->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn"><i class="fas fa-trash-alt" style="color: #e01010;"></i></button>
+                            </form>                        </td>
+                    </tr>
+                @endforeach
+
+                </tbody>
+            </table>
+            {{$leaves->links()}}
+
+        </div>
+
     </div>
 
-   
+
+
 @stop
 
 @section('css')
@@ -40,27 +65,18 @@
 @stop
 
 @section('js')
-<script>
-        $(function () {
-            var table = $('#data-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('leave.index') }}",
-                columns: [
-                    {data: 'id', name: 'DT_RowIndex'},
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    { 
-                        data: 'is_active', 
-                        name: 'is_active',
-                        render: function(data, type, full, meta) {
-                            // Assuming 1 represents active and 0 represents inactive
-                            return data == 1 ? 'Active' : 'Inactive';
-                        }},
-                    {data: 'status', name: 'status'},
-                    {data: 'action', name: 'action'},
-                ],
-            });
+    {{-- <script>
+    $(function () {
+            var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('department.index') }}",
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'title', name: 'title' },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
+            ]
         });
-    </script>
-    @stop
+    });
+</script> --}}
+@stop

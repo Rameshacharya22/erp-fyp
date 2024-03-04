@@ -63,11 +63,6 @@ class User extends Authenticatable
         return $this->hasMany(Notice::class);
 
     }
-    public function projects(): HasMany
-    {
-        return $this->hasMany(Project::class);
-
-    }
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
@@ -83,5 +78,8 @@ class User extends Authenticatable
         return $this->hasMany(Appreciation::class);
 
     }
-   
+    public function employee()
+    {
+        return $this->hasOne(Employee::class);
+    }
 }

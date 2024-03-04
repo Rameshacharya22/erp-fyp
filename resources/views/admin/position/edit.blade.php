@@ -3,7 +3,7 @@
 @section('title', 'Edit Position')
 
 <!-- @section('content_header')
-        <h1>Add Position</h1>
+
 
 @stop -->
 
@@ -18,26 +18,29 @@
         <form action="{{ route('position.update', $position->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            <div class="form-row" >
+                <div class="form-group col-md-6 mt-4">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" value="{{ $position->title }}" name="title"
+                           required>
+                </div>
 
-            <div class="form-group col-md-6">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" value="{{ $position->title }}" name="title"
-                    required>
+                <div class="form-group col-md-6 mt-4">
+                    <label for="department_id">Department</label>
+
+                    <select class="form-control" id="department_id" name="department_id"  required>
+                        @foreach($departments as $department)
+                            <option value="{{$department->id}}">{{$department->title}} ({{$department->title}})</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{{ route('position.index') }}"><button type="submit" class="btn btn-secondary">Back</button></a>
 
-            <div class="form-group col-md-6">
-                <label for="department_id">Department</label>
-
-                 <select class="form-control" id="department_id" name="department_id"  required>
-                    @foreach($info['departments'] as $department)
-                    <option value="{{$department->id}}">{{$department->title}} ({{$department->title}})</option>
-                    @endforeach
-                </select>
-            </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a href="{{ route('position.index') }}"><button type="submit" class="btn btn-secondary">Back</button></a>
+
     </form>
     </div>
 

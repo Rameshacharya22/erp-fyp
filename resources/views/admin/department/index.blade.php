@@ -10,7 +10,6 @@
             </button>
         </a>
 
-
         <div class="table-responsive mt-5 bg-white">
             <table class="table table-md data-table rounded">
                 <thead>
@@ -30,6 +29,11 @@
                             <a href="{{ route('department.show', $department->id) }}" class="btn"><i class="fas fa-eye"></i></a>
                             <a href="{{ route('department.edit', $department->id) }}" class="btn "><i
                                     class="far fa-edit"></i></a>
+                            <form action="{{ route('department.destroy', $department->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn"><i class="fas fa-trash-alt" style="color: #e01010;"></i></button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -51,18 +55,4 @@
 @stop
 
 @section('js')
-    {{-- <script>
-    $(function () {
-            var table = $('.data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('department.index') }}",
-            columns: [
-                { data: 'id', name: 'id' },
-                { data: 'title', name: 'title' },
-                { data: 'action', name: 'action', orderable: false, searchable: false },
-            ]
-        });
-    });
-</script> --}}
 @stop

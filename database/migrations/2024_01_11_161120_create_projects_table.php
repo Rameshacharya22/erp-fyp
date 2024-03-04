@@ -15,11 +15,11 @@ return new class extends Migration
             // $table->bigInteger('id');
             $table->id();
             $table->string('title');
-            $table->longText('description');
-            $table->date('started_at');
-            $table->date('deadline_at');
-            $table->double('completion_time');
-            $table->date('completion_at');
+            $table->longText('description')->nullable();
+            $table->date('started_at')->nullable();
+            $table->date('deadline_at')->nullable();
+            $table->time('completion_time')->nullable();
+            $table->date('completion_at')->nullable();
             $table->timestamps();
         });
     }

@@ -14,13 +14,19 @@ class Task extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-
     }
 
     public function project(): BelongsTo
     {
-        return $this->belongsTo(Project::class);
-
+        return $this->belongsTo(Project::class, 'project_id');
     }
-    
+
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class, 'employee_tasks');
+    }
+    public function employeeTasks()
+    {
+        return $this->hasMany(EmployeeTask::class);
+    }
 }

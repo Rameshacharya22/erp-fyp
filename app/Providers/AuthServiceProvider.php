@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-// use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -21,6 +21,53 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::define('view-notice', function ($user) {
+            if ($user->role == 'User') {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define('add-notice', function ($user) {
+            if ($user->role == 'Admin') {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define('appreciation-crud', function ($user) {
+            if ($user->role == 'Admin') {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define('task-crud', function ($user) {
+            if ($user->role == 'Admin') {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define('project-crud', function ($user) {
+            if ($user->role == 'Admin') {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define('holiday-crud', function ($user) {
+            if ($user->role == 'Admin') {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define('salary-crud', function ($user) {
+            if ($user->role == 'Admin') {
+                return true;
+            }
+            return false;
+        });
     }
 }

@@ -20,9 +20,9 @@
         @endif
 
 
-{{--        @section('content_top_nav_left')--}}
-{{--            <li class="pt-2 px-2"><h4>{{$title}}</h4></li>--}}
-{{--        @endsection--}}
+        @section('content_top_nav_left')
+            <li class="pt-2 px-2"><h4>{{$title}}</h4></li>
+        @endsection
 
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())

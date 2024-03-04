@@ -3,7 +3,7 @@
 @section('title', 'Add Employee')
 
 <!-- @section('content_header')
-    <h1>Add Employee</h1>   
+    <h1>Add Employee</h1>
 
 @stop -->
 

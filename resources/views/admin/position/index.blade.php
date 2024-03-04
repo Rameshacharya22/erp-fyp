@@ -5,7 +5,7 @@
 @section('content_header')
     <div class="row">
         <div class="col">
-            <h1>Position</h1>
+{{--            <h1>Position</h1>--}}
         </div>
         <div class="col"></div>
         <div class="col"></div>
@@ -37,6 +37,11 @@
                         <td>
                             <a href="{{ route('position.show', $position->id) }}" class="btn"><i class="fas fa-eye"></i></a>
                         <a href="{{ route('position.edit', $position->id) }}" class="btn "><i class="far fa-edit"></i></a>
+                            <form action="{{ route('position.destroy', $position->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn"><i class="fas fa-trash-alt" style="color: #e01010;"></i></button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -66,7 +71,7 @@
                 { data: 'title', name: 'title' },
                 { data: 'department_id', name: 'department.title' },
                 { data: 'action', name: 'action', orderable: false, searchable: false },
- 
+
 
             ]
         });

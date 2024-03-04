@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Leave;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -23,6 +24,7 @@ class DepartmentController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index(Request $request)
     {
         $info = $this->getInfo();
@@ -88,8 +90,10 @@ class DepartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Department $department)
+    public function destroy($id)
     {
-        //
+        $department= Department::where('id',$id)->first();
+        $department->delete();
+        return back()->withSuccess('Department deleted');
     }
 }

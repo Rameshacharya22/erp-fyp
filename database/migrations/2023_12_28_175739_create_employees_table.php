@@ -14,20 +14,25 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             // $table->bigInteger('id');
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->date('dob');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->date('dob')->nullable();
             $table->enum('gender', ['Male', 'Female', 'Other'])->default('Male');
-            $table->string('number');
+            $table->string('number')->nullable();
             $table->string('mobile')->nullable();
             $table->string('designation')->nullable();
             $table->string('department')->nullable();
-            $table->string('email')->unique();
-            $table->text('address');
-            $table->date('hire_date');
+             $table->string('email')->unique();
+            // $table->string('password');
+            $table->text('address')->nullable();
+            $table->longText('personaldetail')->nullable();
+            $table->longText('emergencycontact')->nullable();
+            $table->date('hire_date')->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
-            $table->unsignedBigInteger('position_id');
-            $table->foreign('position_id')->references('id')->on('positions');                  
+            $table->unsignedBigInteger('position_id')->nullable();
+            $table->foreign('position_id')->references('id')->on('positions');
             $table->timestamps();
         });
     }
