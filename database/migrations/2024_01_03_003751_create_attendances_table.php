@@ -12,14 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('attendances', function (Blueprint $table) {
-            $table->bigInteger('id');
-            $table->unsignedBigInteger('employee_id');
-            $table->foreign('employee_id')->references('id')->on('employees')->cascadeOnDelete();
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->date('date')->nullable();
-            $table->enum('type',['check_in','check_out'])->default('check_in');
             $table->string('source')->nullable();
+            $table->enum('status', ['present', 'absent', 'pending'])->nullable();
             $table->time('clock_in_time')->nullable();
             $table->time('clock_out_time')->nullable();
+            $table->decimal('work_hrs')->nullable();
             $table->timestamps();
         });
     }

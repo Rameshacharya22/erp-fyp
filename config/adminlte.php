@@ -129,7 +129,7 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
+    'usermenu_enabled' => false,
     'usermenu_header' => false,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
@@ -290,95 +290,106 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
-        // [
-        //     'type'         => 'navbar-search',
-        //     'text'         => 'search',
-        //     'topnav_right' => true,
-        // ],
-        // [
-        //     'type'         => 'fullscreen-widget',
-        //     'topnav_right' => true,
-        // ],
-
-        // Sidebar items:
-        // [
-        //     'type' => 'sidebar-menu-search',
-        //     'text' => 'search',
-        // ],
         [
-            'text'        => 'Dashboard',
-            'route'         => 'home',
-            'icon'        => 'far fa-fw fa-file',
+            'text' => 'Dashboard',
+            'route' => 'home',
+            'icon' => 'far fa-fw fa-file',
 
         ],
         [
-            'text'        => 'Department',
-            'route'         => 'department.index',
-            'icon'        => 'fas fa-user-tie',
-
-        ],
-        [
-            'text'        => 'Position',
-            'route'         => 'position.index',
-            'icon'        => 'fas fa-user-tie',
-
-        ],
-        [
-            'text'        => 'Employee',
-            'route'         => 'employee.index',
-            'icon'        => 'fas fa-user-tie',
-        ],
-        [
-            'text'        => 'Leave',
-            'route'         => 'leave.index',
-            'icon'        => 'fas fa-user',
-        ],
-        [
-            'text'        => 'Holiday',
-            'route'         => 'holiday.index',
-            'icon'        => 'fas fa-user',
-        ],
-        [
-            'text'        => 'Attendance',
-            'route'         => 'attendance.index',
-            'icon'        => 'fas fa-user',
-        ],
-        [
-            'text'        => 'Project',
-            'route'         => 'project.index',
-            'icon'        => 'fas fa-user',
-            'can'         => 'project-crud',
+            'text' => 'HR',
+            'submenu' => [
+                [
+                    'text' => 'Department',
+                    'route' => 'department.index',
+                    'icon' => 'fas fa-user-tie',
+                    'classes' => 'pl-4'
+                ],
+                [
+                    'text' => 'Position',
+                    'route' => 'position.index',
+                    'icon' => 'fas fa-user-tie',
+                    'classes' => 'pl-4'
+                ],
+                [
+                    'text' => 'Employee',
+                    'route' => 'employee.index',
+                    'icon' => 'fas fa-user-tie',
+                    'classes' => 'pl-4'
+                ],
+                [
+                    'text' => 'Salary',
+                    'route' => 'salary.index',
+                    'icon' => 'fas fa-user',
+                    'can' => 'salary-crud',
+                    'classes' => 'pl-4'
+                ],
+            ],
         ],
 
+
+
         [
-            'text'        => 'Notice',
-            'route'         => 'notice.index',
-            'icon'        => 'fas fa-user',
+            'text' => 'Schedule',
+            'submenu' => [
+                ['text' => 'Leave',
+                    'route' => 'leave.index',
+                    'icon' => 'fas fa-user',
+                    'classes' => 'pl-4'
+                ],
+                [
+                    'text' => 'Holiday',
+                    'route' => 'holiday.index',
+                    'icon' => 'fas fa-user',
+                    'classes' => 'pl-4'
+                ],
+                [
+                    'text' => 'Attendance',
+                    'route' => 'attendance.index',
+                    'icon' => 'fas fa-user',
+                    'classes' => 'pl-4'
+                ],
+            ],
         ],
 
         [
-            'text'        => 'Appreciation',
-            'route'         => 'appreciation.index',
-            'icon'        => 'fas fa-user',
-            'can'        => 'appreciation-crud',
+            'text' => 'Work',
+            'submenu' => [
+                ['text' => 'Project',
+                    'route' => 'project.index',
+                    'icon' => 'fas fa-user',
+                    'can' => 'project-crud',
+                    'classes' => 'pl-4'
+                ],
+                [
+                    'text' => 'Task',
+                    'route' => 'task.index',
+                    'icon' => 'fas fa-user',
+                    'can' => 'task-crud',
+                    'classes' => 'pl-4'
+                ],
+
+            ],
         ],
+
+
         [
-            'text'        => 'Task',
-            'route'         => 'task.index',
-            'icon'        => 'fas fa-user',
-            'can'        => 'task-crud',
+            'text' => 'Notice',
+            'route' => 'notice.index',
+            'icon' => 'fas fa-user',
         ],
+
         [
-            'text'        => 'Salary',
-            'route'         => 'salary.index',
-            'icon'        => 'fas fa-user',
-            'can'           => 'salary-crud'
+            'text' => 'Appreciation',
+            'route' => 'appreciation.index',
+            'icon' => 'fas fa-user',
+            'can' => 'appreciation-crud',
         ],
+
         [
-            'text'        => 'Setting',
-            'route'         => 'setting.index',
-            'icon'        => 'fas fa-user',
+            'text' => 'Setting',
+            'route' => 'setting.index',
+            'icon' => 'fas fa-user',
         ],
         // ['header' => 'account_settings'],
         // [

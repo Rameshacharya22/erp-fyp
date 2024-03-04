@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -14,6 +15,7 @@ class AttendanceController extends Controller
         $info['title'] = "Attendance";
         return $info;
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -37,8 +39,32 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($userId = $request->userId) {
+            $date = Carbon::now()->format('Y-m-d');
+            $clockTime = Carbon::now();
+
+            $attendance = Attendance::updateOrCreate(
+                [
+                    'user_id' => $userId,
+                    'date' => $date,
+                ],
+                [
+                    $request->clockIn ? 'clock_in_time' : 'clock_out_time' => $clockTime,
+                    'status' => $request->clockIn ? 'pending' : 'present'
+                ]
+            );
+
+            if (!$request->clockIn) {
+                $startDate = Carbon::parse($attendance->clock_in_time);
+                $endDate = Carbon::parse($attendance->clock_out_time);
+                $hours = $endDate->diffInHours($startDate);
+                $attendance->update(['work_hrs' => $hours]);
+            }
+        }
+
+        return redirect()->back();
     }
+
 
     /**
      * Display the specified resource.

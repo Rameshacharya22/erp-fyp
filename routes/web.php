@@ -81,4 +81,7 @@ Route::middleware(['auth'])->group(function () {
 
     //changepassword
     Route::resource('changepassword', App\Http\Controllers\ChangePasswordController::class);
+    Route::get('clock-in', [App\Http\Controllers\AttendanceController::class, 'store'])->name('clock-in');
+
+
 });

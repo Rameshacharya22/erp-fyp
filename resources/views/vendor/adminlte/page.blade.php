@@ -24,6 +24,12 @@
             <li class="pt-2 px-2"><h4>{{$title}}</h4></li>
         @endsection
 
+
+        @section('content_top_nav_right')
+
+
+        @endsection
+
         {{-- Top Navbar --}}
         @if($layoutHelper->isLayoutTopnavEnabled())
             @include('adminlte::partials.navbar.navbar-layout-topnav')
