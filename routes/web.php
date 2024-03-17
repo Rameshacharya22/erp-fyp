@@ -31,7 +31,6 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['checkRole:Admin'])->group(function () {
         Route::resource('employee', App\Http\Controllers\EmployeeController::class);
         //    Route::resource('leave', App\Http\Controllers\LeaveController::class);
-        Route::resource('attendance', App\Http\Controllers\AttendanceController::class);
         Route::resource('department', App\Http\Controllers\DepartmentController::class);
         Route::resource('position', App\Http\Controllers\PositionController::class);
         //    Route::resource('holiday', App\Http\Controllers\HolidayController::class);
@@ -69,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
     //holiday
     Route::get('/holiday', [App\Http\Controllers\HolidayController::class, 'index'])->name('holiday.index');
     Route::get('/holiday/{id}', [App\Http\Controllers\HolidayController::class, 'show'])->name('holiday.show');
+    Route::resource('attendance', App\Http\Controllers\AttendanceController::class)->except(['store']);
 
 
     //emergencycontact

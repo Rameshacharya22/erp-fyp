@@ -13,15 +13,11 @@ return new class extends Migration
     {
         Schema::create('leaves', function (Blueprint $table) {
             $table->id('id');
-//            $table->unsignedBigInteger('employee_id');
-//            $table->foreign('employee_id')->references('id')->on('employees')->cascadeOnDelete();
             $table->string('name'); //paxi select employee id
-            $table->enum('duration',['half day','full day'])->defaul('half day');
+            $table->enum('duration',['halfDay','fullDay'])->default('fullDay');
             $table->string('reason')->nullable();
-            $table->date('date')->nullable();
             $table->enum('type',['unpaid','paid','annual'])->default('Unpaid');
             $table->enum('status',['approved','rejected','pending'])->default('pending');
-//            $table->string('status')->default('null');
             $table->timestamps();
         });
     }

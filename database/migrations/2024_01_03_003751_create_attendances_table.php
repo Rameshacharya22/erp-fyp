@@ -15,13 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('leave_id')->nullable();
+            $table->foreign('leave_id')->references('id')->on('leaves')->cascadeOnDelete();
             $table->date('date')->nullable();
             $table->string('source')->nullable();
             $table->enum('status', ['present', 'absent', 'pending'])->nullable();
             $table->time('clock_in_time')->nullable();
             $table->time('clock_out_time')->nullable();
             $table->boolean('is_late')->default(0);
-            $table->decimal('work_hrs')->nullable();
+            $table->string('work_hrs')->nullable();
             $table->timestamps();
         });
     }

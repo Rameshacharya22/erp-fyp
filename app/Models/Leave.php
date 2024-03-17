@@ -18,8 +18,13 @@ class Leave extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(user::class);
+        return $this->belongsTo(User::class);
 
+    }
+
+    public function attendance()
+    {
+        return $this->hasOne(Attendance::class);
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Holiday;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -19,11 +20,37 @@ class AttendanceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
+
         $info = $this->getInfo();
 
-        return view("admin.attendance.index", $info);
+        $userAttendance = Attendance::where('user_id', auth()->user()->id);
+
+        $info['presentDays'] = $userAttendance->where('status', 'present')->count();
+        $info['absentDays'] = $userAttendance->where('status', 'absent')->count();
+        $info['late'] = Attendance::where('user_id', auth()->user()->id)->where('is_late', true)->count();
+        $info['halfDays'] = $userAttendance->whereHas('leave', function ($query) {
+            $query->where('duration', 'halfDay');
+        })->count();
+        $info['holidays'] = Holiday::count();
+        $info['attendances'] = Attendance::where('user_id', auth()->user()->id)->whereYear('date', '=', now()->year)
+            ->whereMonth('date', '=', now()->month)
+            ->get();
+
+        if ($request->ajax()) {
+            if ($request->month) {
+                $date = Carbon::parse($request->month);
+                $attendances = Attendance::where('user_id', auth()->user()->id)->whereYear('date', '=', $date->year)
+                    ->whereMonth('date', '=', $date->month)
+                    ->get();
+                return response()->json($attendances);
+
+            }
+        }
+
+        return view("user.attendance.index", $info);
     }
 
     /**
@@ -44,7 +71,6 @@ class AttendanceController extends Controller
             $clockTime = Carbon::now();
 
 
-
             $attendance = Attendance::updateOrCreate(
                 [
                     'user_id' => $userId,
@@ -56,7 +82,7 @@ class AttendanceController extends Controller
                 ]
             );
 
-            if ($request->clockIn){
+            if ($request->clockIn) {
                 $openingTime = Carbon::createFromFormat('H:i:s', config('erp.open_time'));
                 if ($clockTime->gt($openingTime)) {
                     $late = true;
@@ -64,12 +90,12 @@ class AttendanceController extends Controller
                     $late = false;
                 }
                 $attendance->update(['is_late' => $late]);
-            }
-            elseif (!$request->clockIn) {
+            } elseif (!$request->clockIn) {
                 $startDate = Carbon::parse($attendance->clock_in_time);
                 $endDate = Carbon::parse($attendance->clock_out_time);
-                $hours = $endDate->diffInHours($startDate);
-                $attendance->update(['work_hrs' => $hours]);
+                $minutesDifference = $endDate->diffInMinutes($startDate);
+                $attendance->update(['work_hrs' => $minutesDifference]);
+
             }
         }
 
