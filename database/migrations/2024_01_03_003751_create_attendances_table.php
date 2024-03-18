@@ -19,7 +19,9 @@ return new class extends Migration
             $table->foreign('leave_id')->references('id')->on('leaves')->cascadeOnDelete();
             $table->date('date')->nullable();
             $table->string('source')->nullable();
-            $table->enum('status', ['present', 'absent', 'pending'])->nullable();
+            $table->string('location')->nullable();
+
+            $table->enum('status', ['present', 'absent', 'pending'])->default('pending');
             $table->time('clock_in_time')->nullable();
             $table->time('clock_out_time')->nullable();
             $table->boolean('is_late')->default(0);

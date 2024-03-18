@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name'); //paxi select employee id
             $table->enum('duration',['halfDay','fullDay'])->default('fullDay');
             $table->string('reason')->nullable();
+            $table->date('date')->nullable();
             $table->enum('type',['unpaid','paid','annual'])->default('Unpaid');
             $table->enum('status',['approved','rejected','pending'])->default('pending');
             $table->timestamps();
