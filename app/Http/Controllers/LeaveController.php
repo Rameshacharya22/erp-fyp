@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Leave;
 use App\Models\Employee;
 use App\Models\Position;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LeaveController extends Controller
 {
@@ -29,7 +32,7 @@ class LeaveController extends Controller
         $info = $this->getInfo();
         $info['leaves'] = Leave::paginate(5);
 
-        return view("admin.leave.index",$info);
+        return view("admin.leave.index", $info);
     }
 
     /**
@@ -40,9 +43,10 @@ class LeaveController extends Controller
 
 
         $info = $this->getInfo();
+        $info['user'] = Auth::user();
 
         // $employee = Employee::get();
-        return view('admin.leave.create',$info);
+        return view('admin.leave.create', $info);
     }
 
     /**
@@ -50,21 +54,31 @@ class LeaveController extends Controller
      */
     public function store(Request $request)
     {
-
-        // Validate the form data
-        $request->validate([
-            'name'=>'required',
-            'reason'=>'required|string|max:255',
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'reason' => 'required|string|max:255',
             'type' => 'required|string',
-            'duration' => 'required|string',
-            'status'=> '',
+            'duration' => 'required|string|in:halfDay,fullDay',
+            'date' => 'required',
+            //            'status'=>'required',
         ]);
+
 
         $data = $request->all();
         $leave = new Leave($data);
         $leave->save();
+
+
+        //        $leave->attendance()->save($leave);
+
+
+
+
         return redirect()->route('leave.index')->with('success', 'Leave added successfully');
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -72,7 +86,7 @@ class LeaveController extends Controller
     public function show($id)
     {
         $info = $this->getInfo();
-        $info ['leave'] = Leave::findOrFail($id);
+        $info['leave'] = Leave::findOrFail($id);
         return view('admin.leave.show', $info);
     }
 
@@ -83,16 +97,35 @@ class LeaveController extends Controller
     {
         $info = $this->getInfo();
         $info['leave'] = Leave::findOrFail($id);
+        $info['user'] = Auth::user();
         return view('admin.leave.edit', $info);
     }
 
     /**
      * Update the specified resource in storage.
      */
+
+
     public function update(Request $request, $id)
     {
         $leave = Leave::findOrFail($id);
         $leave->update($request->all());
+
+        
+        if ($leave->status === 'approved') {
+           
+            $user = User::where('name', $leave->name)->first();
+
+            if ($user) {
+                $user_id = $user->id;
+
+                $attendance = Attendance::create([
+                    'leave_id' => $id,
+                    'user_id' => $user_id, 
+                    'status' => "absent",
+                ]);
+            } 
+        }
         return redirect()->route('leave.index')->with('success', 'Record updated successfully');
     }
     /**
@@ -104,5 +137,4 @@ class LeaveController extends Controller
         $leave->delete();
         return back()->withSuccess('Leave deleted');
     }
-
 }
