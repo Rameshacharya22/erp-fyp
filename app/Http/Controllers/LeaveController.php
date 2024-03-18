@@ -7,6 +7,7 @@ use App\Models\Leave;
 use App\Models\Employee;
 use App\Models\Position;
 use App\Models\Attendance;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -116,12 +117,14 @@ class LeaveController extends Controller
            
             $user = User::where('name', $leave->name)->first();
 
+            $validatedData = $request->validate([
+                'date' => 'required',]);
+            $data = $request->all();
             if ($user) {
                 $user_id = $user->id;
-
                 $attendance = Attendance::create([
                     'leave_id' => $id,
-                    'user_id' => $user_id, 
+                    'user_id' => $user_id,
                     'status' => "absent",
                 ]);
             } 
