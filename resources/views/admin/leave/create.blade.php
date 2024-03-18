@@ -36,8 +36,8 @@
                 <div class="form-row ">
                     <div class="form-group col-md-4">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" value="{{old('name')}}" name="name"
-                            required placeholder="">
+                        <input type="text" class="form-control" id="name" value="{{ $user->name }}" name="name"
+                            readonly placeholder="">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="type">Leave Type*</label>
@@ -52,8 +52,8 @@
                         <label for="duration">Select Duration</label>
                         <select class="form-control" id="duration" name="duration" required>
                             <option value="">Select Duration</option>
-                            <option value="half day">Half Day</option>
-                            <option value="full day">Full Day</option>
+                            <option value="halfDay">Half Day</option>
+                            <option value="fullDay">Full Day</option>
                         </select>
                     </div>
                 </div>
@@ -61,13 +61,14 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="date">Date</label>
-                        <input type="date" class="form-control" id="date" value="{{old('date')}}" name="date" required min="{{\Carbon\Carbon::now()->format('Y-m-d')}}">
+                        <input type="date" class="form-control" id="date" value="{{ old('date') }}" name="date"
+                            required min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <label for="reason"> Reason</label>
-                    <textarea class="form-control" value="{{old('reason')}}" name="reason" id="reason" cols="30" rows="5"
+                    <textarea class="form-control" value="{{ old('reason') }}" name="reason" id="reason" cols="30" rows="5"
                         placeholder="For eg :Feeling not well"></textarea>
                 </div>
                 <div class="action mt-2 float-right">
