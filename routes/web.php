@@ -83,5 +83,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('changepassword', App\Http\Controllers\ChangePasswordController::class);
     Route::get('clock-in', [App\Http\Controllers\AttendanceController::class, 'store'])->name('clock-in');
 
+    Route::get('notifications/get',[App\Http\Controllers\NotificationsController::class, 'getNotificationsData'])
+        ->name('notifications.get');
 
 });
