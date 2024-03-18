@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendance;
 use App\Models\Holiday;
+use App\Models\Notice;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -66,48 +67,125 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all())
-        $validatedData = $request->validate([
-            'location' => 'sometimes|string|max:255',
-            'source' => 'sometimes|string|max:255',
-        ]);
 
 
-        if ($userId = $request->user_id) {
-            $date = Carbon::now()->format('Y-m-d');
-            $clockTime = Carbon::now();
 
-            $attendance = Attendance::updateOrCreate(
-                [
-                    'user_id' => $userId,
-                    'date' => $date,
-                ],
-                [
-                    $request->clockIn ? 'clock_in_time' : 'clock_out_time' => $clockTime,
-                    'status' => $request->clockIn ? 'pending' : 'present',
-                    'location' => $validatedData['location'] ?? null,
-                    'source'=> $validatedData['source'] ?? null,
-                ]
-            );
+    $user_id = $request->user_id ;
+//    dd($user_id);
 
-            if ($request->clockIn) {
-                $openingTime = Carbon::createFromFormat('H:i:s', config('erp.open_time'));
-                if ($clockTime->gt($openingTime)) {
-                    $late = true;
-                } else {
-                    $late = false;
-                }
-                $attendance->update(['is_late' => $late]);
+//    $absentUser = Attendance::where('user_id', $user_id)->where('status','absent')->whereDate('date', Carbon::today())->exists();
+        $todayDate = Carbon::today();
 
-                return redirect()->back()->with('message',"Sussessfully Logged In");
-            } elseif (!$request->clockIn) {
-                $startDate = Carbon::parse($attendance->clock_in_time);
-                $endDate = Carbon::parse($attendance->clock_out_time);
-                $minutesDifference = $endDate->diffInMinutes($startDate);
-                $attendance->update(['work_hrs' => $minutesDifference]);
-                return redirect()->back()->with('message2',"Sussessfully Logged Out");
-            }
-        }
+        $absentUsersWithUserData = Attendance::where('user_id', $user_id)
+            ->where('status', 'absent')
+            ->whereDate('date', $todayDate)
+//            ->with('user') // assuming you have 'user' relation in Attendance model to fetch user data
+            ->get();
+
+//        dd($absentUsersWithUserData);
+
+   if(!$absentUsersWithUserData){
+     $validatedData = $request->validate([
+         'location' => 'sometimes|string|max:255',
+         'source' => 'sometimes|string|max:255',
+     ]);
+
+
+     if ($userId = $request->user_id) {
+         $date = Carbon::now()->format('Y-m-d');
+         $clockTime = Carbon::now();
+
+         $attendance = Attendance::updateOrCreate(
+             [
+                 'user_id' => $userId,
+                 'date' => $date,
+             ],
+             [
+                 $request->clockIn ? 'clock_in_time' : 'clock_out_time' => $clockTime,
+                 'status' => $request->clockIn ? 'pending' : 'present',
+                 'location' => $validatedData['location'] ?? null,
+                 'source'=> $validatedData['source'] ?? null,
+             ]
+         );
+
+         if ($request->clockIn) {
+             $openingTime = Carbon::createFromFormat('H:i:s', config('erp.open_time'));
+             if ($clockTime->gt($openingTime)) {
+                 $late = true;
+             } else {
+                 $late = false;
+             }
+             $attendance->update(['is_late' => $late]);
+
+             return redirect()->back()->with('message',"Sussessfully Logged In");
+         } elseif (!$request->clockIn) {
+             $startDate = Carbon::parse($attendance->clock_in_time);
+             $endDate = Carbon::parse($attendance->clock_out_time);
+             $minutesDifference = $endDate->diffInMinutes($startDate);
+             $attendance->update(['work_hrs' => $minutesDifference]);
+             return redirect()->back()->with('message2',"Sussessfully Logged Out");
+         }
+     }
+
+
+
+
+ }
+   else{
+       return redirect()->back()->with('message3',"You are on leave today");
+   }
+
+
+
+
+
+
+
+
+    $date = Carbon::now()->format('Y-m-d');
+//dd($attendances->status);
+
+//        $validatedData = $request->validate([
+//            'location' => 'sometimes|string|max:255',
+//            'source' => 'sometimes|string|max:255',
+//        ]);
+//
+//
+//        if ($userId = $request->user_id) {
+//            $date = Carbon::now()->format('Y-m-d');
+//            $clockTime = Carbon::now();
+//
+//            $attendance = Attendance::updateOrCreate(
+//                [
+//                    'user_id' => $userId,
+//                    'date' => $date,
+//                ],
+//                [
+//                    $request->clockIn ? 'clock_in_time' : 'clock_out_time' => $clockTime,
+//                    'status' => $request->clockIn ? 'pending' : 'present',
+//                    'location' => $validatedData['location'] ?? null,
+//                    'source'=> $validatedData['source'] ?? null,
+//                ]
+//            );
+//
+//            if ($request->clockIn) {
+//                $openingTime = Carbon::createFromFormat('H:i:s', config('erp.open_time'));
+//                if ($clockTime->gt($openingTime)) {
+//                    $late = true;
+//                } else {
+//                    $late = false;
+//                }
+//                $attendance->update(['is_late' => $late]);
+//
+//                return redirect()->back()->with('message',"Sussessfully Logged In");
+//            } elseif (!$request->clockIn) {
+//                $startDate = Carbon::parse($attendance->clock_in_time);
+//                $endDate = Carbon::parse($attendance->clock_out_time);
+//                $minutesDifference = $endDate->diffInMinutes($startDate);
+//                $attendance->update(['work_hrs' => $minutesDifference]);
+//                return redirect()->back()->with('message2',"Sussessfully Logged Out");
+//            }
+//        }
 
     //    return redirect()->back();
     }
