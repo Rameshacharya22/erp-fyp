@@ -11,16 +11,51 @@
 
 <style>
     .modal-backdrop {
-        z-index: 0!important;
+        z-index: 0 !important;
     }
-     .alert {
-         position: absolute;
-         z-index: 1000;
-         width: 300px;
-         top: 6px;
-         right: 300px;
-     }
+
+    .alert {
+        position: absolute;
+        z-index: 1000;
+        width: 300px;
+        top: 6px;
+        right:5px;
+    }
+        .approve-box{
+            padding-top: 50px ;
+            text-align: center;
+            height: 180px;
+            width:250px ;
+            background-color:white  ;
+            color: #C2699E;
+            border-radius: 12px;
+            box-shadow: 0px 2px 9px 4px rgba(150, 150, 150, 0.24)
+        }
+        .tick {
+            margin-left: 90px;
+            text-align: center;
+            background-color:#D0E8FF ;
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+
+        }
+        .tick i {
+            font-size:20px ;
+            margin: 10px 10px 10px 5px ;
+        }
+
+        /*a.nav-link.bell {*/
+        /*    background-color: #e9ecef;*/
+        /*    border-radius: 10px;*/
+        /*    margin-right: 7px;*/
+        /*    !* border: solid black 0.1px; *!*/
+        /*}*/
+
 </style>
+<li class="nav-item pr-2">
+    <a class="btn btn-default btn-flat border rounded text-center m-auto p-auto"><i class="far fa-bell"></i></a>
+</li>
 <li class="nav-item pr-2">
     <a class="btn btn-default btn-flat border rounded text-center m-auto p-auto"><i
             class="fa fa-fw fa-calendar-alt"></i></a>
@@ -41,14 +76,11 @@
 </li>
 
 {{-- @dd($attendance) --}}
-@php(
-    $attendance = \App\Models\Attendance::where('user_id', $user->id)->whereDate('date', \Carbon\Carbon::now())->first()
-)
+@php($attendance = \App\Models\Attendance::where('user_id', $user->id)->whereDate('date', \Carbon\Carbon::now())->first())
 @if ($user->role == 'User')
     @if ($attendance && $attendance->status == 'pending')
         <li class="nav-item d-flex flex-column">
-            <a class="btn btn-danger border-0 rounded float-right text-white p-auto m-auto"
-                 {{--  clock in change to clock out in route
+            <a class="btn btn-danger border-0 rounded float-right text-white p-auto m-auto" {{--  clock in change to clock out in route
 
                                --}}
                 href="{{ route('clock-in', ['user_id' => $user->id]) }}">
@@ -58,10 +90,10 @@
         </li>
     @else
         <li class="nav-item">
-{{--             <a class="btn btn-primary border-0 rounded float-right text-white p-auto m-auto"--}}
-{{--                href="{{ route('clock-in', ['userId' => $user->id, 'clockIn' => true]) }}">--}}
-{{--                <i class="fa fa-fw pr-1 fa-clock"></i>Clock In--}}
-{{--            </a>--}}
+            {{--             <a class="btn btn-primary border-0 rounded float-right text-white p-auto m-auto" --}}
+            {{--                href="{{ route('clock-in', ['userId' => $user->id, 'clockIn' => true]) }}"> --}}
+            {{--                <i class="fa fa-fw pr-1 fa-clock"></i>Clock In --}}
+            {{--            </a> --}}
 
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -76,10 +108,10 @@
 
 
         </li>
-
     @endif
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -90,34 +122,35 @@
                 </div>
                 <div class="modal-body">
                     <div style="display: flex; justify-content: space-between ">
-                        <i class="far fa-clock">{{\Carbon\Carbon::now()->format('h:m A')}}</i>
+                        <i class="far fa-clock">{{ \Carbon\Carbon::now()->format('h:m A') }}</i>
                         <span>position</span>
 
                     </div>
 
 
-                        <form action="{{ route('clock-in') }}"  method="get" enctype="multipart/form-data">
+                    <form action="{{ route('clock-in') }}" method="get" enctype="multipart/form-data">
 
-                            <div style="display: flex; justify-content: space-between">
+                        <div style="display: flex; justify-content: space-between">
 
-                                <div class="form-group col-md-6 mt-3">
-                                    <label for="title">Location</label>
-                                        <select class="form-control" id="Location" name="location" required>
-                                        <option value="Nayabazar,Pokhara">Nayabazar, Pokhara</option>
-                                        <option value="Bagar">Bagar</option>
-                                    </select>                                </div>
-                                <div class="form-group col-md-6 mt-3">
-                                    <label for="title">Working From</label>
-                                    <select class="form-control" id="source" name="source" required>
-                                        <option value="Office">Office</option>
-                                        <option value="Home">Home</option>
-                                    </select>
-                                </div>
-                                <input type="hidden" value="{{$user->id}}" name="user_id">
-                                <input type="hidden" value="true" name="clockIn">
-
-
+                            <div class="form-group col-md-6 mt-3">
+                                <label for="title">Location</label>
+                                <select class="form-control" id="Location" name="location" required>
+                                    <option value="Nayabazar,Pokhara">Nayabazar, Pokhara</option>
+                                    <option value="Bagar">Bagar</option>
+                                </select>
                             </div>
+                            <div class="form-group col-md-6 mt-3">
+                                <label for="title">Working From</label>
+                                <select class="form-control" id="source" name="source" required>
+                                    <option value="Office">Office</option>
+                                    <option value="Home">Home</option>
+                                </select>
+                            </div>
+                            <input type="hidden" value="{{ $user->id }}" name="user_id">
+                            <input type="hidden" value="true" name="clockIn">
+
+
+                        </div>
 
 
 
@@ -131,28 +164,73 @@
     </div>
     </form>
 
-    @if(session()->has('message'))
-        <div class="alert alert-success" id="success-alert">
-            {{ session()->get('message') }}
+    @if (session()->has('message'))
+        <div class="alert" id="success-alert">
+            {{-- {{ session()->get('message') }} --}}
+
+            <div class="approve-box" >
+
+                <div class="tick">
+                    <i class="fas fa-check"></i>
+                </div>
+
+                <div class="succ-message mt-4">
+                    {{ session()->get('message') }}
+                </div>
+            </div>
+
+
+
         </div>
     @endif
 
-    @if(session()->has('message2'))
-        <div class="alert alert-danger" id="danger-alert">
-            {{ session()->get('message2') }}
+    @if (session()->has('message2'))
+        <div class="alert " id="danger-alert">
+{{--            {{ session()->get('message2') }}--}}
+
+            <div class="approve-box" >
+
+                <div class="tick">
+                    <i class="fas fa-check"></i>
+                </div>
+
+                <div class="succ-message mt-4">
+                    {{ session()->get('message2') }}
+                </div>
+            </div>
+
+        </div>
         </div>
     @endif
+
+    @if (session()->has('message3'))
+        <div class="alert " id="danger-alert">
+            {{--            {{ session()->get('message2') }}--}}
+
+            <div class="approve-box" >
+
+                <div class="tick">
+                    <i class="fas fa-times"></i>
+                </div>
+
+                <div class="succ-message mt-4">
+                    {{ session()->get('message3') }}
+                </div>
+            </div>
+
+        </div>
+        </div>
+    @endif
+
 
     <script>
         setTimeout(function() {
             $('#success-alert').fadeOut('fast');
-        }, 2000);
+        }, 4000);
 
         setTimeout(function() {
             $('#danger-alert').fadeOut('fast');
-        }, 2000);
-
-
+        }, 4000);
     </script>
 
 @endif
