@@ -66,10 +66,16 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        if ($userId = $request->userId) {
+//        dd($request->all())
+        $validatedData = $request->validate([
+            'location' => 'sometimes|string|max:255',
+            'source' => 'sometimes|string|max:255',
+        ]);
+
+
+        if ($userId = $request->user_id) {
             $date = Carbon::now()->format('Y-m-d');
             $clockTime = Carbon::now();
-
 
             $attendance = Attendance::updateOrCreate(
                 [
@@ -78,7 +84,9 @@ class AttendanceController extends Controller
                 ],
                 [
                     $request->clockIn ? 'clock_in_time' : 'clock_out_time' => $clockTime,
-                    'status' => $request->clockIn ? 'pending' : 'present'
+                    'status' => $request->clockIn ? 'pending' : 'present',
+                    'location' => $validatedData['location'] ?? null,
+                    'source'=> $validatedData['source'] ?? null,
                 ]
             );
 
@@ -90,16 +98,18 @@ class AttendanceController extends Controller
                     $late = false;
                 }
                 $attendance->update(['is_late' => $late]);
+
+                return redirect()->back()->with('message',"Sussessfully Logged In");
             } elseif (!$request->clockIn) {
                 $startDate = Carbon::parse($attendance->clock_in_time);
                 $endDate = Carbon::parse($attendance->clock_out_time);
                 $minutesDifference = $endDate->diffInMinutes($startDate);
                 $attendance->update(['work_hrs' => $minutesDifference]);
-
+                return redirect()->back()->with('message2',"Sussessfully Logged Out");
             }
         }
 
-        return redirect()->back();
+    //    return redirect()->back();
     }
 
 
