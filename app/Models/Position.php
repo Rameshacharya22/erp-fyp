@@ -28,6 +28,6 @@ class Position extends Model
     }
     public function employee()
     {
-        return $this->hasMany(Employee::class, 'employee_id');
+        return $this->hasOne(Employee::class, 'employee_id');
     }
 }
