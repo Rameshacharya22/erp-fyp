@@ -117,15 +117,18 @@ class LeaveController extends Controller
            
             $user = User::where('name', $leave->name)->first();
 
-            $validatedData = $request->validate([
-                'date' => 'required',]);
-            $data = $request->all();
+//            $validatedData = $request->validate([
+//                'date' => 'required',]);
+//            $data = $request->all();
+
+//            dd($leave->date);
             if ($user) {
                 $user_id = $user->id;
                 $attendance = Attendance::create([
                     'leave_id' => $id,
                     'user_id' => $user_id,
                     'status' => "absent",
+                    'date'=> $leave->date ,
                 ]);
             } 
         }
