@@ -1,9 +1,35 @@
 {{-- Navbar notification --}}
 
-<li class="{{ $makeListItemClass() }}" id="{{ $id }}">
+<style>
+    li#my-notification {
+        margin-right: 10px;
+        height: 40px;
+        width: 43px;
+    }
+    a.nav-link.nav-button-bell {
+        margin: -31px;
+        margin-top: -12px;
+    }
+
+    span.badge.navbar-badge.text-bold.text-xs.badge-success.badge-pill {
+        position: absolute;
+        margin: 12px;
+        margin-right: 17px;
+    }
+    i.fas.fa-bell.text-dark {
+        margin-right: 15px;
+    }
+
+
+</style>
+
+<li class="{{ $makeListItemClass() }} btn btn-default btn-flat border rounded text-center" id="{{ $id }}">
+
 
     {{-- Link --}}
-    <a @if($enableDropdownMode) href="" @endif {{ $attributes->merge($makeAnchorDefaultAttrs()) }}>
+    <a @if($enableDropdownMode) class="" href="" @endif {{ $attributes->merge($makeAnchorDefaultAttrs()) }}>
+        <a href="" class="nav-link nav-button-bell" data-toggle="dropdown">
+            <span class="badge navbar-badge text-bold text-xs badge-success badge-pill">3</span>
 
         {{-- Icon --}}
         <i class="{{ $makeIconClass() }}"></i>
