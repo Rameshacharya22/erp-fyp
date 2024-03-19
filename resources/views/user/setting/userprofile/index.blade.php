@@ -46,13 +46,14 @@
                             </div>
                             <div class="form-group col-md-4 ">
                                 <label for="position">Your Position <span style="color: #FF3B30">*</span> </label>
-                                <input type="text" value="{{ $user->employee->position->title }}" class="form-control"
+                                <input type="text" value="{{ $user->employee?->position?->title }}" class="form-control"
                                     id="position" name="position" readonly>
                             </div>
                             <div class="form-group col-md-4 ">
                                 <label for="hobbies">Hobbies <span style="color: #FF3B30">*</span></label>
-                                <input type="text" value="{{ $user->employee->personaldetail['hobbies'] }}"
+                                <input type="text" value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['hobbies'] : '' }}"
                                     class="form-control" id="hobbies" name="hobbies" required>
+
 
                             </div>
                         </div>
@@ -64,18 +65,18 @@
                             <option value="Male">Male</option>
                             <option value="Female">Female</option> --}}
                                 </select>
-                                <input type="text" value="{{ $user->employee->gender }}" class="form-control"
+                                <input type="text" value="{{ $user->employee?->gender }}" class="form-control"
                                     id="gender" name="gender" readonly>
 
                             </div>
                             <div class="form-group col-md-4 ">
                                 <label for="last_name">DOB <span style="color: #FF3B30">*</span> </label>
-                                <input type="date" value="{{ $user->employee->dob }}" class="form-control" id="dob"
+                                <input type="date" value="{{ $user->employee?->dob }}" class="form-control" id="dob"
                                     name="dob" required>
                             </div>
                             <div class="form-group col-md-4 ">
                                 <label for="number">Contact Number <span style="color: #FF3B30">*</span></label>
-                                <input type="number" value="{{ $user->employee->number }}" class="form-control"
+                                <input type="number" value="{{ $user->employee?->number }}" class="form-control"
                                     id="number" name="number" required>
                             </div>
                         </div>
@@ -89,12 +90,12 @@
                             <div class="form-group col-md-4 ">
                                 <label for="country">Country <span style="color: #FF3B30">*</span> </label>
                                 {{-- <select class="form-control selectpicker countrypicker" data-flag="true"></select> --}}
-                                <input type="text" value="{{ $user->employee->personaldetail['country'] }}"
+                                <input type="text" value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['country'] : '' }}"
                                     class="form-control" id="country" name="country" required>
                             </div>
                             <div class="form-group col-md-4 ">
                                 <label for="language">Language <span style="color: #FF3B30">*</span></label>
-                                <input type="text" value="{{ $user->employee->personaldetail['language'] }}"
+                                <input type="text" value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['language'] : '' }}"
                                     class="form-control" id="language" name="language" required>
                             </div>
                         </div>
@@ -102,12 +103,12 @@
                         <div class="form-row">
                             <div class="form-group col-md-4 ">
                                 <label for="city">Your City <span style="color: #FF3B30">*</span> </label>
-                                <input type="text" value="{{ $user->employee->address }}" class="form-control"
+                                <input type="text" value="{{ $user->employee?->address }}" class="form-control"
                                     id="city" name="city" required>
                             </div>
                             <div class="form-group col-md-4 ">
                                 <label for="postalcode">Postal Code / Ward <span style="color: #FF3B30">*</span> </label>
-                                <input type="text" value="{{ $user->employee->personaldetail['postalcode'] }}"
+                                <input type="text" value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['postalcode'] : '' }}"
                                     class="form-control" id="postalcode" name="postalcode" required>
                             </div>
                             <div class="form-group col-md-4 ">
@@ -126,7 +127,7 @@
 
                 <div class="form-row about-you">
                     <label for="about-you"> About You</label>
-                    <textarea class="form-control" name="about-you" id="reason" cols="30" rows="5">  {{ $user->employee->personaldetail['about-you'] }}</textarea>
+                    <textarea class="form-control" name="about-you" id="about-you" cols="30" rows="5">  {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['about-you'] : '' }}</textarea>
                 </div>
 
 
