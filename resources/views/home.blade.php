@@ -102,7 +102,29 @@
                         <i class="far fa-calendar-alt"></i>
                     </div>
                 </div>
-                <div class="calender"></div>
+                <div class="calender">
+                    <div class="calendar">
+                        <header>
+                            <h3></h3>
+                            <nav>
+                                <button id="prev"></button>
+                                <button id="next"></button>
+                            </nav>
+                        </header>
+                        <section class="calender-section">
+                            <ul class="days">
+                                <li>Sun</li>
+                                <li>Mon</li>
+                                <li>Tue</li>
+                                <li>Wed</li>
+                                <li>Thu</li>
+                                <li>Fri</li>
+                                <li style=" color: red">Sat</li>
+                            </ul>
+                            <ul class="dates"></ul>
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -172,5 +194,87 @@
 
 @section('js')
     {{-- <script> console.log('Hi!'); </script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const header = $(".calendar h3");
+            const dates = $(".dates");
+            const navs = $("#prev, #next");
+
+            const months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+            ];
+
+            let date = new Date();
+            let month = date.getMonth();
+            let year = date.getFullYear();
+
+            function renderCalendar() {
+                const start = new Date(year, month, 1).getDay();
+                const endDate = new Date(year, month + 1, 0).getDate();
+                const end = new Date(year, month, endDate).getDay();
+                const endDatePrev = new Date(year, month, 0).getDate();
+
+                let datesHtml = "";
+
+                for (let i = start; i > 0; i--) {
+                    datesHtml += `<li class="inactive">${endDatePrev - i + 1}</li>`;
+                }
+
+                for (let i = 1; i <= endDate; i++) {
+                    let className =
+                        i === date.getDate() &&
+                        month === new Date().getMonth() &&
+                        year === new Date().getFullYear()
+                            ? ' class="today"'
+                            : "";
+                    className += new Date(year, month, i).getDay() === 6 ? ' style="color: red;"' : ""; // Adding red color for Saturday
+                    datesHtml += `<li${className}>${i}</li>`;
+                }
+
+                for (let i = end; i < 6; i++) {
+                    datesHtml += `<li class="inactive">${i - end + 1}</li>`;
+                }
+
+                dates.html(datesHtml);
+                header.text(`${months[month]} ${year}`);
+            }
+
+            navs.on("click", function(e) {
+                const btnId = e.target.id;
+
+                if (btnId === "prev" && month === 0) {
+                    year--;
+                    month = 11;
+                } else if (btnId === "next" && month === 11) {
+                    year++;
+                    month = 0;
+                } else {
+                    month = btnId === "next" ? month + 1 : month - 1;
+                }
+
+                date = new Date(year, month, new Date().getDate());
+                year = date.getFullYear();
+                month = date.getMonth();
+
+                renderCalendar();
+            });
+
+            renderCalendar();
+        });
+    </script>
+
+
 
 @stop
