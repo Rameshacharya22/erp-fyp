@@ -84,7 +84,8 @@ class AttendanceController extends Controller
 
 //        dd($absentUsersWithUserData);
 
-   if(!$absentUsersWithUserData){
+
+   if($absentUsersWithUserData->isEmpty() || !$absentUsersWithUserData){
      $validatedData = $request->validate([
          'location' => 'sometimes|string|max:255',
          'source' => 'sometimes|string|max:255',
@@ -117,13 +118,13 @@ class AttendanceController extends Controller
              }
              $attendance->update(['is_late' => $late]);
 
-             return redirect()->back()->with('message',"Sussessfully Logged In");
+             return redirect()->back()->with('message',"Sussessfully Clock-In");
          } elseif (!$request->clockIn) {
              $startDate = Carbon::parse($attendance->clock_in_time);
              $endDate = Carbon::parse($attendance->clock_out_time);
              $minutesDifference = $endDate->diffInMinutes($startDate);
              $attendance->update(['work_hrs' => $minutesDifference]);
-             return redirect()->back()->with('message2',"Sussessfully Logged Out");
+             return redirect()->back()->with('message2',"Sussessfully Clock-Out");
          }
      }
 
