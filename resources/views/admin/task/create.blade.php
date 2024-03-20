@@ -52,7 +52,7 @@
             </div>
 
             <div class="form-row">
-                <label for="description"> Desccription</label>
+                <label for="description"> Description</label>
                 <textarea class="form-control" name="description" id="description" cols="30" rows="4">{{ old('description') }}</textarea>
             </div>
 
