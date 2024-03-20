@@ -40,6 +40,13 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('salary', App\Http\Controllers\SalaryController::class);
         Route::resource('task', App\Http\Controllers\TaskController::class);
 
+        //task
+        Route::get('/task/create', [App\Http\Controllers\TaskController::class,'create'])->name('task.create');
+        Route::get('/task/edit/{id}', [App\Http\Controllers\TaskController::class,'edit'])->name('task.edit');
+        Route::put('/task/{id}', [App\Http\Controllers\TaskController::class,'update'])->name('task.update');
+        Route::delete('/task/{id}', [App\Http\Controllers\TaskController::class,'destroy'])->name('task.destroy');
+
+
 
 
         //leave
@@ -55,6 +62,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/holiday/store', [App\Http\Controllers\HolidayController::class, 'store'])->name('holiday.store');
     });
 
+
+    //task
+    Route::get('/task',[App\Http\Controllers\TaskController::class, 'index'])->name('task.index');
+
     //notice
     Route::resource('/notice', NoticeController::class)->except(['create']);
 
@@ -69,8 +80,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/holiday', [App\Http\Controllers\HolidayController::class, 'index'])->name('holiday.index');
     Route::get('/holiday/{id}', [App\Http\Controllers\HolidayController::class, 'show'])->name('holiday.show');
     Route::resource('attendance', App\Http\Controllers\AttendanceController::class)->except(['store']);
-
-
     //emergencycontact
 
     Route::resource('emergency', App\Http\Controllers\EmergencyController::class);
@@ -85,5 +94,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('notifications/get',[App\Http\Controllers\NotificationsController::class, 'getNotificationsData'])
         ->name('notifications.get');
+
+    Route::get('task/userTask/{id}',[App\Http\Controllers\TaskController::class, 'getTaskInformation'])
+        ->name('task.userTask');
 
 });
