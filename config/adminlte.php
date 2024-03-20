@@ -381,7 +381,7 @@ return [
                     'text' => 'Task',
                     'route' => 'task.index',
                     'icon' => 'fas fa-user',
-                    'can' => 'task-crud',
+//                    'can' => 'task-crud',
                     'classes' => 'pl-4'
                 ],
 
