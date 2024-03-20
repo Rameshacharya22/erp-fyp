@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Employee;
 use App\Models\ProjectMember;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -74,16 +75,16 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
-    {
-        $info = $this->getInfo();
-        $info['project'] = Task::with('project')->find($id);
-
-        // $info['employees'] = Employee::get();
-
-        $info['task'] = Task::findOrFail($id);
-        return view('admin.task.show', $info);
-    }
+//    public function show($id)
+//    {
+//        $info = $this->getInfo();
+//        $info['project'] = Task::with('project')->find($id);
+//
+//        // $info['employees'] = Employee::get();
+//
+//        $info['task'] = Task::findOrFail($id);
+//        return view('admin.task.show', $info);
+//    }
 
     /**
      * Show the form for editing the specified resource.
@@ -140,4 +141,30 @@ class TaskController extends Controller
         $task->delete();
         return back()->withSuccess('Task deleted');
     }
+
+
+    public function getTaskInformation($id){
+        $info = $this->getInfo();
+
+//            $task = Task::findOrFail($id);
+
+//            $info['taskInformation'] = DB::table('tasks')
+//                ->join('projects', 'tasks.project_id', '=', 'projects.id')
+//                ->join('project_members', 'projects.id', '=', 'project_members.project_id')
+//                ->join('employees', 'project_members.employee_id', '=', 'employees.id')
+//                ->select('tasks.title as task_name',
+//                    'tasks.description as task_description',
+//                    'projects.title as project_name',
+//                    'projects.description as project_description')
+//                ->where('tasks.id', '=', $id)
+//                ->get();
+
+
+
+        return view('admin.task.taskUser', $info);
+
+
+
+        }
+
 }

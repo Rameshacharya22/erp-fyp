@@ -265,3 +265,42 @@ i.fas {
 .dates li.inactive {
     color: #ccc;
 }
+
+
+
+/*---------------- css for taskUser page-------------- */
+
+.taskUser-header{
+    display: flex;
+    justify-content: space-between;
+}
+.two-button{
+    display: flex;
+}
+.btn{
+    border: 1px solid #D6D6D6;
+}
+.taskHeader{
+ font-size: 20px;
+}
+.taskDetail-box{
+    display: flex;
+    gap: 30px;
+}
+.taskBox{
+   padding: 10px;
+    border: 2px solid #D5D5D5;
+    border-radius: 8px;
+    width: 50%;
+}
+.detail-lable{
+    padding: 10px 0 10px 10px;
+    width: 130px;
+
+}
+.taskProgress{
+    padding: 10px;
+    border: 2px solid #D5D5D5;
+    border-radius: 8px;
+    width: 50%;;
+}

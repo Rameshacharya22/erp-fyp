@@ -40,7 +40,7 @@
                         <td>{{ $task->started_at }}</td>
                         <td>{{ $task->deadline }}</td>
                         <td>
-                            <a href="{{ route('task.show', $task->id) }}" class="btn"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('task.userTask', $task->id) }}" class="btn"><i class="fas fa-eye"></i></a>
                             <a href="{{ route('task.edit', $task->id) }}" class="btn "><i class="far fa-edit"></i></a>
                             <form action="{{ route('task.destroy', $task->id) }}" method="POST">
                                 @csrf
