@@ -45,6 +45,7 @@
             margin: 10px 10px 10px 5px ;
         }
 
+
         /*a.nav-link.bell {*/
         /*    background-color: #e9ecef;*/
         /*    border-radius: 10px;*/
@@ -53,9 +54,9 @@
         /*}*/
 
 </style>
-<li class="nav-item pr-2">
-    <a class="btn btn-default btn-flat border rounded text-center m-auto p-auto"><i class="far fa-bell"></i></a>
-</li>
+{{--<li class="nav-item pr-2">--}}
+{{--    <a class="btn btn-default btn-flat border rounded text-center m-auto p-auto"><i class="far fa-bell"></i></a>--}}
+{{--</li>--}}
 <li class="nav-item pr-2">
     <a class="btn btn-default btn-flat border rounded text-center m-auto p-auto"><i
             class="fa fa-fw fa-calendar-alt"></i></a>
