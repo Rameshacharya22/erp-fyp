@@ -11,6 +11,8 @@ use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 
 class EmployeeController extends Controller
 {
@@ -63,11 +65,13 @@ class EmployeeController extends Controller
             'gender' => 'required|string',
             'number' => 'required|digits_between:9,10',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|max:255|confirmed',
+            // 'password' => 'required|string|max:255|confirmed',
             'address' => 'required|string|max:255',
             'hire_date' => 'required|date',
             'position_id' => 'required|exists:positions,id',
         ]);
+        $password =   Str::password();
+
 
         $name = $validatedData['first_name'] . ' ' . $validatedData['last_name'];
 
@@ -77,7 +81,7 @@ class EmployeeController extends Controller
 //            'name' => $validatedData['first_name'],
             'name' => $name,
             'email' => $validatedData['email'],
-            'password' => bcrypt($validatedData['password']),
+            'password' => bcrypt($password),
         ]);
 
         // Create employee
