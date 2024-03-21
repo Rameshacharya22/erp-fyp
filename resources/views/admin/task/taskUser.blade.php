@@ -19,7 +19,12 @@
         <div class="taskUser-header">
             <div class="two-button">
                     <div class="btn btn-1"> <i class="far fa-check-circle"></i> Mark as Completed</div>
-                <div class="btn ml-3 btn-primary "> <i class="far fa-clock"></i> Start Timer </div>
+                <div class="btn ml-3 btn-primary " id="startStopBtn" > <i class="far fa-clock"></i> Start Timer </div>
+                <div class="btn btn-primary" id="demo">  </div>
+                <div class="btn btn-primary" id="pauseResumeBtn" style="display:none;">Pause/Resume</div>
+                <button class="btn btn-primary"  id="stopBtn" style="display:none;">Stop</button>
+
+
             </div>
             <div class="btn"> <i class="fas fa-file-export"></i> Export</div>
         </div>
@@ -45,7 +50,7 @@
                 <label class="detail-lable">Start Date:</label>   <span class="detailText">2023/10/18</span><br>
 
                 <label class="detail-lable">End Date:</label>   <span class="detailText">2023/10/18</span><br>
-                <label class="detail-lable">Hours Logged:</label>   <span class="detailText">1 hrs 30 min</span><br>
+                <label class="detail-lable">Hours Logged:</label>   <span class="detailText" id="totalhrslogged"></span><br>
 
                 <label class="detail-lable">Working Days:</label>   <span class="detailText">ssdfdsf</span>
             </div>
@@ -75,5 +80,101 @@
 @stop
 
 @section('js')
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            var startTime; // Variable to hold the start time
+            var pauseTime; // Variable to hold the pause time
+            var timerInterval; // Variable to hold the interval ID
+
+            // Function to start or stop the timer
+            function startStopTimer() {
+                if (!startTime) {
+                    // If timer is not running, start it
+                    startTime = new Date().getTime();
+                    $("#demo").html("Timer started.");
+                    $("#pauseResumeBtn").text("Pause");
+                    $("#pauseResumeBtn").show();
+                    $("#stopBtn").show();
+                    timerInterval = setInterval(updateTimer, 1000); // Start the interval to update the timer
+                } else {
+                    // If timer is running, stop it
+                    clearInterval(timerInterval); // Clear the interval
+                    var now = new Date().getTime();
+                    var elapsedTime = now - startTime;
+                    var days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+                    $("#demo").html("Time interval: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
+                    startTime = null;
+                    $("#pauseResumeBtn").hide();
+                    $("#stopBtn").hide();
+                }
+            }
+
+            // Function to pause or resume the timer
+            function pauseResumeTimer() {
+                if ($("#pauseResumeBtn").text() === "Pause") {
+                    clearInterval(timerInterval);
+                    pauseTime = new Date().getTime();
+                    $("#pauseResumeBtn").text("Resume");
+                } else {
+                    var pauseDuration = new Date().getTime() - pauseTime;
+                    startTime += pauseDuration;
+                    timerInterval = setInterval(updateTimer, 1000);
+                    $("#pauseResumeBtn").text("Pause");
+                }
+            }
+
+            // Function to stop the timer
+            function stopTimer() {
+                clearInterval(timerInterval); // Clear the interval
+                var now = new Date().getTime();
+                var elapsedTime = now - startTime;
+                var days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+                $("#demo").html("Time interval: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
+
+                $("#totalhrslogged").html(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
+
+                startTime = null;
+                $("#pauseResumeBtn").hide();
+                $("#stopBtn").hide();
+            }
+
+            // Function to update the timer
+            function updateTimer() {
+                var now = new Date().getTime(); // Get the current time
+                var elapsedTime = now - startTime; // Calculate the elapsed time
+
+                var days = Math.floor(elapsedTime / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((elapsedTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((elapsedTime % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((elapsedTime % (1000 * 60)) / 1000);
+
+                $("#demo").html("Timer running: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
+
+
+            }
+
+
+            // Add event listener to the button to start or stop the timer
+            $("#startStopBtn").on("click", startStopTimer);
+
+            // Add event listener to the pause/resume button
+            $("#pauseResumeBtn").on("click", pauseResumeTimer);
+
+            // Add event listener to the stop button
+            $("#stopBtn").on("click", stopTimer);
+
+
+        });
+    </script>
 
 @stop
