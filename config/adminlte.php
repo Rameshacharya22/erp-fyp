@@ -371,7 +371,8 @@ return [
         [
             'text' => 'Work',
             'submenu' => [
-                ['text' => 'Project',
+                [
+                    'text' => 'Project',
                     'route' => 'project.index',
                     'icon' => 'fas fa-user',
                     'can' => 'project-crud',
@@ -381,11 +382,18 @@ return [
                     'text' => 'Task',
                     'route' => 'task.index',
                     'icon' => 'fas fa-user',
-//                    'can' => 'task-crud',
+                    //                    'can' => 'task-crud',
                     'classes' => 'pl-4'
                 ],
 
             ],
+        ],
+
+        [
+            'text' => 'Time Sheet',
+            'route' => 'timeSheet.index',
+            'icon' => 'far fa-clock',
+
         ],
 
 
