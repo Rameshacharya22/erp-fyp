@@ -75,11 +75,20 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    // public function show($id)
+    // {
+    //     $info = $this->getInfo();
+
+    //     $info['project'] = Project::findOrFail($id);
+    //     return view('admin.project.show', $info);
+    // }
+
+    // only for static view
+    public function show()
     {
         $info = $this->getInfo();
 
-        $info['project'] = Project::findOrFail($id);
+        // $info['project'] = Project::findOrFail($id);
         return view('admin.project.show', $info);
     }
 

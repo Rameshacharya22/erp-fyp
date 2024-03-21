@@ -41,7 +41,8 @@
                         <td>{{$project->completion_time}}</td>
                         <td>{{$project->completion_at}}</td>
                         <td>
-                        <a href="{{ route('project.show', $project->id) }}" class="btn"><i class="fas fa-eye"></i></a>
+                        {{-- <a href="{{ route('project.show', $project->id) }}" class="btn"><i class="fas fa-eye"></i></a> --}}
+                        <a href="{{ route('project.show') }}" class="btn"><i class="fas fa-eye"></i></a>
                         <a href="{{ route('project.edit', $project->id) }}" class="btn "><i class="far fa-edit"></i></a>
                             <form action="{{ route('project.destroy', $project->id) }}" method="POST">
                                 @csrf

@@ -1,4 +1,4 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -192,27 +192,32 @@ i.fas {
     width: 100%;
     padding: 1rem;
 }
+
 .calendar header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .calendar nav {
     display: flex;
     align-items: center;
 }
+
 .calendar ul {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
 }
+
 .calendar ul li {
     width: calc(100% / 7);
     margin-top: 25px;
     position: relative;
     z-index: 2;
 }
+
 #prev,
 #next {
     width: 20px;
@@ -222,6 +227,7 @@ i.fas {
     background: transparent;
     cursor: pointer;
 }
+
 #prev::before,
 #next::before {
     content: "";
@@ -234,22 +240,28 @@ i.fas {
     border-width: 0.25em 0.25em 0 0;
     border-color: #ccc;
 }
+
 #next::before {
     transform: translate(-50%, -50%) rotate(45deg);
 }
+
 #prev::before {
     transform: translate(-50%, -50%) rotate(-135deg);
 }
+
 #prev:hover::before,
 #next:hover::before {
     border-color: #000;
 }
+
 .days {
     font-weight: 600;
 }
+
 .dates li.today {
     color: #fff;
 }
+
 .dates li.today::before {
     content: "";
     width: 2rem;
@@ -262,6 +274,7 @@ i.fas {
     border-radius: 50%;
     z-index: -1;
 }
+
 .dates li.inactive {
     color: #ccc;
 }
@@ -270,37 +283,91 @@ i.fas {
 
 /*---------------- css for taskUser page-------------- */
 
-.taskUser-header{
+.taskUser-header {
     display: flex;
     justify-content: space-between;
 }
-.two-button{
+
+.two-button {
     display: flex;
 }
-.btn{
-    border: 1px solid #D6D6D6;
+
+/*.btn{*/
+/*    border: 1px solid #D6D6D6;*/
+/*}*/
+.taskHeader {
+    font-size: 20px;
 }
-.taskHeader{
- font-size: 20px;
-}
-.taskDetail-box{
+
+.taskDetail-box {
     display: flex;
     gap: 30px;
 }
-.taskBox{
-   padding: 10px;
+
+.taskBox {
+    padding: 10px;
     border: 2px solid #D5D5D5;
     border-radius: 8px;
     width: 50%;
 }
-.detail-lable{
+
+.detail-lable {
     padding: 10px 0 10px 10px;
     width: 130px;
 
 }
-.taskProgress{
+
+.taskProgress {
     padding: 10px;
     border: 2px solid #D5D5D5;
     border-radius: 8px;
-    width: 50%;;
+    width: 50%;
+    ;
+}
+
+/* project overview , project member ,project Task */
+
+/* project overview */
+#pills-home {
+    display: flex;
+    gap: 20px;
+}
+
+#pills-tabContent .task-info {
+    border: 1px solid #D5D5D5;
+    border-radius: 8px;
+    width: 40%;
+    padding: 20px;
+}
+
+#pills-tabContent .task-chart {
+    width: 60%;
+}
+
+.task-chart .chart-detail {
+    border: 1px solid #D5D5D5;
+    border-radius: 8px;
+    width: 100%;
+    padding: 20px;
+    height: 70%;
+    margin-bottom: 25px;
+}
+
+.task-chart .hourloggs {
+    border: 1px solid #D5D5D5;
+    border-radius: 8px;
+    width: 100%;
+    padding: 15px;
+    height: 20%;
+}
+
+#pills-tabContent .task-info label {
+    width: 130px;
+    padding: 10px 0;
+    color: #979797;
+}
+
+#pills-tabContent .task-info span {
+    color: #023E7D;
+    font-size: 18px;
 }
