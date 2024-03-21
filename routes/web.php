@@ -41,10 +41,10 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('task', App\Http\Controllers\TaskController::class);
 
         //task
-        Route::get('/task/create', [App\Http\Controllers\TaskController::class,'create'])->name('task.create');
-        Route::get('/task/edit/{id}', [App\Http\Controllers\TaskController::class,'edit'])->name('task.edit');
-        Route::put('/task/{id}', [App\Http\Controllers\TaskController::class,'update'])->name('task.update');
-        Route::delete('/task/{id}', [App\Http\Controllers\TaskController::class,'destroy'])->name('task.destroy');
+        Route::get('/task/create', [App\Http\Controllers\TaskController::class, 'create'])->name('task.create');
+        Route::get('/task/edit/{id}', [App\Http\Controllers\TaskController::class, 'edit'])->name('task.edit');
+        Route::put('/task/{id}', [App\Http\Controllers\TaskController::class, 'update'])->name('task.update');
+        Route::delete('/task/{id}', [App\Http\Controllers\TaskController::class, 'destroy'])->name('task.destroy');
 
 
 
@@ -64,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     //task
-    Route::get('/task',[App\Http\Controllers\TaskController::class, 'index'])->name('task.index');
+    Route::get('/task', [App\Http\Controllers\TaskController::class, 'index'])->name('task.index');
 
     //notice
     Route::resource('/notice', NoticeController::class)->except(['create']);
@@ -88,14 +88,25 @@ Route::middleware(['auth'])->group(function () {
     //setting
     Route::resource('setting', App\Http\Controllers\SettingController::class);
 
+    //timesheet
+    // Route::resource('timeSheet', App\Http\Controllers\TimeSheetController::class);
+
+
+    Route::get('/timeSheet', [App\Http\Controllers\TimeSheetController::class, 'index'])->name('timeSheet.index');
+    Route::get('/timeSheet/edit', [App\Http\Controllers\TimeSheetController::class, 'edit'])->name('timeSheet.edit');
+    Route::get('/timeSheet/show', [App\Http\Controllers\TimeSheetController::class, 'show'])->name('timeSheet.show');
+
+    //for static view for show project 
+    Route::get('/project/show', [App\Http\Controllers\ProjectController::class, 'show'])->name('project.show');
+
+
     //changepassword
     Route::resource('changepassword', App\Http\Controllers\ChangePasswordController::class);
     Route::get('clock-in', [App\Http\Controllers\AttendanceController::class, 'store'])->name('clock-in');
 
-    Route::get('notifications/get',[App\Http\Controllers\NotificationsController::class, 'getNotificationsData'])
+    Route::get('notifications/get', [App\Http\Controllers\NotificationsController::class, 'getNotificationsData'])
         ->name('notifications.get');
 
-    Route::get('task/userTask/{id}',[App\Http\Controllers\TaskController::class, 'getTaskInformation'])
+    Route::get('task/userTask/{id}', [App\Http\Controllers\TaskController::class, 'getTaskInformation'])
         ->name('task.userTask');
-
 });
