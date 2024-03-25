@@ -33,6 +33,7 @@ return new class extends Migration
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->unsignedBigInteger('position_id')->nullable();
             $table->foreign('position_id')->references('id')->on('positions');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

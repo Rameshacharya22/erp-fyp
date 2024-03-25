@@ -20,13 +20,13 @@
             <div class="form-row">
 
                 <div class="form-group col-md-6 mt-3">
-                    <label for="title">Title</label>
+                    <label for="title">Title *</label>
                     <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}"
                         required>
                 </div>
 
                 <div class="form-group col-md-6 mt-3">
-                    <label for="project_id">Project</label>
+                    <label for="project_id">Project *</label>
                     <select class="form-control" id="project_id" name="project_id" required>
                         @foreach ($projects as $project)
                             <option value="{{ $project->id }}">{{ $project->title }}
@@ -40,39 +40,39 @@
 
             <div class="form-row">
                 <div class="form-group col-md-6 mt-3">
-                    <label for="employee_id">Project Member</label>
+                    <label for="employee_id">Project Member *</label>
                     <select class="form-control" id="employee_id" name="employee_ids[]" multiple="multiple" required>
                     </select>
                 </div>
                 <div class="form-group col-md-6 mt-3">
-                    <label for="given_date">Given Date</label>
+                    <label for="given_date">Given Date *</label>
                     <input type="date" class="form-control" id="given_date" name="given_date"
                         value="{{ old('given_date') }}" required min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                 </div>
             </div>
 
             <div class="form-row">
-                <label for="description"> Description</label>
+                <label for="description"> Description *</label>
                 <textarea class="form-control" name="description" id="description" cols="30" rows="4">{{ old('description') }}</textarea>
             </div>
 
 
             <div class="form-row">
                 <div class="form-group col-md-6 mt-3">
-                    <label for="started_at">Started At</label>
+                    <label for="started_at">Started At *</label>
                     <input type="date" class="form-control" id="started_at" name="started_at"
                         value="{{ old('started_at') }}" required min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                 </div>
 
 
                 <div class="form-group col-md-6 mt-3">
-                    <label for="deadline">Deadline</label>
+                    <label for="deadline">Deadline *</label>
                     <input type="date" class="form-control" id="deadline" name="deadline" value="{{ old('deadline') }}"
                         required min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                 </div>
             </div>
 
-            <div class="form-row">
+            {{-- <div class="form-row">
                 <div class="form-group col-md-6 mt-3">
                     <label for="completed_at">Completed At</label>
                     <input type="date" class="form-control" id="completed_at" name="completed_at"
@@ -84,7 +84,7 @@
                     <input type="time" class="form-control" id="time_taken" name="time_taken"
                         value="{{ old('time_taken') }}" required>
                 </div>
-            </div>
+            </div> --}}
             <button type="submit" class="btn btn-primary mb-3">Submit</button>
 
     </div>

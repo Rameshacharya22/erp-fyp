@@ -24,6 +24,8 @@ return new class extends Migration
             $table->date('completed_at')->nullable();
             $table->date('started_at')->nullable();
             // $table->double('time_taken')->nullable();
+            $table->string('task_status')->nullable();
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }

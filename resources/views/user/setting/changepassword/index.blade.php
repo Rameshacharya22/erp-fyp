@@ -10,13 +10,21 @@
                     class="btn btn-primary">Add Emergency</button></a></div> --}}
     </div>
 
+    <style>
+        .setting-tab .b3 span {
+            border-bottom: 2px solid #0466C8;
+            padding-bottom: 6px;
+        }
+    </style>
+
+
 
 @section('content')
     <div class="setting-container">
         <div class="setting-tab">
-           <a class="b1" href="{{route('setting.index')}}">Profile</a>
+            <a class="b1" href="{{ route('setting.index') }}">Profile</a>
             <a class="b2" href="{{ route('emergency.index') }}">Emergency Contact</a>
-            <a href="{{ route('changepassword.index') }}">Change Password</a>
+            <a class="b3" href="{{ route('changepassword.index') }}"><span>Change Password</span></a>
             <div class="user-icon float-right pr-30">
                 <i class="fas fa-user"></i>
             </div>
@@ -28,8 +36,8 @@
     <div class="password-change-box">
 
         <div class="password-info">
-            <div class="pass-head ">
-                <div class="pass-text">Change Password</div>
+            <div class="pass-head d-flex ">
+                <div class="pass-text text-center">Change Password</div>
                 <i class="fas fa-lock"></i>
             </div>
 
@@ -39,10 +47,10 @@
             </div>
 
             <div class="combo-input">
-                <input type="password" class="form-control mt-3" placeholder="Current password" id="title"
-                    name="title">
-                <input type="password" class="form-control mt-3 " placeholder="New Password" id="title" name="title">
-                <input type="password" class="form-control mt-3 " placeholder="New Password" id="title" name="title">
+                <input type="password" class="form-control mt-3" placeholder="Current password" id="current_password" value="{{old('current_password')}}"
+                    name="current_password">
+                <input type="password" class="form-control mt-3 " placeholder="New Password" id="new_password" value="{{old('new_password')}}" name="new_password">
+                <input type="password" value="{{old('new_password')}}" class="form-control mt-3 " placeholder="New Password" id="new_password" name="new_password">
             </div>
 
             <button type="submit" class="btn btn-primary mt-3">Change Password</button>

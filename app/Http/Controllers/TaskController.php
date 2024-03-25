@@ -55,7 +55,7 @@ class TaskController extends Controller
             'given_date' => 'required|date',
             'started_at' => 'required|date',
             'deadline' => 'required|date',
-            'completed_at' => 'required|date'
+            // 'completed_at' => 'required|date'
         ]);
 
         $task = Task::create([
@@ -65,7 +65,7 @@ class TaskController extends Controller
             'started_at' => $validatedData['started_at'],
             'given_date' => $validatedData['given_date'],
             'deadline' => $validatedData['deadline'],
-            'completed_at' => $validatedData['completed_at'],
+            // 'completed_at' => $validatedData['completed_at'],
         ]);
         $task->employees()->sync($request->employee_ids);
 
@@ -113,7 +113,7 @@ class TaskController extends Controller
             'given_date' => 'required|date',
             'started_at' => 'required|date',
             'deadline' => 'required|date',
-            'completed_at' => 'required|date'
+            // 'completed_at' => 'required|date'
         ]);
         $task = Task::findOrFail($id);
         $task->update([
@@ -123,7 +123,7 @@ class TaskController extends Controller
             'started_at' => $validatedData['started_at'],
             'given_date' => $validatedData['given_date'],
             'deadline' => $validatedData['deadline'],
-            'completed_at' => $validatedData['completed_at'],
+            // 'completed_at' => $validatedData['completed_at'],
         ]);
 
         $task->employees()->sync($request->employee_ids);

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->date('started_at')->nullable();
             $table->date('deadline_at')->nullable();
-            $table->time('completion_time')->nullable();
-            $table->date('completion_at')->nullable();
+            // $table->time('completion_time')->nullable();
+            // $table->date('completion_at')->nullable();
             $table->timestamps();
         });
     }
