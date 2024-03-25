@@ -63,7 +63,7 @@ class ProjectController extends Controller
             'description' => $validatedData['description'],
             'started_at' => $validatedData['started_at'],
             'deadline_at' => $validatedData['deadline_at'],
-            'completion_at' => $validatedData['completion_at'],
+            // 'completion_at' => $validatedData['completion_at'],
         ]);
 
         $project->employees()->sync($request->employee_ids);

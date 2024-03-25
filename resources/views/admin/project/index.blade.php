@@ -3,19 +3,20 @@
 @section('title', 'Project')
 
 @section('content_header')
-<div class="row">
-{{--    <div class="col"><h1>Project</h1></div>--}}
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"><a href="{{route('project.create')}}" class="tertiary-color"><button type="button" class="btn btn-primary">Add Project</button></a></div>
-</div>
+    <div class="row">
+        {{--    <div class="col"><h1>Project</h1></div> --}}
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"><a href="{{ route('project.create') }}" class="tertiary-color"><button type="button"
+                    class="btn btn-primary">Add Project</button></a></div>
+    </div>
 
 
 @stop
 
 @section('content')
-<div class="container">
+    <div class="container">
         <table class="table table-bordered" id="employee-table">
             <thead>
                 <tr>
@@ -24,8 +25,7 @@
                     <th>Description</th>
                     <th>Started At</th>
                     <th>Deadline At</th>
-                    <th>Completion Time</th>
-                    <th>Completed At</th>
+                    <th>Status</th>
                     <th>Action</th>
 
                 </tr>
@@ -33,28 +33,36 @@
             <tbody>
                 @foreach ($projects as $project)
                     <tr>
-                        <td>{{$project->id}}</td>
-                        <td>{{$project->title}}</td>
-                        <td>{{$project->description}}</td>
-                        <td>{{$project->started_at}}</td>
-                        <td>{{$project->deadline_at}}</td>
-                        <td>{{$project->completion_time}}</td>
-                        <td>{{$project->completion_at}}</td>
+                        <td>{{ $project->id }}</td>
+                        <td>{{ $project->title }}</td>
+                        <td>{{ $project->description }}</td>
+                        <td>{{ $project->started_at }}</td>
+                        <td>{{ $project->deadline_at }}</td>
                         <td>
-                        {{-- <a href="{{ route('project.show', $project->id) }}" class="btn"><i class="fas fa-eye"></i></a> --}}
-                        <a href="{{ route('project.show') }}" class="btn"><i class="fas fa-eye"></i></a>
-                        <a href="{{ route('project.edit', $project->id) }}" class="btn "><i class="far fa-edit"></i></a>
+                            <select class="form-control" id="ststus" name="ststus" required>
+                                <option value="Progress">Progress</option>
+                                <option value="Finished">Finish</option>
+                                <option value="Start">Start</option>
+                                <!-- Add more options if needed -->
+                            </select>
+                        </td>
+                        <td>
+                            {{-- <a href="{{ route('project.show', $project->id) }}" class="btn"><i class="fas fa-eye"></i></a> --}}
+                            <a href="{{ route('project.show') }}" class="btn"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('project.edit', $project->id) }}" class="btn "><i
+                                    class="far fa-edit"></i></a>
                             <form action="{{ route('project.destroy', $project->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn"><i class="fas fa-trash-alt" style="color: #e01010;"></i></button>
+                                <button type="submit" class="btn"><i class="fas fa-trash-alt"
+                                        style="color: #e01010;"></i></button>
                             </form>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-                {{$projects->links()}}
+        {{ $projects->links() }}
 
     </div>
 
@@ -66,7 +74,7 @@
 @stop
 
 @section('js')
-{{-- <script>
+    {{-- <script>
         $(function () {
             var table = $('#data-table').DataTable({
                 processing: true,
@@ -89,4 +97,4 @@
             });
         });
     </script> --}}
-    @stop
+@stop

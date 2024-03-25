@@ -19,12 +19,12 @@
 
             <div class="form-row ">
                 <div class="form-group col-md-6 mt-3">
-                    <label for="title">Project Title</label>
+                    <label for="title">Project Title *</label>
                     <input type="text" value="{{old('title')}}" class="form-control" id="title" name="title" required>
                 </div>
 
                 <div class="form-group col-md-6 mt-3">
-                    <label for="title">Project Member</label>
+                    <label for="title">Project Member *</label>
                     <select  class="form-control" id="employee_id" name="employee_ids[]" required multiple>
                         @foreach ($employees as $employee) employees
                         <option value="{{ $employee->id }}">{{ $employee->first_name }}
@@ -35,7 +35,7 @@
             </div>
             <div class="form-row ">
                 <div class="form-group col-md">
-                    <label for="description">Project Description</label>
+                    <label for="description">Project Description *</label>
 {{--                    <textarea class="form-control" value="{{old('description')}}" name="description" id="description" cols="30" rows="4"></textarea>--}}
                     <textarea class="form-control" id="description" name="description" cols="30" rows="4" required>{{ old('description') }}</textarea>
 
@@ -45,17 +45,17 @@
             <div class="form-row">
 
                 <div class="form-group col-md-6 ">
-                    <label for="started_at">Started Date</label>
+                    <label for="started_at">Started Date *</label>
                     <input type="date" value="{{old('started_at')}}" class="form-control" id="started_at" name="started_at" required min="{{\Carbon\Carbon::now()->format('Y-m-d')}}">
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="deadline_at"> Deadline Date</label>
+                    <label for="deadline_at"> Deadline Date *</label>
                     <input type="date" value="{{old('deadline_at')}}" class="form-control" id="deadline_at" name="deadline_at" min="{{\Carbon\Carbon::now()->format('Y-m-d')}}" required>
                 </div>
             </div>
 
-            <div class="form-row">
+            {{-- <div class="form-row">
 
                 <div class="form-group col-md-6">
                     <label for="completion_time"> Completion Time </label>
@@ -65,7 +65,7 @@
                     <label for="completion_at">Completed Date</label>
                     <input type="date" class="form-control" value="{{old('completion_at')}}" id="completion_at" name="completion_at" min="{{\Carbon\Carbon::now()->format('Y-m-d')}}" required>
                 </div>
-            </div>
+            </div> --}}
 
 
 
