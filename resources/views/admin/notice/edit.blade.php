@@ -18,26 +18,25 @@
             @csrf
             @method('PUT')
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="title"> Title</label>
+                <div class="form-group col-md-5 mt-3">
+                    <label for="title"> Title *</label>
                     <input type="text" class="form-control" id="title" value="{{ $notice->title }}" name="title"
                         required>
                 </div>
 
-                <div class="form-group col-md-6">
-                    <label for="date"> Date</label>
-                    <input type="date" class="form-control" id="date" value="{{ $notice->date }}" name="date"  min="{{\Carbon\Carbon::now()->format('Y-m-d')}}"
-                           required>
+                <div class="form-group col-md-5 mt-3">
+                    <label for="date"> Date *</label>
+                    <input type="date" class="form-control" id="date" value="{{ $notice->date }}" name="date"
+                        min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" required>
                 </div>
 
 
             </div>
             <div class="form-row">
-                <div class="form-group col-md">
-                    <label for="description">Description</label>
+                <div class="form-group col-md-10">
+                    <label for="description">Description *</label>
 
-                    <textarea class="form-control"  name="description" id="description" cols="30"
-                              rows="4">{{ $notice->description }}</textarea>
+                    <textarea class="form-control" name="description" id="description" cols="30" rows="4">{{ $notice->description }}</textarea>
                 </div>
             </div>
 

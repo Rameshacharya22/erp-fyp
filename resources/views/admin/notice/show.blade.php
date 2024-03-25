@@ -26,12 +26,13 @@
     }
 
     .notice-section {
-        width: 900px;
+        width: 1700px;
+        /* width: 900px; */
         margin-top: 40px;
         margin-left: 40px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
+        /* display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px; */
     }
 
     .notice-box {
@@ -69,7 +70,7 @@
 
     <div class="header-content">
         <div class="header">Notice Board</div>
-        <div class="icon"><i class="fas fa-volume-up" style="color: #0466C8CC;"></i> </div>
+        {{-- <div class="icon"><i class="fas fa-volume-up" style="color: #0466C8CC;"></i> </div> --}}
     </div>
 
     <div class="notice-section">

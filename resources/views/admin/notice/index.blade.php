@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Leave')
+@section('title', 'Notice')
 
 
 @section('css')
@@ -98,8 +98,8 @@
             <div class="col"></div>
             <div class="col"></div>
             <div class="col"></div>
-            <div class="col">
-                <a href="{{ route('notice.create') }}" class="tertiary-color"><button type="button" class="btn btn-primary">Add
+            <div class="col pt-3 pb-3">
+                <a href="{{ route('notice.create') }}" class="tertiary-color "><button type="button" class="btn btn-primary">Add
                         Notice</button></a>
             </div>
         </div>
@@ -149,7 +149,7 @@
 
         <div class="header-content">
             <div class="header">Notice Board</div>
-            <div class="icon"><i class="fas fa-volume-up" style="color: #0466C8CC;"></i> </div>
+            {{-- <div class="icon"><i class="fas fa-volume-up" style="color: #0466C8CC;"></i> </div> --}}
         </div>
 
         <div class="notice-section">

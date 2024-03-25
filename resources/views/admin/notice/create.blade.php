@@ -20,34 +20,34 @@
 
 
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="title">Title</label>
+                <div class="form-group col-md-5 mt-3">
+                    <label for="title">Title *</label>
                     <input type="text" class="form-control" value="{{ old('title') }}" id="title" name="title"
                         required>
                 </div>
 
-                <div class="form-group col-md-6">
-                    <label for="date">Date</label>
-                    <input type="date" class="form-control" value="{{ old('date') }}" id="date" name="date"  min="{{\Carbon\Carbon::now()->format('Y-m-d')}}"
-                           required>
+                <div class="form-group col-md-5 mt-3">
+                    <label for="date">Date *</label>
+                    <input type="date" class="form-control" value="{{ old('date') }}" id="date" name="date"
+                        min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" required>
                 </div>
 
             </div>
 
             <div class="form-row">
-                <div class="form-group col-md">
-                    <label for="description">Description</label>
+                <div class="form-group col-md-10">
+                    <label for="description">Description *</label>
 
                     <textarea class="form-control" value="{{ old('description') }}" name="description" id="description" cols="30"
-                              rows="4"></textarea>
+                        rows="4"></textarea>
                 </div>
             </div>
 
 
 
+            <button type="submit" class="btn btn-primary">Submit</button>
 
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     </div>
 
