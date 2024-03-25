@@ -24,6 +24,7 @@ class SettingController extends Controller
     {
         $info = $this->getInfo();
         $info['user'] = Auth::user();
+        $info['user'] = User::where('id', auth()->user()->id)->with('employee')->first();
         return view('user.setting.userprofile.index', $info);
     }
 
@@ -60,6 +61,7 @@ class SettingController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request);
 
         $user = User::findOrFail($id); // Retrieve the existing user by ID
 
@@ -68,13 +70,22 @@ class SettingController extends Controller
             'hobbies' => 'required|string|max:255',
             'country' => 'required|string|max:20',
             'language' => 'required|string|max:20',
-            'city' => 'required|string|max:20', 
+            'city' => 'required|string|max:20',
             'postalcode' => 'required|string|max:20',
             'number' => 'required|digits_between:9,10',
             // 'email' => 'required|email|unique:users,email,' . $user->id, 
             // 'goog_cal' => 'nullable|string|in:yes,no', 
-            'about-you' => 'required|string|max:255', 
+            'about-you' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        if ($request->hasfile('image')) {
+            $file = $request->file('image');
+            $extenstion = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extenstion;
+            $file->move('uploads/employee/', $filename);
+            $user->employee->image = $filename;
+        }
 
         // Update the user's personal details
         $user->employee->update([
@@ -82,24 +93,13 @@ class SettingController extends Controller
                 'hobbies' => $validatedData['hobbies'],
                 'country' => $validatedData['country'],
                 'language' => $validatedData['language'],
-                'city' => $validatedData['city'], 
+                'city' => $validatedData['city'],
                 'postalcode' => $validatedData['postalcode'],
                 'about-you' => $validatedData['about-you'],
             ],
-            'number' => $validatedData['number'], 
+            'number' => $validatedData['number'],
         ]);
-
-        
-        // $user->update([
-        //     'email' => $validatedData['email'], 
-        // ]);
-
-        // $user->employee->update([
-        //     'email' => $validatedData['email'],
-        // ]);
-
-
-        return redirect()->back()->with('success', 'User settings updated successfully.');
+        return redirect()->back()->with('message', 'User settings updated successfully.');
     }
 
 

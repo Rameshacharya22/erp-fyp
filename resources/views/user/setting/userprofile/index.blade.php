@@ -10,11 +10,18 @@
                     class="btn btn-primary">Add Appreciation</button></a></div> --}}
     </div>
 
+    <style>
+        .setting-tab .b1 span {
+            border-bottom: 2px solid #0466C8;
+            padding-bottom: 6px;
+        }
+    </style>
+
 
 @section('content')
     <div class="setting-container">
         <div class="setting-tab">
-            <a class="b1" href="{{ route('setting.index') }}">Profile</a>
+            <a class="b1" href="{{ route('setting.index') }}"><span>Profile</span></a>
             <a class="b2" href="{{ route('emergency.index') }}">Emergency Contact</a>
             <a href="{{ route('changepassword.index') }}">Change Password</a>
             <div class="user-icon float-right pr-30">
@@ -29,13 +36,36 @@
                 @csrf
                 @method('PUT')
 
+
+
                 <div class="user-info">
-                    <div class="image-side">
+
+
+                    @if ($user->employee->image)
+                        <div class="image-side">
+                            <div class="user-image">
+                                <img src="uploads/employee/{{ $user->employee->image }}" alt="{{ $user->name }} ppimage">
+                                <br>
+                                <div class="pt-2 text-center " style="color: #C2699E">Profile Pic</div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="image-side">
+                            <div class="user-image">
+                                <!-- Input field for uploading image -->
+                                <input type="file" name="image" accept="image">
+                            </div>
+                        </div>
+                    @endif
+
+
+
+                    {{-- <div class="image-side">
                         <div class="user-image">
                             <img src="img/user.jpeg" alt=""> <br>
                             <div class="pr-9 pt-2" style="color: #C2699E">Profile Image</div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-side">
                         <div class="form-row">
@@ -51,7 +81,8 @@
                             </div>
                             <div class="form-group col-md-4 ">
                                 <label for="hobbies">Hobbies <span style="color: #FF3B30">*</span></label>
-                                <input type="text" value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['hobbies'] : '' }}"
+                                <input type="text"
+                                    value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['hobbies'] : '' }}"
                                     class="form-control" id="hobbies" name="hobbies" required>
 
 
@@ -71,8 +102,8 @@
                             </div>
                             <div class="form-group col-md-4 ">
                                 <label for="last_name">DOB <span style="color: #FF3B30">*</span> </label>
-                                <input type="date" value="{{ $user->employee?->dob }}" class="form-control" id="dob"
-                                    name="dob" required>
+                                <input type="date" value="{{ $user->employee?->dob }}" class="form-control"
+                                    id="dob" name="dob" required>
                             </div>
                             <div class="form-group col-md-4 ">
                                 <label for="number">Contact Number <span style="color: #FF3B30">*</span></label>
@@ -90,12 +121,14 @@
                             <div class="form-group col-md-4 ">
                                 <label for="country">Country <span style="color: #FF3B30">*</span> </label>
                                 {{-- <select class="form-control selectpicker countrypicker" data-flag="true"></select> --}}
-                                <input type="text" value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['country'] : '' }}"
+                                <input type="text"
+                                    value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['country'] : '' }}"
                                     class="form-control" id="country" name="country" required>
                             </div>
                             <div class="form-group col-md-4 ">
                                 <label for="language">Language <span style="color: #FF3B30">*</span></label>
-                                <input type="text" value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['language'] : '' }}"
+                                <input type="text"
+                                    value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['language'] : '' }}"
                                     class="form-control" id="language" name="language" required>
                             </div>
                         </div>
@@ -103,12 +136,14 @@
                         <div class="form-row">
                             <div class="form-group col-md-4 ">
                                 <label for="city">Your City <span style="color: #FF3B30">*</span> </label>
-                                <input type="text" value="{{ $user->employee?->address }}" class="form-control"
-                                    id="city" name="city" required>
+                                <input type="text"
+                                    value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['city'] : '' }}"
+                                    class="form-control" id="city" name="city" required>
                             </div>
                             <div class="form-group col-md-4 ">
                                 <label for="postalcode">Postal Code / Ward <span style="color: #FF3B30">*</span> </label>
-                                <input type="text" value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['postalcode'] : '' }}"
+                                <input type="text"
+                                    value=" {{ $user->employee && $user->employee->personaldetail ? $user->employee->personaldetail['postalcode'] : '' }}"
                                     class="form-control" id="postalcode" name="postalcode" required>
                             </div>
                             <div class="form-group col-md-4 ">
@@ -134,22 +169,37 @@
                 <button type="submit" class="btn btn-primary float-right mt-3">Edit</button>
         </div>
 
-
         </form>
 
-
-
-
     </div>
+
+
 
 @stop
 
 @section('css')
     <link rel="stylesheet" href="/css/user_setting.css">
 
+    <script src="
+            https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js
+            "></script>
+
 
 @stop
 
 @section('js')
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script>
+            Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Your work has been saved",
+  showConfirmButton: false,
+  timer: 1500
+});
+        </script>
 @stop
