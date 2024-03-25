@@ -31,8 +31,15 @@
 
                 <div class="form-group col-md-6 mt-3">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" value="{{ $appreciation->title }}" id="title"
-                        name="title" required>
+                    {{-- <input type="text" class="form-control" value="{{ $appreciation->title }}" id="title"
+                        name="title" required> --}}
+                    <select class="form-control" id="title" name="title" required>
+                        <option value="{{ $appreciation->id }}">{{ $appreciation->title }}</option>
+                        <option value="Employee Of Week">Employee of the Week</option>
+                        <option value="Employee Of Month">Employee of the Month</option>
+                        <option value="Intern of Week">Intern of the Week</option>
+                        <!-- Add more options if needed -->
+                    </select>
                 </div>
 
             </div>
