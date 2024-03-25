@@ -8,7 +8,7 @@
 
 {{-- Default Content Wrapper --}}
 <div class="content-wrapper {{ config('adminlte.classes_content_wrapper', '') }}" style="
-/*background-color:#faf9f9*/background-color:#F2F2F2;
+/*background-color:#faf9f9*/background-color:rgba(248,248,248,0.98);
     border-top-left-radius: 20px;
 
 ">

@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 'Admin'
             ]);
 
-        \App\Models\User::factory()->create(
+        $user = \App\Models\User::factory()->create(
             [
                 'name' => 'User',
                 'email' => 'user@erp.test',
@@ -34,12 +34,13 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Employee::create(
             [
-                'first_name' => 'User',
-                'email' => 'user@erp.test',
+                'first_name' => $user->name,
+                'user_id' => $user->id,
+                'email' => $user->email,
             ]
         );
 
-        \App\Models\User::factory()->create(
+        $ramesh = \App\Models\User::factory()->create(
             [
                 'name' => 'Ramesh',
                 'email' => 'ramesh@erp.test',
@@ -50,8 +51,9 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Employee::create(
             [
-                'first_name' => 'Ramesh',
-                'email' => 'ramesh@erp.test',
+                'first_name' => $ramesh->name,
+                'user_id' => $ramesh->id,
+                'email' => $ramesh->email,
             ]
         );
 

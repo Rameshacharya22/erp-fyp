@@ -401,6 +401,7 @@ return [
             'text' => 'Notice',
             'route' => 'notice.index',
             'icon' => 'fas fa-user',
+            'label' => \App\Helpers\NoticeCount::getUnreadNoticeCount()
         ],
 
         [
