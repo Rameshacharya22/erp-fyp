@@ -97,7 +97,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/timeSheet/show', [App\Http\Controllers\TimeSheetController::class, 'show'])->name('timeSheet.show');
 
     //for static view for show project 
-    Route::get('/project/show', [App\Http\Controllers\ProjectController::class, 'show'])->name('project.show');
+    // Route::get('/project/show', [App\Http\Controllers\ProjectController::class, 'show'])->name('project.show');
 
 
     //changepassword
@@ -109,4 +109,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('task/userTask/{id}', [App\Http\Controllers\TaskController::class, 'getTaskInformation'])
         ->name('task.userTask');
+
+    Route::get('/send/markdown', 'SendEmailController@sendMarkdown');
+
 });
+
+
+
