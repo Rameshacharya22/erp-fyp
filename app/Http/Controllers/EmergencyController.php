@@ -23,8 +23,10 @@ class EmergencyController extends Controller
     {
         $info = $this->getInfo();
         $info['user'] = Auth::user();
+        $info['user'] = User::where('id', auth()->user()->id)->with('employee')->first();
         return view('user.setting.emergency.index', $info);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -59,7 +61,30 @@ class EmergencyController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
+        // dd($request);
+
+        $user = User::findOrFail($id); // Retrieve the existing user by ID
+
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'country' => 'required|string|max:255',
+            'gender' => 'required|string|max:20',
+            'relationship' => 'required|string|max:20',
+            'city' => 'required|string|max:20',
+            'postalcode' => 'required|string|max:20',
+        ]);
+
+        // Update the user's personal details
+        $user->employee->update([
+            'emergencycontact' => [
+                'city' => $validatedData['city'],
+                'postalcode' => $validatedData['postalcode'],
+                'gender' => $validatedData['gender'],
+                'relationship' => $validatedData['relationship'],
+                'country' => $validatedData['country'],
+            ]
+        ]);
+        return redirect()->back()->with('message', 'User settings updated successfully.');
     }
 
     /**
