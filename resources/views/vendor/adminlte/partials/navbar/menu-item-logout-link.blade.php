@@ -19,44 +19,46 @@
         z-index: 1000;
         width: 300px;
         top: 6px;
-        right:5px;
+        right: 5px;
     }
-        .approve-box{
-            padding-top: 50px ;
-            text-align: center;
-            height: 180px;
-            width:250px ;
-            background-color:white  ;
-            color: #C2699E;
-            border-radius: 12px;
-            box-shadow: 0px 2px 9px 4px rgba(150, 150, 150, 0.24)
-        }
-        .tick {
-            margin-left: 90px;
-            text-align: center;
-            background-color:#D0E8FF ;
-            height: 60px;
-            width: 60px;
-            border-radius: 50%;
 
-        }
-        .tick i {
-            font-size:20px ;
-            margin: 10px 10px 10px 5px ;
-        }
+    .approve-box {
+        padding-top: 50px;
+        text-align: center;
+        height: 180px;
+        width: 250px;
+        background-color: white;
+        color: #C2699E;
+        border-radius: 12px;
+        box-shadow: 0px 2px 9px 4px rgba(150, 150, 150, 0.24)
+    }
+
+    /* .tick {
+        margin-left: 90px;
+        text-align: center;
+        background-color: #D0E8FF;
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+
+    }
+
+    .tick i {
+        font-size: 20px;
+        margin: 10px 10px 10px 5px;
+    } */
 
 
-        /*a.nav-link.bell {*/
-        /*    background-color: #e9ecef;*/
-        /*    border-radius: 10px;*/
-        /*    margin-right: 7px;*/
-        /*    !* border: solid black 0.1px; *!*/
-        /*}*/
-
+    /*a.nav-link.bell {*/
+    /*    background-color: #e9ecef;*/
+    /*    border-radius: 10px;*/
+    /*    margin-right: 7px;*/
+    /*    !* border: solid black 0.1px; *!*/
+    /*}*/
 </style>
-{{--<li class="nav-item pr-2">--}}
-{{--    <a class="btn btn-default btn-flat border rounded text-center m-auto p-auto"><i class="far fa-bell"></i></a>--}}
-{{--</li>--}}
+{{-- <li class="nav-item pr-2"> --}}
+{{--    <a class="btn btn-default btn-flat border rounded text-center m-auto p-auto"><i class="far fa-bell"></i></a> --}}
+{{-- </li> --}}
 <li class="nav-item pr-2">
     <a class="btn btn-default btn-flat border rounded text-center m-auto p-auto"><i
             class="fa fa-fw fa-calendar-alt"></i></a>
@@ -77,7 +79,9 @@
 </li>
 
 {{-- @dd($attendance) --}}
-@php($attendance = \App\Models\Attendance::where('user_id', $user->id)->whereDate('date', \Carbon\Carbon::now())->first())
+@php(
+    $attendance = \App\Models\Attendance::where('user_id', $user->id)->whereDate('date', \Carbon\Carbon::now())->first()
+)
 @if ($user->role == 'User')
     @if ($attendance && $attendance->status == 'pending')
         <li class="nav-item d-flex flex-column">
@@ -165,11 +169,11 @@
     </div>
     </form>
 
-    @if (session()->has('message'))
+    {{-- @if (session()->has('message'))
         <div class="alert" id="success-alert">
             {{-- {{ session()->get('message') }} --}}
 
-            <div class="approve-box" >
+    {{-- <div class="approve-box" >
 
                 <div class="tick">
                     <i class="fas fa-check"></i>
@@ -178,18 +182,18 @@
                 <div class="succ-message mt-4">
                     {{ session()->get('message') }}
                 </div>
-            </div>
+            </div> --}}
 
 
 
-        </div>
+    {{-- </div>
     @endif
 
     @if (session()->has('message2'))
-        <div class="alert " id="danger-alert">
-{{--            {{ session()->get('message2') }}--}}
+        <div class="alert " id="danger-alert"> --}}
+    {{--            {{ session()->get('message2') }} --}}
 
-            <div class="approve-box" >
+    {{-- <div class="approve-box" >
 
                 <div class="tick">
                     <i class="fas fa-check"></i>
@@ -202,13 +206,13 @@
 
         </div>
         </div>
-    @endif
+    @endif --}}
 
-    @if (session()->has('message3'))
-        <div class="alert " id="danger-alert">
-            {{--            {{ session()->get('message2') }}--}}
+    {{-- @if (session()->has('message3'))
+        <div class="alert " id="danger-alert"> --}}
+    {{--            {{ session()->get('message2') }} --}}
 
-            <div class="approve-box" >
+    {{-- <div class="approve-box" >
 
                 <div class="tick">
                     <i class="fas fa-times"></i>
@@ -232,6 +236,6 @@
         setTimeout(function() {
             $('#danger-alert').fadeOut('fast');
         }, 4000);
-    </script>
+    </script> --}}
 
 @endif
