@@ -54,9 +54,9 @@ class AppreciationController extends Controller
 
         // dd($existingAppreciation);
         if ($existingAppreciation) {
-            return redirect()->route('appreciation.index')->with('danger', 'appreciation added successfully');
+            return redirect()->route('appreciation.index')->with('message', 'appreciation added successfully');
         } else {
-            
+
             $request->validate([
                 'employee_id' => 'required',
                 'given_date' => 'required|date|after_or_equal:today',
@@ -66,7 +66,7 @@ class AppreciationController extends Controller
             $data = $request->all();
             $appreciation = new Appreciation($data);
             $appreciation->save();
-            return redirect()->route('appreciation.index')->with('success', 'appreciation added successfully');
+            return redirect()->route('appreciation.index')->with('message', 'appreciation added successfully');
         }
     }
 
@@ -103,7 +103,7 @@ class AppreciationController extends Controller
     {
         $appreciation = Appreciation::findOrFail($id);
         $appreciation->update($request->all());
-        return redirect()->route('appreciation.index')->with('success', 'Record updated successfully');
+        return redirect()->route('appreciation.index')->with('message', 'Record updated successfully');
     }
 
     /**
@@ -113,6 +113,6 @@ class AppreciationController extends Controller
     {
         $appreciation = Appreciation::find($id);
         $appreciation->delete();
-        return back()->withSuccess('Appreciation deleted');
+        return back()->with('error', 'Appreciation deleted');
     }
 }

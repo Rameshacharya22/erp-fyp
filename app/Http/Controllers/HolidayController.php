@@ -53,7 +53,7 @@ class HolidayController extends Controller
         $data = $request->all();
         $holiday = new Holiday($data);
         $holiday->save();
-        return redirect()->route('holiday.index')->with('success', 'department added successfully');
+        return redirect()->route('holiday.index')->with('message', 'Holiday added successfully');
     }
 
     /**
@@ -84,7 +84,7 @@ class HolidayController extends Controller
     {
         $holiday = Holiday::findOrFail($id);
         $holiday->update($request->all());
-        return redirect()->route('holiday.index')->with('success', 'Record updated successfully');
+        return redirect()->route('holiday.index')->with('message', 'Record updated successfully');
     }
 
     /**
@@ -94,6 +94,6 @@ class HolidayController extends Controller
     {
         $holiday = Holiday::find($id);
         $holiday->delete();
-        return back()->withSuccess('Holiday deleted');
+        return back()->with('error', 'Holiday deleted');
     }
 }

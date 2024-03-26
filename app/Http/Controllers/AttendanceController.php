@@ -124,7 +124,7 @@ class AttendanceController extends Controller
              $endDate = Carbon::parse($attendance->clock_out_time);
              $minutesDifference = $endDate->diffInMinutes($startDate);
              $attendance->update(['work_hrs' => $minutesDifference]);
-             return redirect()->back()->with('message2',"Sussessfully Clock-Out");
+             return redirect()->back()->with('message',"Sussessfully Clock-Out");
          }
      }
 
@@ -133,7 +133,7 @@ class AttendanceController extends Controller
 
  }
    else{
-       return redirect()->back()->with('message3',"You are on leave today");
+       return redirect()->back()->with('error',"You are on leave today");
    }
 
 

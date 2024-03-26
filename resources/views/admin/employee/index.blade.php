@@ -5,7 +5,7 @@
 @section('content_header')
     <div class="row">
         <div class="col">
-{{--            <h1>Employee</h1>--}}
+            {{--            <h1>Employee</h1> --}}
         </div>
         <div class="col"></div>
         <div class="col"></div>
@@ -42,18 +42,20 @@
                     <td> {{ $employee->last_name }}</td>
                     <td> {{ $employee->dob }}</td>
                     <td> {{ $employee->gender }}</td>
-                    <td> {{ $employee->number}}</td>
+                    <td> {{ $employee->number }}</td>
                     <td> {{ $employee->email }}</td>
                     <td> {{ $employee->address }}</td>
                     <td> {{ $employee->hire_date }}</td>
                     <td> {{ $employee->position_id }}</td>
                     <td>
                         <a href="{{ route('employee.show', $employee->id) }}" class="btn"><i class="fas fa-eye"></i></a>
-                        <a href="{{ route('employee.edit', $employee->id) }}" class="btn "><i class="far fa-edit"></i></a>
+                        <a href="{{ route('employee.edit', $employee->id) }}" class="btn "><i
+                                class="far fa-edit"></i></a>
                         <form action="{{ route('employee.destroy', $employee->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn"><i class="fas fa-trash-alt" style="color: #e01010;"></i></button>
+                            <button type="submit" class="btn"><i class="fas fa-trash-alt"
+                                    style="color: #e01010;"></i></button>
                         </form>
                     </td>
 
@@ -63,7 +65,7 @@
 
             </tbody>
         </table>
-                {{$employees->links()}}
+        {{ $employees->links() }}
 
     </div>
 
@@ -71,10 +73,32 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="/css/admin_custom.css"> 
 @stop
 
 @section('js')
+<script>
+  @if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif
+
+  @if(Session::has('error'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.error("{{ session('error') }}");
+  @endif
+
+  
+</script>
+
     {{-- <script>
     $(function () {
             var table = $('.data-table').DataTable({

@@ -63,7 +63,7 @@ class NoticeController extends Controller
         $notice->fill($validatedData);
         $notice->save();
 
-        return redirect()->route('notice.index')->with('success', 'Notice added successfully');
+        return redirect()->route('notice.index')->with('message', 'Notice added successfully');
     }
 
     /**
@@ -93,7 +93,7 @@ class NoticeController extends Controller
     {
         $notice = Notice::findOrFail($id);
         $notice->update($request->all());
-        return redirect()->route('notice.index')->with('success', 'Record updated successfully');
+        return redirect()->route('notice.index')->with('message', 'Record updated successfully');
     }
 
     /**
@@ -103,6 +103,6 @@ class NoticeController extends Controller
     {
         $notice = Notice::find($id);
         $notice->delete();
-        return back()->withSuccess('Notice deleted');
+        return back()->with('error', 'Notice deleted');
     }
 }

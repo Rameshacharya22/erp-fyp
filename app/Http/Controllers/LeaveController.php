@@ -75,7 +75,7 @@ class LeaveController extends Controller
 
 
 
-        return redirect()->route('leave.index')->with('success', 'Leave added successfully');
+        return redirect()->route('leave.index')->with('message', 'Leave added successfully');
     }
 
 
@@ -132,7 +132,7 @@ class LeaveController extends Controller
                 ]);
             } 
         }
-        return redirect()->route('leave.index')->with('success', 'Record updated successfully');
+        return redirect()->route('leave.index')->with('message', 'Record updated successfully');
     }
     /**
      * Remove the specified resource from storage.
@@ -141,6 +141,6 @@ class LeaveController extends Controller
     {
         $leave = Leave::find($id);
         $leave->delete();
-        return back()->withSuccess('Leave deleted');
+        return back()->with('error', 'Leave deleted');
     }
 }

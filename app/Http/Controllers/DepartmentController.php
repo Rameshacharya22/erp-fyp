@@ -54,7 +54,7 @@ class DepartmentController extends Controller
         $department = new Department($data);
         $department->save();
 
-        return redirect()->route('department.index')->with('success', 'department added successfully');
+        return redirect()->route('department.index')->with('message', 'Department added successfully');
     }
 
     /**
@@ -84,7 +84,7 @@ class DepartmentController extends Controller
     {
         $department = Department::findOrFail($id);
         $department->update($request->all());
-        return redirect()->route('department.index')->with('success', 'Record updated successfully');
+        return redirect()->route('department.index')->with('message', 'Record updated successfully');
     }
 
     /**
@@ -94,6 +94,6 @@ class DepartmentController extends Controller
     {
         $department= Department::where('id',$id)->first();
         $department->delete();
-        return back()->withSuccess('Department deleted');
+        return back()->with('error', 'Department deleted');
     }
 }

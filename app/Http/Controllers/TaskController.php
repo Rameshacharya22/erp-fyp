@@ -69,7 +69,7 @@ class TaskController extends Controller
         ]);
         $task->employees()->sync($request->employee_ids);
 
-        return redirect()->route('task.index')->with('success', 'Record created successfully');
+        return redirect()->route('task.index')->with('message', 'Task added created successfully');
     }
 
     /**
@@ -128,7 +128,7 @@ class TaskController extends Controller
 
         $task->employees()->sync($request->employee_ids);
         // $task->update($request->all());
-        return redirect()->route('task.index')->with('success', 'Record updated successfully');
+        return redirect()->route('task.index')->with('message', 'Record updated successfully');
     }
 
     /**
@@ -139,7 +139,7 @@ class TaskController extends Controller
         $task = Task::find($id);
         $task->employeeTasks()->delete();
         $task->delete();
-        return back()->withSuccess('Task deleted');
+        return back()->with('error', 'Task deleted');
     }
 
 

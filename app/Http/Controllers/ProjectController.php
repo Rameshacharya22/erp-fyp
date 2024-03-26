@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
-use App\Models\Project;
-use App\Models\ProjectMember;
+use App\Models\Task;
 use App\Models\User;
+use App\Models\Project;
+use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Models\ProjectMember;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -53,10 +55,10 @@ class ProjectController extends Controller
             'deadline_at' => 'required|date|after_or_equal:today',
             'completion_at' => 'nullable|date|after_or_equal:today',
         ]);
-//
-//        $data = $request->all();
-//        $project = new Project($data);
-//        $project->save();
+        //
+        //        $data = $request->all();
+        //        $project = new Project($data);
+        //        $project->save();
 
         $project = Project::create([
             'title' => $validatedData['title'],
@@ -69,7 +71,7 @@ class ProjectController extends Controller
         $project->employees()->sync($request->employee_ids);
 
 
-        return redirect()->route('project.index')->with('success', 'department added successfully');
+        return redirect()->route('project.index')->with('message', 'Project  added successfully');
     }
 
     /**
@@ -84,13 +86,25 @@ class ProjectController extends Controller
     // }
 
     // only for static view
-    public function show()
+    public function show($id)
     {
-        $info = $this->getInfo();
-
+        // $info = $this->getInfo();
+        // $info['employees'] = Employee::get();
         // $info['project'] = Project::findOrFail($id);
+        // return view('admin.project.show', $info);
+
+
+        $info = $this->getInfo();
+        $info['user'] = Auth::user();
+        $info['tasks'] = Task::get();
+        $info['project'] = Project::findOrFail($id);
+        $info['project']->load('employees'); // Load the 'employees' relationship
+
         return view('admin.project.show', $info);
     }
+
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -116,22 +130,22 @@ class ProjectController extends Controller
             'completion_at' => 'nullable|date|after_or_equal:today',
         ]);
 
-//        dd($validatedData);
+        //        dd($validatedData);
         $project = Project::findOrFail($id);
         $project->update($validatedData);
 
         $project->employees()->sync($request->employee_ids);
 
-//        foreach ($request->employee_ids ?? [] as $employeeId)
-//        {
-//            $pm = new ProjectMember([
-//                'employee_id' => $employeeId,
-//                'project_id' => $project->id
-//            ]);
-//            $pm->save();
-//
-//        }
-        return redirect()->route('project.index')->with('success', 'Record updated successfully');
+        //        foreach ($request->employee_ids ?? [] as $employeeId)
+        //        {
+        //            $pm = new ProjectMember([
+        //                'employee_id' => $employeeId,
+        //                'project_id' => $project->id
+        //            ]);
+        //            $pm->save();
+        //
+        //        }
+        return redirect()->route('project.index')->with('message', 'Record updated successfully');
     }
 
     /**
@@ -141,6 +155,6 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $project->delete();
-        return back()->withSuccess('project deleted');
+        return back()->with('error', 'Project deleted');
     }
 }

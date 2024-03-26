@@ -99,7 +99,7 @@ class EmployeeController extends Controller
         $user->employee()->save($employee);
 
 
-        return redirect()->route('employee.index')->with('success', 'Employee added successfully');
+        return redirect()->route('employee.index')->with('message', 'Employee added successfully');
     }
 
     /**
@@ -130,7 +130,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
         $employee->update($request->all());
-        return redirect()->route('employee.index')->with('success', 'Record updated successfully');
+        return redirect()->route('employee.index')->with('message', 'Record updated successfully');
     }
 
     /**
@@ -140,7 +140,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
         $employee->delete();
-        return back()->withSuccess('Employee deleted');
+        return back()->with('error', 'Employee deleted');
     }
 
 }

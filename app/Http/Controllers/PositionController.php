@@ -58,7 +58,7 @@ class PositionController extends Controller
         $data = $request->all();
         $position = new Position($data);
         $position->save();
-        return redirect()->route('position.index')->with('success', 'position added successfully');
+        return redirect()->route('position.index')->with('message', 'Position added successfully');
     }
 
     /**
@@ -93,7 +93,7 @@ class PositionController extends Controller
     {
         $position = Position::findOrFail($id);
         $position->update($request->all());
-        return redirect()->route('position.index')->with('success', 'Record updated successfully');
+        return redirect()->route('position.index')->with('message', 'Record updated successfully');
     }
 
     /**
@@ -103,6 +103,6 @@ class PositionController extends Controller
     {
         $position = Position::find($id);
         $position->delete();
-        return back()->withSuccess('Positoin deleted');
+        return back()->with('error', 'Position deleted');
     }
 }

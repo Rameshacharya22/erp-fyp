@@ -52,7 +52,7 @@ class SalaryController extends Controller
         $data = $request->all();
         $salary = new Salary($data);
         $salary->save();
-        return redirect()->route('salary.index')->with('success', 'salary added successfully');
+        return redirect()->route('salary.index')->with('message', 'Salary added successfully');
     }
 
     /**
@@ -86,7 +86,7 @@ class SalaryController extends Controller
     {
         $salary = Salary::findOrFail($id);
         $salary->update($request->all());
-        return redirect()->route('salary.index')->with('success', 'Record updated successfully');
+        return redirect()->route('salary.index')->with('message', 'Record updated successfully');
     }
 
     /**
@@ -96,6 +96,6 @@ class SalaryController extends Controller
     {
         $salary = Salary::find($id);
         $salary->delete();
-        return back()->withSuccess('Salary deleted');
+        return back()->with('error', 'Salary deleted');
     }
 }
