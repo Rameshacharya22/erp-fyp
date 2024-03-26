@@ -40,37 +40,45 @@
             </ul>
 
             <div class="tab-content" id="pills-tabContent">
-                {{-- overview tab --}}
+
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
                     tabindex="0">
 
-                    <div class="task-info">
-                        <label for="projectTitle">Project Title:</label><span>Fyp Design</span> <br>
-                        <label for="priority">Priority : </label><span>Most</span> <br>
-                        <label for="stateDate">Start Date : </label><span>2024/03/03</span> <br>
-                        <label for="endDate">End Date : </label><span>2024/05/05</span> <br>
-                        <label for="workingDays">Working Days : </label><span>5 Days</span> <br>
-                    </div>
+                    <div class="row">
 
-                    <div class="task-chart">
-                        <div class="chart-detail">
-                            <h5 style="color:#023E7D">Task</h5>
-                            <div class="piechart-info" style="display: flex; justify-content:space-between;">
-                                <div class="pichart">
-                                    <i class="fas fa-chart-pie" style="font-size: 100px; "></i>
-                                </div>
-                                <div class="wip" style="padding-right: 50px">
-                                    <i class="fas fa-ellipsis-h" style="color: #4dbb25;"></i>Task in progress <br>
-                                    <i class="fas fa-ellipsis-h" style="color: #dbd032;"></i>Complete <br>
-                                    <i class="fas fa-ellipsis-h" style="color: #c1cebc;"></i>Review <br>
-                                    <i class="fas fa-ellipsis-h" style="color: #c93319;"></i>Backlog<br>
-                                </div>
+                        <div class="col-5">
+                            <div class="task-info">
+                                <label for="projectTitle">Project Title:</label><span>{{ $project->title }}</span> <br>
+                                <label for="priority">Priority : </label><span>Most</span> <br>
+                                <label for="stateDate">Start Date : </label><span>{{ $project->started_at }}</span> <br>
+                                <label for="endDate">End Date : </label><span>{{ $project->deadline_at }}</span> <br>
+                                <label for="workingDays">Working Days : </label><span>5 Days</span> <br>
                             </div>
                         </div>
 
-                        <div class="hourloggs">
-                            <label for="hourLogged" style="color: #979797;"> Hour Logged: <span
-                                    style="color: #023E7D;">12hrs 30mins</span></label>
+                        <div class="col-7">
+                            <div class="task-chart">
+                                <div class="chart-detail">
+                                    <h5 style="color:#023E7D">Task</h5>
+                                    <div class="piechart-info" style="display: flex; justify-content:space-between;">
+                                        <div class="pichart">
+                                            <i class="fas fa-chart-pie" style="font-size: 100px; "></i>
+                                        </div>
+                                        <div class="wip" style="padding-right: 50px">
+                                            <i class="fas fa-ellipsis-h" style="color: #4dbb25;"></i>Task in progress <br>
+                                            <i class="fas fa-ellipsis-h" style="color: #dbd032;"></i>Complete <br>
+                                            <i class="fas fa-ellipsis-h" style="color: #c1cebc;"></i>Review <br>
+                                            <i class="fas fa-ellipsis-h" style="color: #c93319;"></i>Backlog<br>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="hourloggs">
+                                    <label for="hourLogged" style="color: #979797;"> Hour Logged: <span
+                                            style="color: #023E7D;">12hrs 30mins</span></label>
+                                </div>
+
+                            </div>
                         </div>
 
                     </div>
@@ -81,7 +89,6 @@
 
 
 
-                {{-- Member Tab --}}
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
                     tabindex="0">
 
@@ -90,31 +97,69 @@
                             <tr>
                                 <th>SN.</th>
                                 <th>Member Role</th>
-                                <th>Assign Date</th>
                                 <th>Assigned Date</th>
                             </tr>
                         </thead>
-                        <tr>
-                            <td>01</td>
-                            <td>ramesh Achyara <br> UI/UX</td>
-                            <td>24/23/2024</td>
-                            <td>24/23/2024</td>
-                        </tr>
+
+
+
+                        <tbody>
+                            @foreach ($project->employees as $employee)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="d-flex">
+                                        <div class="user-image">
+                                            <img height="45px" width="45px"
+                                                src="/uploads/employee/{{ $employee->image }}">
+                                        </div>{{ $employee->first_name }}
+                                    </td>
+                                    <td>{{ $user->position_id }}</td>
+                                    <td>{{ $project->started_at }}</td>
+                            @endforeach
+
+                        </tbody>
+
                     </table>
 
 
 
                 </div>
 
-                {{-- Task Tab --}}
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"
                     tabindex="0">
+
+
+                    <table class="table table-bordered" id="employee-table">
+                        <thead>
+                            <tr>
+                                <th>Task Id</th>
+                                <th>Task Name</th>
+                                <th>Task Title</th>
+                                <th>Assigned Date</th>
+                                <th>Due Date</th>
+                                <th>Hours Logged Date</th>
+                                <th>Status </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{-- @foreach ($tasks as $task)
+                                <tr>
+                                    <th></th>
+                                </tr>
+                            @endforeach --}}
+
+
+                        </tbody>
+
+                    </table>
 
 
 
                 </div>
             </div>
         </div>
+
 
 
 

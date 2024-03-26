@@ -35,24 +35,24 @@
     <div class="emergency-content">
 
         <div class="emergency-info">
-            <form action="{{ route('setting.update', $user->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('emergency.update', $user->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="emergency-form">
                     <div class="form-row">
                         <div class="form-group col-md-4 ">
                             <label for="name">Name <span style="color: #FF3B30">*</span> </label>
-                            <input type="text" value="{{ old('name') }}" class="form-control" id="name"
-                                name="name" required>
+                            <input type="text" value="{{ $user->name }}" class="form-control" id="name"
+                                name="name" readonly>
                         </div>
                         <div class="form-group col-md-4 ">
                             <label for="email">Email <span style="color: #FF3B30">*</span> </label>
-                            <input type="text" value="{{ old('email') }}" class="form-control" id="email"
+                            <input type="text" value="{{ $user->email }}" class="form-control" id="email"
                                 name="email" required>
                         </div>
                         <div class="form-group col-md-4 ">
                             <label for="contact_number">Contact Number <span style="color: #FF3B30">*</span></label>
-                            <input type="text" value="{{ old('contact_number') }}" class="form-control"
+                            <input type="text" value="{{ $user->employee->number }}" class="form-control"
                                 id="contact_number" name="contact_number" required>
                         </div>
                     </div>
@@ -60,31 +60,37 @@
                     <div class="form-row">
                         <div class="form-group col-md-4 ">
                             <label for="gender">Gender <span style="color: #FF3B30">*</span> </label>
-                            <input type="text" value="{{ old('gender') }}" class="form-control" id="gender"
-                                name="gender" required>
+                            <select class="form-control" id="gender" name="gender" required>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <!-- Add more options if needed -->
+                            </select>
+
                         </div>
                         <div class="form-group col-md-4 ">
                             <label for="relationship">Relationship<span style="color: #FF3B30">*</span> </label>
-                            <input type="text" value="{{ old('relationship') }}" class="form-control" id="relationship"
+                            <input type="text" value="{{ $user->employee && $user->employee->emergencycontact ? $user->employee->emergencycontact['relationship'] : '' }}" class="form-control" id="relationship"
                                 name="relationship" required>
                         </div>
+
+                         
 
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-4 ">
-                            <label for="country">Your Name <span style="color: #FF3B30">*</span> </label>
-                            {{-- <input type="text" value="{{ old('country') }}" class="form-control" id="country"
-                                name="country" required> --}}
+                            <label for="country">Country <span style="color: #FF3B30">*</span> </label>
+                            <input type="text" value="{{ $user->employee && $user->employee->emergencycontact ? $user->employee->emergencycontact['country'] : '' }}" class="form-control" id="country"
+                                name="country" required>
                         </div>
                         <div class="form-group col-md-4 ">
                             <label for="city">City <span style="color: #FF3B30">*</span> </label>
-                            <input type="text" value="{{ old('city') }}" class="form-control" id="city"
+                            <input type="text" value="{{ $user->employee && $user->employee->emergencycontact ? $user->employee->emergencycontact['city'] : '' }}" class="form-control" id="city"
                                 name="city" required>
                         </div>
                         <div class="form-group col-md-4 ">
                             <label for="postalcode">Postal Code / Ward <span style="color: #FF3B30">*</span></label>
-                            <input type="text" value="{{ old('postalcode') }}" class="form-control" id="postalcode"
+                            <input type="text" value="{{ $user->employee && $user->employee->emergencycontact ? $user->employee->emergencycontact['postalcode'] : '' }}" class="form-control" id="postalcode"
                                 name="postalcode" required>
                         </div>
                     </div>
@@ -107,27 +113,23 @@
 @section('js')
 
 
-<script>
-  @if(Session::has('message'))
-  toastr.options =
-  {
-  	"closeButton" : true,
-  	"progressBar" : true
-  }
-  		toastr.success("{{ session('message') }}");
-  @endif
+    <script>
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
 
-  @if(Session::has('error'))
-  toastr.options =
-  {
-  	"closeButton" : true,
-  	"progressBar" : true
-  }
-  		toastr.error("{{ session('error') }}");
-  @endif
-
-  
-</script>
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+    </script>
 
 
 @stop
