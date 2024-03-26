@@ -329,20 +329,16 @@ i.fas {
 
 /* project overview */
 #pills-home {
-    display: flex;
+    /* display: flex; */
     gap: 20px;
 }
 
 #pills-tabContent .task-info {
     border: 1px solid #D5D5D5;
     border-radius: 8px;
-    width: 40%;
     padding: 20px;
 }
 
-#pills-tabContent .task-chart {
-    width: 60%;
-}
 
 .task-chart .chart-detail {
     border: 1px solid #D5D5D5;
