@@ -62,7 +62,7 @@
                         name="number" required>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="position_id">Position</label>
+                    <label for="position_id">Position *</label>
                     <select class="form-control" id="position_id" name="position_id" required>
                         @foreach ($positions as $position)
                             <option value="{{ $position->id }}">{{ $position->title }} ({{ $position->department->title }})
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6 mb-0">
+                <div class="form-group col-md-6 mb-0 mt-2">
                     <label>
                         Account Details:
                     </label>
@@ -91,7 +91,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="email">Email</label>
+                    <label for="email">Email*</label>
                     <input type="email" value="{{ old('email') }}" class="form-control" id="email" name="email"
                         required>
                 </div>

@@ -21,7 +21,7 @@
 
             <div class="form-row">
                 <div class="form-group col-md-6 mt-3">
-                    <label for="employee_id">Employee</label>
+                    <label for="employee_id">Employee *</label>
                     <select class="form-control" id="employee_id" name="employee_id" required>
                         @foreach ($employees as $employee)
                             <option value="{{ $employee->id }}">{{ $employee->first_name }}
@@ -30,7 +30,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-6 mt-3">
-                    <label for="title">Title</label>
+                    <label for="title">Title *</label>
                     {{-- <input type="text" class="form-control" id="title" name="title" required> --}}
                     <select class="form-control" id="title" name="title" required>
                         <option value="Employee Of Week">Employee of the Week</option>
@@ -43,7 +43,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6 mt-3">
-                    <label for="given_date">Given Date</label>
+                    <label for="given_date">Given Date *</label>
                     <input type="date" class="form-control" id="given_date" name="given_date" value="{{old('given_date')}}" required
                         min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                 </div>

@@ -50,13 +50,13 @@
         <div class="form-row">
 
             <div class="form-group col-md-4 mt-3">
-                <label for="projectName">Project Name</label>
+                <label for="projectName">Project Name * </label>
                 <input type="text" class="form-control" id="projectName" name="projectName"
                     value="{{ old('projectName') }}" required>
             </div>
 
             <div class="form-group col-md-4 mt-3">
-                <label for="task">Task</label>
+                <label for="task">Task *</label>
                 <select class="form-control" id="task" name="task" required>
                     <option value="">----</option>
                     <option value="">Task One</option>
@@ -66,7 +66,7 @@
             </div>
 
             <div class="form-group col-md-4 mt-3">
-                <label for="startDate">Start Date</label>
+                <label for="startDate">Start Date *</label>
                 <input type="date" value="{{ old('startDate') }}" class="form-control" id="startDate" name="startDate"
                     min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" required>
             </div>
@@ -76,19 +76,19 @@
         <div class="form-row">
 
             <div class="form-group col-md-4 mt-3">
-                <label for="endDate">End Date</label>
+                <label for="endDate">End Date *</label>
                 <input type="text" class="form-control" id="endDate" name="endDate" value="{{ old('endDate') }}"
                     required>
             </div>
 
             <div class="form-group col-md-4 mt-3">
-                <label for="startTime">Start Time</label>
+                <label for="startTime">Start Time *</label>
                 <input type="text" class="form-control" id="startTime" name="startTime" value="{{ old('startTime') }}"
                     required>
             </div>
 
             <div class="form-group col-md-4 mt-3">
-                <label for="endTime">End Time</label>
+                <label for="endTime">End Time *</label>
                 <input type="text" class="form-control" id="endTime" name="endTime" value="{{ old('endTime') }}"
                     required>
             </div>
@@ -96,7 +96,7 @@
         </div>
 
         <div class="form-row">
-            <label for="description"> Description</label>
+            <label for="description"> Description *</label>
             <textarea class="form-control" value="{{ old('description') }}" name="description" id="description" cols="30"
                 rows="5" placeholder="For eg :Feeling not well"></textarea>
         </div>

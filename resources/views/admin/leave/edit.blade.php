@@ -22,12 +22,12 @@
             @method('PUT')
             <div class="form-row ">
                 <div class="form-group col-md-4 mt-4">
-                    <label for="name">Name</label>
+                    <label for="name">Name *</label>
                     <input type="text" class="form-control" id="name" value="{{ $leave->name }}" name="name"
                         required placeholder="" readonly>
                 </div>
                 <div class="form-group col-md-4 mt-4">
-                    <label for="type">Leave Type</label>
+                    <label for="type">Leave Type *</label>
                     <select class="form-control" id="type" name="type" required readonly>
                         <option value="{{ $leave->type }}">{{ $leave->type }}</option>
                         <option value="unpaid">Unpaid</option>
@@ -36,7 +36,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-4 mt-4">
-                    <label for="duration">Select Duration</label>
+                    <label for="duration">Select Duration *</label>
                     <select class="form-control" id="duration" name="duration" required readonly>
                         <option value="{{ $leave->duration }} ">{{ $leave->duration }} </option>
                         <option value="half day">Half Day</option>
@@ -47,13 +47,13 @@
 
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="date">Date</label>
+                    <label for="date">Date *</label>
                     <input type="date" class="form-control" id="date" value="{{ $leave->date }}" name="date"
                         readonly required>
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label for="duration">Status</label>
+                    <label for="duration">Status *</label>
                     <select class="form-control" id="status" name="status" required>
                         <option value="">{{ $leave->status }} </option>
                         <option value="approved">Approved</option>
@@ -64,7 +64,7 @@
             </div>
 
             <div class="form-row">
-                <label for="reason"> Reason</label>
+                <label for="reason"> Reason *</label>
                 <textarea class="form-control" name="reason" id="reason" cols="30" rows="5" readonly> {{ $leave->reason }} </textarea>
             </div>
             <button type="submit" class="btn btn-primary mt-4">Update</button>

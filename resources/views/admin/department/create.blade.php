@@ -20,7 +20,7 @@
                         @csrf
                         <div class="form-row">
                         <div class="form-group col-md-6 mt-4">
-                            <label for="title">Title</label>
+                            <label for="title">Title *</label>
                             <input type="text" class="form-control" id="title" name="title" required>
                         </div>
                         </div>

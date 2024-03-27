@@ -65,7 +65,7 @@
             <textarea class="form-control" value={} id="address" name="address" rows="2" required>{{$employee->address}}</textarea>
         </div>
             <div class="form-group col-md-6">
-                <label for="position_id">Position</label>
+                <label for="position_id">Position *</label>
                 <select class="form-control" id="position_id" name="position_id"  required>
                     @foreach($positions as $position)
                     <option value="{{$position->id}}">{{$position->title}} ({{$position->department->title}})</option>

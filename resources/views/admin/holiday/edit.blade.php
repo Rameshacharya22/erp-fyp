@@ -19,12 +19,12 @@
 
             <div class="form-row">
                 <div class="form-group col-md-6 mt-3">
-                    <label for="date">Holiday Date</label>
-                    <input type="date" class="form-control" id="date" value="{{ $holiday->date }}  name="date" required
+                    <label for="date">Holiday Date *</label>
+                    <input type="date" class="form-control" id="date" value="{{ $holiday->date }} " name="date" required
                         min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                 </div>
                 <div class="form-group col-md-6 mt-3">
-                    <label for="title">Title</label>
+                    <label for="title">Title *</label>
                     <input type="text" class="form-control" value="{{ $holiday->title }}" id="title" name="title"
                         required>
                 </div>
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="position_id">Holiday Day</label>
+                    <label for="position_id">Holiday Day *</label>
                     <select class="form-control" name="day" id="day" required>
                         <option value="">Select Day</option>
                         <option value="Sunday">Sunday</option>

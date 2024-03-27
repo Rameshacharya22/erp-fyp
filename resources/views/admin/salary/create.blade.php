@@ -21,7 +21,7 @@
 
             <div class="form-row">
                 <div class="form-group col-md-6 mt-3">
-                    <label for="employee_id">Employee</label>
+                    <label for="employee_id">Employee *</label>
                     <select class="form-control" id="employee_id" name="employee_id" required>
                         @foreach ($employees as $employee)
                             <option value="{{ $employee->id }}">{{ $employee->first_name }}
@@ -30,14 +30,14 @@
                     </select>
                 </div>
                 <div class="form-group col-md-6 mt-3">
-                    <label for="amount">Amount</label>
+                    <label for="amount">Amount *</label>
                     <input type="number" class="form-control" id="amount" name="amount" required>
                 </div>
 
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6 mt-3">
-                    <label for="effective_date">Effective Date</label>
+                    <label for="effective_date">Effective Date *</label>
                     <input type="date" class="form-control" id="effective_date" name="effective_date" required
                         min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                 </div>

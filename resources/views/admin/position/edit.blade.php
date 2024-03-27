@@ -20,13 +20,13 @@
             @method('PUT')
             <div class="form-row">
                 <div class="form-group col-md-6 mt-4">
-                    <label for="title">Title</label>
+                    <label for="title">Title *</label>
                     <input type="text" class="form-control" id="title" value="{{ $position->title }}" name="title"
                         required>
                 </div>
 
                 <div class="form-group col-md-6 mt-4">
-                    <label for="department_id">Department</label>
+                    <label for="department_id">Department *</label>
 
                     <select class="form-control" id="department_id" name="department_id" required>
                         @foreach ($departments as $department)
