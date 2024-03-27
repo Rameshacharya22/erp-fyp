@@ -28,7 +28,7 @@
                         @endforeach
                     </select> --}}
                     <input type="text" class="form-control" value="{{ $salary->employee->first_name }}" id="amount"
-                        name="amount" >
+                        name="amount">
                 </div>
 
                 <div class="form-group col-md-6 mt-3">
@@ -46,10 +46,10 @@
                         name="effective_date" required min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                 </div>
             </div>
-
+            <button type="submit" class="btn btn-primary">Update</button>
     </div>
 
-    <button type="submit" class="btn btn-primary">Update</button>
+
     {{-- <a href="{{ route('employee.index') }}"><button type="submit" class="btn btn-secondary">Back</button></a> --}}
     </form>
     </div>

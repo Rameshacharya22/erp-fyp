@@ -20,11 +20,13 @@
             <div class="form-row">
                 <div class="form-group col-md-6 mt-3">
                     <label for="date">Holiday Date</label>
-                    <input type="date" class="form-control" id="date" value="{{ $holiday->date }}  name="date" required min="{{\Carbon\Carbon::now()->format('Y-m-d')}}">
+                    <input type="date" class="form-control" id="date" value="{{ $holiday->date }}  name="date" required
+                        min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                 </div>
                 <div class="form-group col-md-6 mt-3">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" value="{{ $holiday->title }}" id="title" name="title" required>
+                    <input type="text" class="form-control" value="{{ $holiday->title }}" id="title" name="title"
+                        required>
                 </div>
 
             </div>
@@ -34,7 +36,7 @@
                 <div class="form-group col-md-6">
                     <label for="description">Description*</label>
 
-                    <textarea class="form-control" id="description" name="description"  cols="30" rows="1" required>{{ $holiday->description }}</textarea>
+                    <textarea class="form-control" id="description" name="description" cols="30" rows="1" required>{{ $holiday->description }}</textarea>
 
                 </div>
 
@@ -51,9 +53,10 @@
                     </select>
                 </div>
             </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+
     </div>
 
-    <button type="submit" class="btn btn-primary">Update</button>
     {{-- <a href="{{ route('employee.index') }}"><button type="submit" class="btn btn-secondary">Back</button></a> --}}
     </form>
     </div>

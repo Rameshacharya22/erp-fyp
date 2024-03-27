@@ -3,7 +3,7 @@
 @section('title', 'Add Leave')
 
 <!-- @section('content_header')
-{{--                    <h1>Add Employee</h1>--}}
+        {{--                    <h1>Add Employee</h1> --}}
 
 @stop -->
 
@@ -25,14 +25,15 @@
         <div class="card-layout">
             <div class="assign-leave" style="font-size:20px; padding:10px 0 10px 0">
                 <div class="back-icon ">
-                    <a href="{{route('leave.index')}}"><i class="far fa-arrow-alt-circle-left "></i> <span class="pr-10"> Assign Leave</span></a>
+                    <a href="{{ route('leave.index') }}"><i class="far fa-arrow-alt-circle-left "></i> <span class="pr-10">
+                            Assign Leave</span></a>
                 </div>
             </div>
             <hr>
 
             <form action="{{ route('leave.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-{{old('')}}
+                {{ old('') }}
                 <div class="form-row ">
                     <div class="form-group col-md-4">
                         <label for="name">Name</label>
@@ -71,7 +72,7 @@
                     <textarea class="form-control" value="{{ old('reason') }}" name="reason" id="reason" cols="30" rows="5"
                         placeholder="For eg :Feeling not well"></textarea>
                 </div>
-                <div class="action mt-2 float-right">
+                <div class="action mt-4">
                     <button type="submit" class="btn btn-primary">Save <i class="fas fa-save"
                             style="padding-left: 10px"></i></button>
                     <button type="submit" class="btn btn-primary">Cancel</button>
