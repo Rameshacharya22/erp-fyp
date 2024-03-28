@@ -16,6 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->decimal('amount')->nullable();
+            $table->decimal('allowences')->nullable();
+            $table->decimal('deduction')->nullable();
+            $table->decimal('total')->nullable();
             $table->date('effective_date')->nullable();
             $table->timestamps();
         });

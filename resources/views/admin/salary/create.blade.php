@@ -35,6 +35,19 @@
                 </div>
 
             </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-6 mt-3">
+                    <label for="allowences">Allowences *</label>
+                    <input type="number" class="form-control" id="allowences" name="allowences" required>
+                </div>
+                <div class="form-group col-md-6 mt-3">
+                    <label for="deduction">deduction *</label>
+                    <input type="number" class="form-control" id="deduction" name="deduction" required>
+                </div>
+
+            </div>
             <div class="form-row">
                 <div class="form-group col-md-6 mt-3">
                     <label for="effective_date">Effective Date *</label>

@@ -43,14 +43,31 @@ class SalaryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'employee_id' => 'required',
             'effective_date' => 'required|date|after_or_equal:today',
             'amount' => 'required|string|max:8',
+            'allowences' => 'required|string|max:8',
+            'deduction' => 'required|string|max:8',
         ]);
+        $allowences = $validatedData['allowences'];
+        $deduction = $validatedData['deduction'];
+        $amount = $validatedData['amount'];
+        $total = ($amount+ $allowences) - $deduction ;
+
+        $salary= Salary::create([
+            'employee_id' => $validatedData['employee_id'],
+            'effective_date' => $validatedData['effective_date'],
+            'amount' => $amount,
+            'allowences' => $allowences,
+            'deduction' => $deduction,
+            'total'=> $total ,
+        ]);
+
+
         
-        $data = $request->all();
-        $salary = new Salary($data);
+        // $data = $request->all();
+        // $salary = new Salary($data);
         $salary->save();
         return redirect()->route('salary.index')->with('message', 'Salary added successfully');
     }
