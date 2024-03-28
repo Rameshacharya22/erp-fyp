@@ -1,0 +1,98 @@
+    .assign-leave {
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+    .att-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+    }
+
+    .att-box {
+        border: 1px solid black;
+        width: 335px;
+        height: 199px;
+        flex-shrink: 0;
+        border-radius: 8px;
+        border: 1px solid #D5D5D5;
+        background: #FFF;
+    }
+
+    .att-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .att-header .att-icon {}
+
+    .box-title {
+        color: #023E7D;
+        /* Headings/Headline 24 */
+        font-family: Inter;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 36px;
+        /* 150% */
+    }
+
+    .box-icon {
+        width: 56px;
+        height: 56px;
+        flex-shrink: 0;
+        font-size: 24px;
+        padding-left: 25px;
+        fill: #E1F0FE;
+    }
+
+    .att-dyn-data .att-data {
+        color: #C2699E;
+        font-family: Inter;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 44px;
+        padding-left: 40px;
+
+        /* 110% */
+    }
+
+    .att-svg {
+        width: 382px;
+        height: 87px;
+        flex-shrink: 0;
+        fill: #0f66b8;
+    }
+
+
+
+    /* for admin index display */
+
+    .attendance-catinfo {
+        border-top: 2px solid #D5D5D5;
+        border-bottom: 2px solid #D5D5D5;
+    }
+
+    .attendance-action {
+        /* border-bottom: 2px solid #D5D5D5; */
+    }
+
+    .combo-btn1 .btn {
+        border: 2px solid #D5D5D5;
+    }
+
+
+    .combo-btn2 a {
+        padding: 5px;
+        margin-left: -9px;
+        border: 2px solid #D5D5D5;
+    }
+
+    .attendance-info-table {
+        border: 2px solid #D5D5D5;
+        border-radius: 5px;
+        padding: 10px;
+    }
