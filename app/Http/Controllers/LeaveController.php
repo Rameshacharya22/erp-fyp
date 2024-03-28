@@ -31,9 +31,20 @@ class LeaveController extends Controller
     {
 
         $info = $this->getInfo();
-        $info['leaves'] = Leave::paginate(5);
+        $user = Auth::user()->role;
+        // dd($user);
 
-        return view("admin.leave.index", $info);
+        //  = Leave::where('user_id', $user);
+
+        // $info['leaves'] = Leave::paginate(5);
+
+        if ($user == 'Admin') {
+            $info['leaves'] = Leave::all();
+            return view("admin.leave.index", $info);
+        } else {
+            $info['leaves'] = Leave::where('user_id', auth()->id())->get();
+            return view("admin.leave.index", $info);
+        }
     }
 
     /**
@@ -46,6 +57,8 @@ class LeaveController extends Controller
         $info = $this->getInfo();
         $info['user'] = Auth::user();
 
+
+
         // $employee = Employee::get();
         return view('admin.leave.create', $info);
     }
@@ -56,7 +69,7 @@ class LeaveController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
+            'user_id' => 'required',
             'reason' => 'required|string|max:255',
             'type' => 'required|string',
             'duration' => 'required|string|in:halfDay,fullDay',
@@ -109,28 +122,45 @@ class LeaveController extends Controller
 
     public function update(Request $request, $id)
     {
+
+
+        // $leave = Leave::findOrFail($id);
+        // // dd($leave->user);
+        // $leave->update($request->all());
+
+        $validatedData = $request->validate([
+            'user_id' => 'required',
+            'reason' => 'required|string|max:255',
+            'type' => 'required|string',
+            'duration' => 'required|string|in:halfDay,fullDay',
+            'date' => 'required',
+            'status' => 'required',
+        ]);
         $leave = Leave::findOrFail($id);
-        $leave->update($request->all());
+        // // dd($leave->user);
+        $leave->update($validatedData);
 
-        
+
+
+        // dd($id);
         if ($leave->status === 'approved') {
-           
-            $user = User::where('name', $leave->name)->first();
+$userr = $id;
+            $user = User::where('user_id', $userr);
 
-//            $validatedData = $request->validate([
-//                'date' => 'required',]);
-//            $data = $request->all();
+            //            $validatedData = $request->validate([
+            //                'date' => 'required',]);
+            //            $data = $request->all();
 
-//            dd($leave->date);
+            //            dd($leave->date);
             if ($user) {
-                $user_id = $user->id;
+                $user_id = $userr;
                 $attendance = Attendance::create([
                     'leave_id' => $id,
                     'user_id' => $user_id,
                     'status' => "absent",
-                    'date'=> $leave->date ,
+                    'date' => $leave->date,
                 ]);
-            } 
+            }
         }
         return redirect()->route('leave.index')->with('message', 'Record updated successfully');
     }

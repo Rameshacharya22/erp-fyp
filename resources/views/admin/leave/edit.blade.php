@@ -23,8 +23,9 @@
             <div class="form-row ">
                 <div class="form-group col-md-4 mt-4">
                     <label for="name">Name *</label>
-                    <input type="text" class="form-control" id="name" value="{{ $leave->name }}" name="name"
+                    <input type="text" class="form-control" id="name" value="{{ $leave->user->name }}" name="name"
                         required placeholder="" readonly>
+                    <input type="text" id="user_id" value="{{ $leave->user_id }}" name="user_id" hidden>
                 </div>
                 <div class="form-group col-md-4 mt-4">
                     <label for="type">Leave Type *</label>

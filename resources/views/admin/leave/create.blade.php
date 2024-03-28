@@ -3,7 +3,7 @@
 @section('title', 'Add Leave')
 
 <!-- @section('content_header')
-        {{--                    <h1>Add Employee</h1> --}}
+            {{--                    <h1>Add Employee</h1> --}}
 
 @stop -->
 
@@ -37,8 +37,9 @@
                 <div class="form-row ">
                     <div class="form-group col-md-4">
                         <label for="name">Name *</label>
-                        <input type="text" class="form-control" id="name" value="{{ $user->name }}" name="name"
-                            readonly placeholder="">
+                        <input type="text" class="form-control" id="name" value="{{ $user->name }}" name=""
+                            readonly placeholder="{{ $user->name }}">
+                        <input type="text" id="user_id" value="{{ $user->id }}" name="user_id" hidden>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="type">Leave Type*</label>
