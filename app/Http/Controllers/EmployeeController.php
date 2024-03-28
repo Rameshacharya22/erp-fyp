@@ -1,18 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Mail\CustomMarkdownEmail;
 use App\Models\User;
 // use App\Http\Controllers\DataTables;
 use App\Models\Leave;
 use App\Models\Employee;
 use App\Models\Position;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
+use Nette\Utils\Random;
 
 class EmployeeController extends Controller
 {
@@ -27,19 +30,18 @@ class EmployeeController extends Controller
     protected $title;
 
     public function getInfo()
-{
-    $info['title'] = "Employee";
-    return $info;
+    {
+        $info['title'] = "Employee";
+        return $info;
+    }
 
-}
-
-     //display the employee
+    //display the employee
     public function index(Request $request)
     {
         $info = $this->getInfo();
         $info['employees'] = Employee::paginate(5);
 
-        return view('admin.employee.index',$info);
+        return view('admin.employee.index', $info);
     }
 
     /**
@@ -70,19 +72,26 @@ class EmployeeController extends Controller
             'hire_date' => 'required|date',
             'position_id' => 'required|exists:positions,id',
         ]);
-        $password =   Str::password();
-
-
+        $password = Str::random(8); // Generate a random password
         $name = $validatedData['first_name'] . ' ' . $validatedData['last_name'];
 
-
+        // dd($password);   
         // Create user through employee form
         $user = User::create([
-//            'name' => $validatedData['first_name'],
             'name' => $name,
             'email' => $validatedData['email'],
-            'password' => bcrypt($password),
+            'temporary_password' => bcrypt($password),
+            // 'password' => bcrypt($password),
+
         ]);
+
+
+        // Send email with user data and password
+        // Mail::to('acharya232ramesh@gmail.com')->send(new CustomMarkdownEmail($user, $password));
+        Mail::to('acharya232ramesh@gmail.com')->send(new CustomMarkdownEmail($user, $password));
+
+
+
 
         // Create employee
         $employee = Employee::create([
@@ -106,22 +115,22 @@ class EmployeeController extends Controller
      * Display the specified resource.
      */
     public function show($id)
-{
-    $info = $this->getInfo();
-    $info ['employee'] = Employee::findOrFail($id);
-    return view('admin.employee.show', $info);
-}
+    {
+        $info = $this->getInfo();
+        $info['employee'] = Employee::findOrFail($id);
+        return view('admin.employee.show', $info);
+    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-{
-    $info = $this->getInfo();
-    $info['positions'] = Position::with('department')->get();
-    $info['employee'] = Employee::findOrFail($id);
-    return view('admin.employee.edit', $info);
-}
+    {
+        $info = $this->getInfo();
+        $info['positions'] = Position::with('department')->get();
+        $info['employee'] = Employee::findOrFail($id);
+        return view('admin.employee.edit', $info);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -142,5 +151,4 @@ class EmployeeController extends Controller
         $employee->delete();
         return back()->with('error', 'Employee deleted');
     }
-
 }
