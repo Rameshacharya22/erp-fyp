@@ -3,19 +3,24 @@
 @section('title', 'Holiday')
 
 @section('content_header')
-<div class="row">
-{{--    <div class="col"><h1>Holiday</h1></div>--}}
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"><a href="{{route('holiday.create')}}" class="tertiary-color"><button type="button" class="btn btn-primary">Add Holiday</button></a></div>
-</div>
+    <div class="row">
+        {{--    <div class="col"><h1>Holiday</h1></div> --}}
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+
+        @can('holiday-crud')
+            <div class="col"><a href="{{ route('holiday.create') }}" class="tertiary-color"><button type="button"
+                        class="btn btn-primary">Add Holiday</button></a></div>
+        @endcan
+
+    </div>
 
 
 @stop
 
 @section('content')
-<div class="container">
+    <div class="container">
         <table class="table table-bordered" id="employee-table">
             <thead>
                 <tr>
@@ -31,25 +36,34 @@
             <tbody>
                 @foreach ($holidays as $holiday)
                     <tr>
-                        <td>{{$holiday->id}}</td>
-                        <td>{{$holiday->date}}</td>
-                        <td>{{$holiday->title}}</td>
-                        <td>{{$holiday->description}}</td>
-                        <td>{{$holiday->day}}</td>
+                        <td>{{ $holiday->id }}</td>
+                        <td>{{ $holiday->date }}</td>
+                        <td>{{ $holiday->title }}</td>
+                        <td>{{ $holiday->description }}</td>
+                        <td>{{ $holiday->day }}</td>
                         <td>
-                        <a href="{{ route('holiday.show', $holiday->id) }}" class="btn"><i class="fas fa-eye"></i></a>
-                        <a href="{{ route('holiday.edit', $holiday->id) }}" class="btn "><i class="far fa-edit"></i></a>
-                            <form action="{{ route('holiday.destroy', $holiday->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn"><i class="fas fa-trash-alt" style="color: #e01010;"></i></button>
-                            </form>
+                            <a href="{{ route('holiday.show', $holiday->id) }}" class="btn"><i
+                                    class="fas fa-eye"></i></a>
+
+                            @can('admin-access')
+                                <a href="{{ route('holiday.edit', $holiday->id) }}" class="btn "><i
+                                        class="far fa-edit"></i></a>
+                                <form action="{{ route('holiday.destroy', $holiday->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn"><i class="fas fa-trash-alt"
+                                            style="color: #e01010;"></i></button>
+                                </form>
+                            @endcan
+
+
+
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
-                {{$holidays->links()}}
+        {{ $holidays->links() }}
 
     </div>
 
@@ -62,29 +76,25 @@
 
 @section('js')
 
-<script>
-  @if(Session::has('message'))
-  toastr.options =
-  {
-  	"closeButton" : true,
-  	"progressBar" : true
-  }
-  		toastr.success("{{ session('message') }}");
-  @endif
+    <script>
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
 
-  @if(Session::has('error'))
-  toastr.options =
-  {
-  	"closeButton" : true,
-  	"progressBar" : true
-  }
-  		toastr.error("{{ session('error') }}");
-  @endif
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+    </script>
 
-  
-</script>
-
-{{-- <script>
+    {{-- <script>
         $(function () {
             var table = $('#data-table').DataTable({
                 processing: true,
@@ -107,4 +117,4 @@
             });
         });
     </script> --}}
-    @stop
+@stop

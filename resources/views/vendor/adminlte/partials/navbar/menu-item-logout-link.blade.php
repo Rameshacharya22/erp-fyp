@@ -128,7 +128,7 @@
                 <div class="modal-body">
                     <div style="display: flex; justify-content: space-between ">
                         <i class="far fa-clock">{{ \Carbon\Carbon::now()->format('h:m A') }}</i>
-                        <span>position</span>
+                        <span>{{$user->employee->position->title}}</span>
 
                     </div>
 

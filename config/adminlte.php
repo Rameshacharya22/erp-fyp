@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Validation\Rules\Can;
+
 return [
 
     /*
@@ -314,12 +316,14 @@ return [
         ],
         [
             'text' => 'HR',
+            'can' => 'admin-access',
             'submenu' => [
                 [
                     'text' => 'Department',
                     'route' => 'department.index',
                     'icon' => 'fas fa-user-tie',
-                    'classes' => 'pl-4'
+                    'classes' => 'pl-4',
+                    
                 ],
                 [
                     'text' => 'Position',

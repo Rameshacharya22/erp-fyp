@@ -3,6 +3,7 @@
 use App\Http\Controllers\NoticeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\SendEmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Auth::routes(['register' => false]);
 //user wont be able to register. Admin would be responsible for creating user
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //routes to only access by admin
 
@@ -96,7 +98,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/timeSheet/edit', [App\Http\Controllers\TimeSheetController::class, 'edit'])->name('timeSheet.edit');
     Route::get('/timeSheet/show', [App\Http\Controllers\TimeSheetController::class, 'show'])->name('timeSheet.show');
 
-    //for static view for show project 
+    //for static view for show project
     // Route::get('/project/show', [App\Http\Controllers\ProjectController::class, 'show'])->name('project.show');
 
 
@@ -110,9 +112,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('task/userTask/{id}', [App\Http\Controllers\TaskController::class, 'getTaskInformation'])
         ->name('task.userTask');
 
-    Route::get('/send/markdown', 'SendEmailController@sendMarkdown');
+    // Route::get('/send/markdown', 'SendEmailController@sendMarkdown');
+
+     Route::get('/send-mail',[SendEmailController::class,'index'])->name('email');
 
 });
-
-
-

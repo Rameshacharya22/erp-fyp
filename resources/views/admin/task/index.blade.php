@@ -8,8 +8,12 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col"></div>
-        <div class="col"><a href="{{ route('task.create') }}" class="tertiary-color"><button type="button"
-                    class="btn btn-primary">Add Task</button></a></div>
+
+        @can('admin-access')
+            <div class="col"><a href="{{ route('task.create') }}" class="tertiary-color"><button type="button"
+                        class="btn btn-primary">Add Task</button></a></div>
+        @endcan
+
     </div>
 
 
@@ -68,27 +72,23 @@
 
 
 
-<script>
-  @if(Session::has('message'))
-  toastr.options =
-  {
-  	"closeButton" : true,
-  	"progressBar" : true
-  }
-  		toastr.success("{{ session('message') }}");
-  @endif
+    <script>
+        @if (Session::has('message'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
 
-  @if(Session::has('error'))
-  toastr.options =
-  {
-  	"closeButton" : true,
-  	"progressBar" : true
-  }
-  		toastr.error("{{ session('error') }}");
-  @endif
-
-  
-</script>
+        @if (Session::has('error'))
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+    </script>
 
     {{-- <script>
         $(function () {

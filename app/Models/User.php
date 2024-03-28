@@ -26,6 +26,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'temporary_password',
     ];
 
     /**
@@ -35,6 +36,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'temporary_password',
         'remember_token',
     ];
 
@@ -46,6 +48,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'temporary_password' => 'hashed',
+
     ];
 
     public function leaves(): HasMany
