@@ -27,6 +27,14 @@ class AttendanceController extends Controller
 
         $info = $this->getInfo();
 
+
+        $info['date'] = date('Y-m-d'); // Dynamic date
+        $info['attendance'] = Attendance::all(); // Fetch attendance data from the database
+
+
+
+
+
         $userAttendance = Attendance::where('user_id', auth()->user()->id);
 
         $info['presentDays'] = $userAttendance->where('status', 'present')->count();
@@ -47,7 +55,6 @@ class AttendanceController extends Controller
                     ->whereMonth('date', '=', $date->month)
                     ->get();
                 return response()->json($attendances);
-
             }
         }
 
@@ -70,71 +77,66 @@ class AttendanceController extends Controller
 
 
 
-    $user_id = $request->user_id ;
-//    dd($user_id);
+        $user_id = $request->user_id;
+        //    dd($user_id);
 
-//    $absentUser = Attendance::where('user_id', $user_id)->where('status','absent')->whereDate('date', Carbon::today())->exists();
+        //    $absentUser = Attendance::where('user_id', $user_id)->where('status','absent')->whereDate('date', Carbon::today())->exists();
         $todayDate = Carbon::today();
 
         $absentUsersWithUserData = Attendance::where('user_id', $user_id)
             ->where('status', 'absent')
             ->whereDate('date', $todayDate)
-//            ->with('user') // assuming you have 'user' relation in Attendance model to fetch user data
+            //            ->with('user') // assuming you have 'user' relation in Attendance model to fetch user data
             ->get();
 
-//        dd($absentUsersWithUserData);
+        //        dd($absentUsersWithUserData);
 
 
-   if($absentUsersWithUserData->isEmpty() || !$absentUsersWithUserData){
-     $validatedData = $request->validate([
-         'location' => 'sometimes|string|max:255',
-         'source' => 'sometimes|string|max:255',
-     ]);
+        if ($absentUsersWithUserData->isEmpty() || !$absentUsersWithUserData) {
+            $validatedData = $request->validate([
+                'location' => 'sometimes|string|max:255',
+                'source' => 'sometimes|string|max:255',
+            ]);
 
 
-     if ($userId = $request->user_id) {
-         $date = Carbon::now()->format('Y-m-d');
-         $clockTime = Carbon::now();
+            if ($userId = $request->user_id) {
+                $date = Carbon::now()->format('Y-m-d');
+                $clockTime = Carbon::now();
 
-         $attendance = Attendance::updateOrCreate(
-             [
-                 'user_id' => $userId,
-                 'date' => $date,
-             ],
-             [
-                 $request->clockIn ? 'clock_in_time' : 'clock_out_time' => $clockTime,
-                 'status' => $request->clockIn ? 'pending' : 'present',
-                 'location' => $validatedData['location'] ?? null,
-                 'source'=> $validatedData['source'] ?? null,
-             ]
-         );
+                $attendance = Attendance::updateOrCreate(
+                    [
+                        'user_id' => $userId,
+                        'date' => $date,
+                    ],
+                    [
+                        $request->clockIn ? 'clock_in_time' : 'clock_out_time' => $clockTime,
+                        'status' => $request->clockIn ? 'pending' : 'present',
+                        'location' => $validatedData['location'] ?? null,
+                        'source' => $validatedData['source'] ?? null,
+                    ]
+                );
 
-         if ($request->clockIn) {
-             $openingTime = Carbon::createFromFormat('H:i:s', config('erp.open_time'));
-             if ($clockTime->gt($openingTime)) {
-                 $late = true;
-             } else {
-                 $late = false;
-             }
-             $attendance->update(['is_late' => $late]);
+                if ($request->clockIn) {
+                    $openingTime = Carbon::createFromFormat('H:i:s', config('erp.open_time'));
+                    if ($clockTime->gt($openingTime)) {
+                        $late = true;
+                    } else {
+                        $late = false;
+                    }
+                    $attendance->update(['is_late' => $late]);
 
-             return redirect()->back()->with('message',"Sussessfully Clock-In");
-         } elseif (!$request->clockIn) {
-             $startDate = Carbon::parse($attendance->clock_in_time);
-             $endDate = Carbon::parse($attendance->clock_out_time);
-             $minutesDifference = $endDate->diffInMinutes($startDate);
-             $attendance->update(['work_hrs' => $minutesDifference]);
-             return redirect()->back()->with('message',"Sussessfully Clock-Out");
-         }
-     }
-
-
-
-
- }
-   else{
-       return redirect()->back()->with('error',"You are on leave today");
-   }
+                    return redirect()->back()->with('message', "Sussessfully Clock-In");
+                } elseif (!$request->clockIn) {
+                    $startDate = Carbon::parse($attendance->clock_in_time);
+                    $endDate = Carbon::parse($attendance->clock_out_time);
+                    $minutesDifference = $endDate->diffInMinutes($startDate);
+                    $attendance->update(['work_hrs' => $minutesDifference]);
+                    return redirect()->back()->with('message', "Sussessfully Clock-Out");
+                }
+            }
+        } else {
+            return redirect()->back()->with('error', "You are on leave today");
+        }
 
 
 
@@ -143,52 +145,52 @@ class AttendanceController extends Controller
 
 
 
-    $date = Carbon::now()->format('Y-m-d');
-//dd($attendances->status);
+        $date = Carbon::now()->format('Y-m-d');
+        //dd($attendances->status);
 
-//        $validatedData = $request->validate([
-//            'location' => 'sometimes|string|max:255',
-//            'source' => 'sometimes|string|max:255',
-//        ]);
-//
-//
-//        if ($userId = $request->user_id) {
-//            $date = Carbon::now()->format('Y-m-d');
-//            $clockTime = Carbon::now();
-//
-//            $attendance = Attendance::updateOrCreate(
-//                [
-//                    'user_id' => $userId,
-//                    'date' => $date,
-//                ],
-//                [
-//                    $request->clockIn ? 'clock_in_time' : 'clock_out_time' => $clockTime,
-//                    'status' => $request->clockIn ? 'pending' : 'present',
-//                    'location' => $validatedData['location'] ?? null,
-//                    'source'=> $validatedData['source'] ?? null,
-//                ]
-//            );
-//
-//            if ($request->clockIn) {
-//                $openingTime = Carbon::createFromFormat('H:i:s', config('erp.open_time'));
-//                if ($clockTime->gt($openingTime)) {
-//                    $late = true;
-//                } else {
-//                    $late = false;
-//                }
-//                $attendance->update(['is_late' => $late]);
-//
-//                return redirect()->back()->with('message',"Sussessfully Logged In");
-//            } elseif (!$request->clockIn) {
-//                $startDate = Carbon::parse($attendance->clock_in_time);
-//                $endDate = Carbon::parse($attendance->clock_out_time);
-//                $minutesDifference = $endDate->diffInMinutes($startDate);
-//                $attendance->update(['work_hrs' => $minutesDifference]);
-//                return redirect()->back()->with('message2',"Sussessfully Logged Out");
-//            }
-//        }
+        //        $validatedData = $request->validate([
+        //            'location' => 'sometimes|string|max:255',
+        //            'source' => 'sometimes|string|max:255',
+        //        ]);
+        //
+        //
+        //        if ($userId = $request->user_id) {
+        //            $date = Carbon::now()->format('Y-m-d');
+        //            $clockTime = Carbon::now();
+        //
+        //            $attendance = Attendance::updateOrCreate(
+        //                [
+        //                    'user_id' => $userId,
+        //                    'date' => $date,
+        //                ],
+        //                [
+        //                    $request->clockIn ? 'clock_in_time' : 'clock_out_time' => $clockTime,
+        //                    'status' => $request->clockIn ? 'pending' : 'present',
+        //                    'location' => $validatedData['location'] ?? null,
+        //                    'source'=> $validatedData['source'] ?? null,
+        //                ]
+        //            );
+        //
+        //            if ($request->clockIn) {
+        //                $openingTime = Carbon::createFromFormat('H:i:s', config('erp.open_time'));
+        //                if ($clockTime->gt($openingTime)) {
+        //                    $late = true;
+        //                } else {
+        //                    $late = false;
+        //                }
+        //                $attendance->update(['is_late' => $late]);
+        //
+        //                return redirect()->back()->with('message',"Sussessfully Logged In");
+        //            } elseif (!$request->clockIn) {
+        //                $startDate = Carbon::parse($attendance->clock_in_time);
+        //                $endDate = Carbon::parse($attendance->clock_out_time);
+        //                $minutesDifference = $endDate->diffInMinutes($startDate);
+        //                $attendance->update(['work_hrs' => $minutesDifference]);
+        //                return redirect()->back()->with('message2',"Sussessfully Logged Out");
+        //            }
+        //        }
 
-    //    return redirect()->back();
+        //    return redirect()->back();
     }
 
 
