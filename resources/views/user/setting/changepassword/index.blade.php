@@ -45,18 +45,23 @@
                 <p>Your password must be at least six characters and should include
                     a combination of numbers, letters and special characters (!$@%).</p>
             </div>
+            
+            <form action="{{ route('changepassword.update', $user->id) }}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="combo-input">
+                    <input type="password" class="form-control mt-3" placeholder="Current password" id="current_password"
+                        value="{{ old('current_password') }}" name="current_password">
+                    <input type="password" class="form-control mt-3 " placeholder="New Password" id="new_password"
+                        value="{{ old('new_password') }}" name="new_password">
+                    <input type="password" value="{{ old('confirm_password') }}" class="form-control mt-3 "
+                        placeholder="New Password" id="confirm_password" name="confirm_password">
+                </div>
 
-            <div class="combo-input">
-                <input type="password" class="form-control mt-3" placeholder="Current password" id="current_password" value="{{old('current_password')}}"
-                    name="current_password">
-                <input type="password" class="form-control mt-3 " placeholder="New Password" id="new_password" value="{{old('new_password')}}" name="new_password">
-                <input type="password" value="{{old('new_password')}}" class="form-control mt-3 " placeholder="New Password" id="new_password" name="new_password">
-            </div>
-
-            <button type="submit" class="btn btn-primary mt-3">Change Password</button>
+                <button type="submit" class="btn btn-primary mt-3">Change Password</button>
 
 
-
+            </form>
 
         </div>
     </div>
