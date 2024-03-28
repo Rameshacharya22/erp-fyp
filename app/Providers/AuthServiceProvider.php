@@ -69,5 +69,35 @@ class AuthServiceProvider extends ServiceProvider
             }
             return false;
         });
+
+    
+        // attentance admin index view  
+
+        Gate::define('admin-attendance', function($user){
+            if($user->role =='Admin'){
+                return true;
+            }
+            return false;
+        });
+
+        // attendance user index view
+
+        Gate::define('user-attendance', function ($user) {
+            if ($user->role == 'User') {
+                return true;
+            }
+            return false;
+        });
+
+
+        // adminlte dashboard filter
+
+        Gate::define('admin-access', function ($user) {
+            if ($user->role == 'Admin') {
+                return true;
+            }
+            return false;
+        });
+
     }
 }
