@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('leaves', function (Blueprint $table) {
             $table->id('id');
-            $table->string('name'); //paxi select employee id
+            // $table->string('name'); //paxi select employee id
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->enum('duration',['halfDay','fullDay'])->default('fullDay');
             $table->string('reason')->nullable();
             $table->date('date')->nullable();
